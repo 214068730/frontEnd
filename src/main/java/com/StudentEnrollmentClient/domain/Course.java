@@ -4,23 +4,37 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class Course {
+
 	Long id;
 	String courseCode;
 	String courseName;
 	Student student;
 	Subject subject;
 	Department department;
+
 	String dateRegistered;
+
+	int totalFees = 0;
+
+	public int getTotalFees() {
+		return totalFees;
+	}
+
+	public void setTotalFees(int totalFees) {
+		this.totalFees = totalFees;
+	}
 
 	public Course() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		this.dateRegistered =  dateFormat.format(date);
+		this.dateRegistered = dateFormat.format(date);
 	}
 
-	public Course(String courseCode, String courseName,
-			Student student, Subject subject, Department department) {
+	public Course(String courseCode, String courseName, Student student,
+			Subject subject, Department department) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -29,7 +43,7 @@ public class Course {
 		this.student = student;
 		this.subject = subject;
 		this.department = department;
-		this.dateRegistered =  dateFormat.format(date);
+		this.dateRegistered = dateFormat.format(date);
 	}
 
 	public Long getId() {

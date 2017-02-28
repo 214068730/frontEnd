@@ -4,15 +4,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Student {
+
 	private Long studentID;
 
 	private String studentNumber;
 
+	private String studentIdNumber;
+
 	private String studentName;
 
 	private String studentSurname;
-	
+
 	private String dateCreated;
 
 	private Address studentAddress;
@@ -20,11 +24,12 @@ public class Student {
 	public Student() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		this.dateCreated = dateFormat.format(date);
+		this.dateCreated = dateFormat.format(date).toString();
 	}
 
 	public Student(String studentNumber, String studentName,
-			String studentSurname, Address studentAddress) {
+			String studentSurname, Address studentAddress,
+			String studentIdNumber) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -32,7 +37,9 @@ public class Student {
 		this.studentName = studentName;
 		this.studentSurname = studentSurname;
 		this.studentAddress = studentAddress;
-		this.dateCreated =  dateFormat.format(date);
+		this.studentIdNumber = studentIdNumber;
+		this.dateCreated = dateFormat.format(date).toString();
+
 	}
 
 	public String getStudentSurname() {
@@ -74,8 +81,17 @@ public class Student {
 	public void setStudentAddress(Address studentAddress) {
 		this.studentAddress = studentAddress;
 	}
-	
-	public String getDateCreated(){
+
+	public String getDateCreated() {
 		return this.dateCreated;
 	}
+
+	public String getStudentIdNumber() {
+		return studentIdNumber;
+	}
+
+	public void setStudentIdNumber(String studentIdNumber) {
+		this.studentIdNumber = studentIdNumber;
+	}
+
 }
