@@ -9,58 +9,62 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.StudentEnrollmentClient.domain.Student;
-import com.StudentEnrollmentClient.domain.Subject;
+import com.StudentEnrollmentClient.domain.Address;
+import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.utils.AppUtil;
 
-public class SubjectRestImpl implements RestAPI<Subject, Long> {
+public class AddressRestImpl implements RestAPI<Address, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri()+"/subject";
+	String BASE_URL = util.getUri() + "/address";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
-	
+
 	@Override
-	public Subject get(Long id) {
+	public Address get(Long id) {
 		final String url = BASE_URL + "/" + id;
-			Subject subject = restTemplate.getForObject(url, Subject.class,
+		Address address = restTemplate.getForObject(url, Address.class,
 				id.toString());
-		return subject;
+		return address;
 	}
+
 	@Override
-	public Subject post(Subject entity) {
+	public Address post(Address entity) {
 		String url = BASE_URL + "/create";
-		HttpEntity<Subject> httpEntity = new HttpEntity<Subject>(entity,
+		HttpEntity<Address> httpEntity = new HttpEntity<Address>(entity,
 				requestHeaders);
-		Subject subject = restTemplate.postForObject(url, httpEntity,
-				Subject.class);
-		return subject;
+		Address address = restTemplate.postForObject(url, httpEntity,
+				Address.class);
+		return address;
 	}
+
 	@Override
-	public void put(Subject entity) {
+	public void put(Address entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
-	public void delete(Subject entity) {
-		String id =  entity.getSubjectID()+"";
+	public void delete(Address entity) {
+		String id =  entity.getAddressID()+"";
 		String url = BASE_URL + "/delete/{id}";
 		restTemplate.delete(url,id);
 	}
-	@Override
-	public List<Subject> getAll() {
-		String url = BASE_URL + "/findAll";
-		List<Subject> subjects = new ArrayList<>();
-		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-		ResponseEntity<Subject[]> responseEntity = restTemplate.exchange(url,
-				HttpMethod.GET, requestEntity, Subject[].class);
-		Subject[] results = responseEntity.getBody();
 
-		for (Subject b : results) {
-			subjects.add(b);
+	@Override
+	public List<Address> getAll() {
+		String url = BASE_URL + "/findAll";
+		List<Address> addresses = new ArrayList<>();
+		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+		ResponseEntity<Address[]> responseEntity = restTemplate.exchange(url,
+				HttpMethod.GET, requestEntity, Address[].class);
+		Address[] results = responseEntity.getBody();
+
+		for (Address b : results) {
+			addresses.add(b);
 		}
-		return subjects;
+		return addresses;
 	}
-	
+
 }
