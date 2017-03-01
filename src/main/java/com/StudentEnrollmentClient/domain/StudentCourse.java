@@ -6,7 +6,7 @@ import java.util.Date;
 
 
 
-public class Course {
+public class StudentCourse {
 
 	Long id;
 	String courseCode;
@@ -27,13 +27,13 @@ public class Course {
 		this.totalFees = totalFees;
 	}
 
-	public Course() {
+	public StudentCourse() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		this.dateRegistered = dateFormat.format(date);
 	}
 
-	public Course(String courseCode, String courseName, Student student,
+	public StudentCourse(String courseCode, String courseName, Student student,
 			Subject subject, Department department) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class TestCourse {
 
-	final static Course course = new Course();
+	final static StudentCourse course = new StudentCourse();
 	final static Department department = new Department();
 	
 	@Test
