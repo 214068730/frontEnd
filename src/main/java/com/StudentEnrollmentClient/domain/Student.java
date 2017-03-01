@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Student {
 
 	private Long studentID;
@@ -21,6 +20,8 @@ public class Student {
 
 	private Address studentAddress;
 
+	private Roles role;
+
 	public Student() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -29,7 +30,7 @@ public class Student {
 
 	public Student(String studentNumber, String studentName,
 			String studentSurname, Address studentAddress,
-			String studentIdNumber) {
+			String studentIdNumber, Roles role) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -38,6 +39,7 @@ public class Student {
 		this.studentSurname = studentSurname;
 		this.studentAddress = studentAddress;
 		this.studentIdNumber = studentIdNumber;
+		this.role = role;
 		this.dateCreated = dateFormat.format(date).toString();
 
 	}
@@ -92,6 +94,14 @@ public class Student {
 
 	public void setStudentIdNumber(String studentIdNumber) {
 		this.studentIdNumber = studentIdNumber;
+	}
+
+	public Roles getRole() {
+		return role;
+	}
+
+	public void setRole(Roles role) {
+		this.role = role;
 	}
 
 }

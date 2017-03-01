@@ -9,18 +9,16 @@ import com.StudentEnrollmentClient.services.CourseService;
 
 public class CourseServiceImpl implements CourseService{
 
-	private RestAPI<Course, Long> rest = new CourseRestImpl();
+	private CourseRestImpl rest = new CourseRestImpl();
 
 	@Override
 	public Course findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.get(id);
 	}
 
 	@Override
 	public Course save(Course entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.post(entity);
 	}
 
 	@Override
@@ -31,14 +29,20 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public void delete(Course entity) {
-		// TODO Auto-generated method stub
+		rest.delete(entity);
 		
 	}
 
 	@Override
 	public List<Course> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.getAll();
 	}
+
+	@Override
+	public List<Course> getByStudentId(Long id) {
+		return rest.getByStudentId(id);
+	}
+
+	
 
 }

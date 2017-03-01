@@ -29,7 +29,7 @@ public class StudentRestImpl implements RestAPI<Student, Long> {
 		return student;
 	}
 
-	public Student login(String studentNumber, String studentName) {
+	public Student getStudentLogin(String studentNumber, String studentName) {
 		final String url = BASE_URL + "/findAll/" + studentNumber + "/"
 				+ studentName;
 		Student student = restTemplate.getForObject(url, Student.class,

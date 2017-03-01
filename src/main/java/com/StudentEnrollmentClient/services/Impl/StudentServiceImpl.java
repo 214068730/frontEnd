@@ -9,7 +9,7 @@ import com.StudentEnrollmentClient.services.StudentService;
 
 public class StudentServiceImpl implements StudentService {
 
-	private RestAPI<Student, Long> rest = new StudentRestImpl();
+	private StudentRestImpl rest = new StudentRestImpl();
 
 	@Override
 	public Student findById(Long id) {
@@ -30,14 +30,21 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public void delete(Student entity) {
 		rest.delete(entity);
-
 	}
 
 	@Override
 	public List<Student> findAll() {
 		return rest.getAll();
 	}
-	
-	//extra methods here
+
+	@Override
+	public Student login(String studentNumber, String studentName) {
+		return rest.getStudentLogin(studentNumber, studentName);
+	}
+
+	@Override
+	public Student findByStudentNumber(String studentNumber) {
+		return rest.getByStudentNumber(studentNumber);
+	}
 
 }
