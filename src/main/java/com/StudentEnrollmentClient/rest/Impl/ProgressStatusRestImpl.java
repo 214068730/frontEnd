@@ -28,6 +28,12 @@ public class ProgressStatusRestImpl implements RestAPI<ProgressStatus, Long> {
 				ProgressStatus.class, id.toString());
 		return progressStatus;
 	}
+	
+	public ProgressStatus getByStudentStudentIDAndActive(Long studentID,boolean active) {
+		final String url = BASE_URL + "/progress/grade/"+studentID+"/"+active;
+		ProgressStatus progressStatus = restTemplate.getForObject(url,ProgressStatus.class,studentID.toString(),active);
+		return progressStatus;
+	}
 
 	@Override
 	public ProgressStatus post(ProgressStatus entity) {

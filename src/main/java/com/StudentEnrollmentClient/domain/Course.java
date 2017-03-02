@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Course {
 
-	private Long id;
+	private Long courseID;
 	private String courseName;
 	private String courseCode;
 	private Department department;
@@ -22,7 +22,7 @@ public class Course {
 	public Course(Long id, String courseName, String courseCode,
 			Department department, String dateCreated) {
 		super();
-		this.id = id;
+		this.courseID = id;
 		this.courseName = courseName;
 		this.courseCode = courseCode;
 		this.department = department;
@@ -30,11 +30,11 @@ public class Course {
 	}
 
 	public Long getId() {
-		return this.id;
+		return this.courseID;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.courseID = id;
 	}
 
 	public String getCourseName() {
