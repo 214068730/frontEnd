@@ -14,6 +14,10 @@ public class Subject {
 
 	private String dateAdded;
 
+	private double price;
+
+	private int yearLevel;
+
 	private Lecturer lecturer;
 
 	public Subject() {
@@ -67,5 +71,21 @@ public class Subject {
 	public String getDateAdded() {
 		return this.dateAdded;
 	}
-}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getYearCode() {
+		return yearLevel;
+	}
+
+	public void setYearCode(int yearCode) {
+		this.yearLevel = yearCode;
+	}
+
+}
