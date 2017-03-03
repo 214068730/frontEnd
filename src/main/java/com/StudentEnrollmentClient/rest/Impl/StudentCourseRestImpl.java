@@ -82,4 +82,17 @@ public class StudentCourseRestImpl implements RestAPI<StudentCourse, Long> {
 		return courses;
 	}
 
+	public List<StudentCourse> findByCourseCourseIDAndStudentStudentID(Long courseID,Long studentID){
+		String url = BASE_URL + "/studentCourse/findStudentRecord/"+courseID+"/"+studentID;
+		List<StudentCourse> courseList = new ArrayList<StudentCourse>();
+		List<StudentCourse> courses = new ArrayList<>();
+		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+		ResponseEntity<StudentCourse[]> responseEntity = restTemplate.exchange(url,
+				HttpMethod.GET, requestEntity, StudentCourse[].class);
+		StudentCourse[] results = responseEntity.getBody();
+		for (StudentCourse b : results) {
+			courses.add(b);
+		}
+		return courses;
+	}
 }
