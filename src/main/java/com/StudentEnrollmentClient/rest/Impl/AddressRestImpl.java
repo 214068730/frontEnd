@@ -17,25 +17,22 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class AddressRestImpl implements RestAPI<Address, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri() + "/address";
+	String BASE_URL = util.getUri() + "enrollment/address";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 
 	@Override
 	public Address get(Long id) {
 		final String url = BASE_URL + "/" + id;
-		Address address = restTemplate.getForObject(url, Address.class,
-				id.toString());
+		Address address = restTemplate.getForObject(url, Address.class,id.toString());
 		return address;
 	}
 
 	@Override
 	public Address post(Address entity) {
 		String url = BASE_URL + "/create";
-		HttpEntity<Address> httpEntity = new HttpEntity<Address>(entity,
-				requestHeaders);
-		Address address = restTemplate.postForObject(url, httpEntity,
-				Address.class);
+		HttpEntity<Address> httpEntity = new HttpEntity<Address>(entity,requestHeaders);
+		Address address = restTemplate.postForObject(url, httpEntity,Address.class);
 		return address;
 	}
 
@@ -57,8 +54,7 @@ public class AddressRestImpl implements RestAPI<Address, Long> {
 		String url = BASE_URL + "/findAll";
 		List<Address> addresses = new ArrayList<>();
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-		ResponseEntity<Address[]> responseEntity = restTemplate.exchange(url,
-				HttpMethod.GET, requestEntity, Address[].class);
+		ResponseEntity<Address[]> responseEntity = restTemplate.exchange(url,HttpMethod.GET, requestEntity, Address[].class);
 		Address[] results = responseEntity.getBody();
 
 		for (Address b : results) {

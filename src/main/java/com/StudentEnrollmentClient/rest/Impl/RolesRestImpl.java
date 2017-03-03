@@ -17,7 +17,7 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class RolesRestImpl implements RestAPI<Roles, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri() + "/roles";
+	String BASE_URL = util.getUri() + "enrollment/roles";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 

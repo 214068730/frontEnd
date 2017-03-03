@@ -7,14 +7,24 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
+import com.StudentEnrollmentClient.domain.Student;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class StudentMenu extends JFrame {
 
 	private JPanel contentPane;
+	private static Student student;
+	JButton btnAddStudent = new JButton("Add Student");
+	JButton btnUpdateStudent = new JButton("Update Student");
+	JButton btnViewStudent = new JButton("View Student");
+	JButton btnMainMenu = new JButton("Main Menu");
 
 	/**
 	 * Launch the application.
@@ -23,7 +33,7 @@ public class StudentMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentMenu frame = new StudentMenu();
+					StudentMenu frame = new StudentMenu(student);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,6 +46,27 @@ public class StudentMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentMenu() {
+		intialize();
+	}
+
+	public StudentMenu(Student student) {
+		intialize();
+		this.student = student;
+		accessRights();
+
+	}
+
+	public void accessRights() {
+		// Access Rights
+		String role = student.getRole().getRole();
+		switch (role) {
+		case "B":
+			btnAddStudent.setEnabled(false);
+
+		}
+	}
+
+	public void intialize() {
 		setTitle("Student Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 580, 477);
@@ -43,37 +74,36 @@ public class StudentMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblStudentMenu = new JLabel("Student Menu");
 		lblStudentMenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
 		lblStudentMenu.setBounds(176, 22, 178, 40);
 		contentPane.add(lblStudentMenu);
-		
-		JButton btnAddStudent = new JButton("Add Student");
+
 		btnAddStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				AddOrUpdateStudent addStudent = new AddOrUpdateStudent();
+				// contentPane.hide();
+				AddOrUpdateStudent addStudent = new AddOrUpdateStudent(student,
+						"ADD");
 				addStudent.setVisible(true);
 			}
 		});
 		btnAddStudent.setBounds(152, 84, 236, 63);
 		contentPane.add(btnAddStudent);
-		
-		JButton btnUpdateStudent = new JButton("Update Student");
+
 		btnUpdateStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				AddOrUpdateStudent updateStudent = new AddOrUpdateStudent();
+				// contentPane.hide();
+				AddOrUpdateStudent updateStudent = new AddOrUpdateStudent(
+						student, "UPDATE");
 				updateStudent.setVisible(true);
 			}
 		});
 		btnUpdateStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnUpdateStudent.setBounds(152, 172, 236, 63);
 		contentPane.add(btnUpdateStudent);
-		
-		JButton btnViewStudent = new JButton("View Student");
+
 		btnViewStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,8 +114,7 @@ public class StudentMenu extends JFrame {
 		});
 		btnViewStudent.setBounds(152, 259, 236, 64);
 		contentPane.add(btnViewStudent);
-		
-		JButton btnMainMenu = new JButton("Main Menu");
+
 		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnMainMenu.setBounds(152, 346, 236, 63);
 		contentPane.add(btnMainMenu);

@@ -17,7 +17,7 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class SubjectRestImpl implements RestAPI<Subject, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri()+"/subject";
+	String BASE_URL = util.getUri()+"enrollment/subject";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 	

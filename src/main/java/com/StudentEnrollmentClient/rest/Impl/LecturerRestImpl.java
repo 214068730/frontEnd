@@ -17,7 +17,7 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class LecturerRestImpl implements RestAPI<Lecturer, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri() + "/lecturer";
+	String BASE_URL = util.getUri() + "enrollment/lecturer";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 

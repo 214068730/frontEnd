@@ -16,7 +16,7 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class StudentRestImpl implements RestAPI<Student, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri()+"/student";
+	String BASE_URL = util.getUri()+"enrollment/student";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 	
@@ -30,10 +30,9 @@ public class StudentRestImpl implements RestAPI<Student, Long> {
 	}
 
 	public Student getStudentLogin(String studentNumber, String studentName) {
-		final String url = BASE_URL + "/findAll/" + studentNumber + "/"
-				+ studentName;
+		final String url = BASE_URL +"/findAll/" + studentNumber+"/"+studentName;
 		Student student = restTemplate.getForObject(url, Student.class,
-				studentNumber, studentName);
+				studentNumber,studentName);
 		return student;
 	}
 

@@ -17,7 +17,7 @@ import com.StudentEnrollmentClient.utils.AppUtil;
 public class ProgressStatusRestImpl implements RestAPI<ProgressStatus, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri() + "/progress";
+	String BASE_URL = util.getUri() + "enrollment/progress";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 
