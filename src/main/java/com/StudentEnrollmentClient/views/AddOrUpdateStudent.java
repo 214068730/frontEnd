@@ -92,6 +92,8 @@ public class AddOrUpdateStudent extends JFrame {
 			ddlRights.setSelectedIndex(Integer.parseInt(index)-1);//minus one because db index start from 1
 			txtStreetNumber.setText(student.getStudentAddress().getStreetNumber());
 			
+			
+			
 			break;
 		default:
 			break;
