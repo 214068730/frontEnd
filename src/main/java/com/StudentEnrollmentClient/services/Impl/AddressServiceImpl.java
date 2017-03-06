@@ -21,8 +21,9 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public void update(Address entity) {
+	public Address update(Address entity) {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

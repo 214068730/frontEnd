@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Subject {
 
 	private long subjectID;
@@ -87,5 +88,21 @@ public class Subject {
 	public void setYearCode(int yearCode) {
 		this.yearLevel = yearCode;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Subject subject = (Subject) o;
+
+        return subjectID == subject.subjectID;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (subjectID ^ (subjectID >>> 32));
+    }
 
 }

@@ -43,6 +43,7 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
+		setResizable(false);
 		intialize();
 	}
 	
@@ -54,14 +55,14 @@ public class Menu extends JFrame {
 	
 	public void intialize(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 488, 576);
+		setBounds(100, 100, 488, 616);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(57, 11, 328, 489);
+		panel.setBounds(64, 11, 328, 566);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -104,6 +105,18 @@ public class Menu extends JFrame {
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_4.setBounds(62, 393, 226, 70);
 		panel.add(button_4);
+		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login();
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnLogOut.setBounds(62, 474, 226, 70);
+		panel.add(btnLogOut);
 	}
 
 }

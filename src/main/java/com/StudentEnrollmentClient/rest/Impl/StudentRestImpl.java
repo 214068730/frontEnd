@@ -55,14 +55,12 @@ public class StudentRestImpl implements RestAPI<Student, Long> {
 
 	@Override
 	// update this method use putObject
-	public void put(Student entity) {
+	public Student put(Student entity) {
 		String url = BASE_URL + "/update";
-		HttpEntity<Student> requestEntity = new HttpEntity<Student>(entity,
-				requestHeaders);
-		ResponseEntity<Student> responseEntity = restTemplate.exchange(url,
-				HttpMethod.PUT, requestEntity, Student.class);
+		HttpEntity<Student> requestEntity = new HttpEntity<Student>(entity,requestHeaders);
+		ResponseEntity<Student> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Student.class);
 		Student student = responseEntity.getBody();
-
+		return student;
 	}
 
 	@Override

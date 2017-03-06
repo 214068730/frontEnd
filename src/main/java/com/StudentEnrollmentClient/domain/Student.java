@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Student {
 
 	private Long studentID;
@@ -106,5 +107,21 @@ public class Student {
 	public void setRole(Roles role) {
 		this.role = role;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        return studentID == student.studentID;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (studentID ^ (studentID >>> 32));
+    }
 
 }

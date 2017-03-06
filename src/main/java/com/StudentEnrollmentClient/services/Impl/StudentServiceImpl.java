@@ -22,8 +22,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void update(Student entity) {
-		// TODO Auto-generated method stub
+	public Student update(Student entity) {
+		return rest.put(entity);
 
 	}
 

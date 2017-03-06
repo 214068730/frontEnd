@@ -7,7 +7,7 @@ public interface RestAPI<E, ID> {
 
 	E post(E entity);
 
-	void put(E entity);
+	E put(E entity);
 
 	void delete(E entity);
 

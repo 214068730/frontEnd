@@ -21,9 +21,9 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public void update(Lecturer entity) {
+	public Lecturer update(Lecturer entity) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

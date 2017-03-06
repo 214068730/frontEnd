@@ -169,13 +169,35 @@ public class AddOrUpdateStudent extends JFrame {
 				case "UPDATE":
 					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")) {
 						String name = txtStudentName.getText();
-						String surname = txtStudentName.getText();
+						String surname = txtStudentSurname.getText();
 						String idNumber = txtStudentIdNumber.getText();
 						String streetName = txtStreetName.getText();
 						String suburb = txtSuburb.getText();
 						String areaCode = txtAreaCode.getText();
 						String streetNumber = txtStreetNumber.getText();
-						
+						Long role = new Long(ddlRights.getSelectedIndex() + 1);
+						try{
+							Roles rights = rolesService.get(role); //getting role from db
+							if (rights != null){
+								//update student Address
+								student.getStudentAddress().setAreaCode(areaCode);
+								student.getStudentAddress().setStreetName(streetName);
+								student.getStudentAddress().setStreetNumber(streetNumber);
+								student.getStudentAddress().setSurbubName(suburb);
+								
+								//update student
+								student.setStudentName(name);
+								student.setStudentSurname(surname);
+								student.setRole(rights);
+								
+								studentService.put(student);
+								Student updatedStudent = studentService.get(student.getStudentID());
+								if (!updatedStudent.equals( student))
+									JOptionPane.showMessageDialog(null,"STUDENT HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+							}
+						}catch(Exception ex){
+							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 					break;
 				case "ADD":
@@ -190,9 +212,10 @@ public class AddOrUpdateStudent extends JFrame {
 						Long role = new Long(ddlRights.getSelectedIndex() + 1);
 
 						try {
-							Address result = addressService.post(new Address(streetNumber, streetName,suburb, areaCode)); //saving address into db
-							if (result != null) {
-								Roles rights = rolesService.get(role); //getting role from db
+							Roles rights = rolesService.get(role); //getting role from db
+							
+							if (rights != null) {
+								Address result = new Address(streetNumber, streetName,suburb, areaCode); //saving address into db
 								Student student = studentService.post(new Student(name, surname,result, idNumber, rights)); //saving student into db
 								if (student != null) 
 									JOptionPane.showMessageDialog(null,"STUDENT HAS ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
@@ -213,6 +236,11 @@ public class AddOrUpdateStudent extends JFrame {
 		contentPane.add(btnSave);
 
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCancel.setBounds(760, 297, 184, 59);
 		contentPane.add(btnCancel);
@@ -262,4 +290,5 @@ public class AddOrUpdateStudent extends JFrame {
 		txtStreetNumber.setBounds(159, 139, 64, 29);
 		panStudAddress.add(txtStreetNumber);
 	}
+
 }

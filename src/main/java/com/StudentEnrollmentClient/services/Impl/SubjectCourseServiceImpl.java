@@ -22,8 +22,9 @@ public class SubjectCourseServiceImpl implements SubjectCourseService {
 	}
 
 	@Override
-	public void update(SubjectCourse entity) {
+	public SubjectCourse update(SubjectCourse entity) {
 		// TODO Auto-generated method stub
+		return null;
 
 	}
 

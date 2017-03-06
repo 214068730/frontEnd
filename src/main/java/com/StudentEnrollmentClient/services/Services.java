@@ -8,7 +8,7 @@ public interface Services<E,ID> {
 
 	public E save(E entity);
 
-	public void update(E entity);
+	public E update(E entity);
 
 	public void delete(E entity);
 

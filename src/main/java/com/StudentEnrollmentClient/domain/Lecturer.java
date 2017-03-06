@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class Lecturer {
 	Long id;
 	String name;
@@ -52,6 +54,22 @@ public class Lecturer {
 	public String getDateAdded() {
 		return this.dateAdded;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lecturer lecturer = (Lecturer) o;
+
+        return id == lecturer.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 
 }
 
