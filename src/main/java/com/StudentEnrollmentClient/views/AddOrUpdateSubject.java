@@ -170,14 +170,6 @@ public class AddOrUpdateSubject extends JFrame {
 			    		JOptionPane.showMessageDialog(null,"RECORD INSERTED", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 			    	}
 			    }
-			   
-				
-				
-				
-				
-				
-				
-				
 			}
 		});
 		btnSaveSubject.setFont(new Font("Tahoma", Font.BOLD, 16));

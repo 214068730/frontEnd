@@ -108,6 +108,9 @@ public class Menu extends JFrame {
 		JButton button_4 = new JButton("Course Menu");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CourseMenu view = new CourseMenu(student);
+				view.setVisible(true);
+				dispose();
 			}
 		});
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
