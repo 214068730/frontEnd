@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 
+
+import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.Roles;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.utils.AppUtil;
@@ -41,8 +43,11 @@ public class RolesRestImpl implements RestAPI<Roles, Long> {
 
 	@Override
 	public Roles put(Roles entity) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = BASE_URL + "/update";
+		HttpEntity<Roles> requestEntity = new HttpEntity<Roles>(entity,requestHeaders);
+		ResponseEntity<Roles> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Roles.class);
+		Roles role = responseEntity.getBody();
+		return role;
 	}
 
 	@Override

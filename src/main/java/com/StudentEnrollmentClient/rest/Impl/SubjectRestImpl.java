@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.rest.RestAPI;
@@ -39,8 +40,11 @@ public class SubjectRestImpl implements RestAPI<Subject, Long> {
 	}
 	@Override
 	public Subject put(Subject entity) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = BASE_URL + "/update";
+		HttpEntity<Subject> requestEntity = new HttpEntity<Subject>(entity,requestHeaders);
+		ResponseEntity<Subject> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Subject.class);
+		Subject subject = responseEntity.getBody();
+		return subject;
 		
 	}
 	@Override

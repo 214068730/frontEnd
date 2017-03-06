@@ -8,11 +8,15 @@ import com.StudentEnrollmentClient.rest.Impl.LecturerRestImpl;
 import com.StudentEnrollmentClient.services.LecturerService;
 
 public class LecturerServiceImpl implements LecturerService {
-	private RestAPI<Lecturer, Long> rest = new LecturerRestImpl();
+	private LecturerRestImpl rest = new LecturerRestImpl();
 
 	@Override
 	public Lecturer findById(Long id) {
 		return rest.get(id);
+	}
+	
+	public Lecturer findByNameAndSurname(String name,String surname) {
+		return rest.getByNameAndSurname(name, surname);
 	}
 
 	@Override
@@ -36,5 +40,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public List<Lecturer> findAll() {
 		return rest.getAll();
 	}
+	
+	
 
 }

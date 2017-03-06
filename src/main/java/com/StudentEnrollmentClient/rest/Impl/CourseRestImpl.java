@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.Course;
 import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.rest.RestAPI;
@@ -48,8 +49,11 @@ public class CourseRestImpl implements RestAPI<Course, Long> {
 
 	@Override
 	public Course put(Course entity) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = BASE_URL + "/update";
+		HttpEntity<Course> requestEntity = new HttpEntity<Course>(entity,requestHeaders);
+		ResponseEntity<Course> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Course.class);
+		Course course = responseEntity.getBody();
+		return course;
 	}
 
 	@Override

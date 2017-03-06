@@ -238,7 +238,9 @@ public class AddOrUpdateStudent extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				StudentMenu menu = new StudentMenu();
+				menu.setVisible(false);
+				dispose();
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 16));
