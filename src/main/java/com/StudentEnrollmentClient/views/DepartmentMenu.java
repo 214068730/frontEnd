@@ -69,7 +69,7 @@ public class DepartmentMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.hide();
 				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department, "ADD");
-				addDept.setVisible(true);				
+				addDept.setVisible(true);
 			}
 		});
 		btnAddDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));

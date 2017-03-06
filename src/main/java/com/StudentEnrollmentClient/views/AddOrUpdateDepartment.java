@@ -96,21 +96,28 @@ public class AddOrUpdateDepartment extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				switch(message)
 				{
-				case "UPDATE":
-					break;
+				//case "UPDATE":
+					//break;
 				case "ADD":
 					if (!txtDeptName.getText().equals(""))
 					{
 						String name = txtDeptName.getText();
 						Department department = departmentService.post(new Department(name));
+						
 						if (department != null)
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 						}
-						/*else if (txtDeptName.getText().matches(name))
+						/*else if (txtDeptName.getText().matches(name)) //check if it exist
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ENTER A NEW ONE", JOptionPane.INFORMATION_MESSAGE);
 						}*/
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null,
+								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
+								"INFO", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 			}

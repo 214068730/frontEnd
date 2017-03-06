@@ -46,19 +46,19 @@ public class Department {
 		return  new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Department department = (Department) o;
-
-        return departmentID == department.departmentID;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (departmentID ^ (departmentID >>> 32));
-    }
+//	@Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Department department = (Department) o;
+//
+//        return departmentID == department.departmentID;
+//
+//    }
+//
+////    @Override
+////    public int hashCode() {
+////        return (int) (departmentID ^ (departmentID >>> 32));
+//    }
 }
