@@ -22,6 +22,7 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 	private static Student student;
 	private StudentMenu studentMenu;
+	private DepartmentMenu deptMenu;
 
 	/**
 	 * Launch the application.
@@ -81,10 +82,16 @@ public class Menu extends JFrame {
 		button.setBounds(62, 49, 226, 70);
 		panel.add(button);
 		
-		JButton button_1 = new JButton("Department Menu");
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_1.setBounds(62, 130, 226, 80);
-		panel.add(button_1);
+		JButton btnDeptMenu = new JButton("Department Menu");
+		btnDeptMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deptMenu = new DepartmentMenu();
+				deptMenu.setVisible(true);
+			}
+		});
+		btnDeptMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnDeptMenu.setBounds(62, 130, 226, 80);
+		panel.add(btnDeptMenu);
 		
 		JButton button_2 = new JButton("Subject Menu");
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));

@@ -7,14 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
+import com.StudentEnrollmentClient.domain.Department;
+import com.StudentEnrollmentClient.domain.Student;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class DepartmentMenu extends JFrame {
 
 	private JPanel contentPane;
+	private static Department department;
 
 	/**
 	 * Launch the application.
@@ -23,7 +30,7 @@ public class DepartmentMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DepartmentMenu frame = new DepartmentMenu();
+					DepartmentMenu frame = new DepartmentMenu(department);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,11 +38,19 @@ public class DepartmentMenu extends JFrame {
 			}
 		});
 	}
+	
+	public DepartmentMenu() {
+		intialize();
+	}
+
+	public DepartmentMenu(Department department) {
+		intialize();
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public DepartmentMenu() {
+	public void intialize() {
 		setTitle("Department Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 386);
@@ -53,8 +68,8 @@ public class DepartmentMenu extends JFrame {
 		btnAddDepartment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.hide();
-				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment();
-				addDept.setVisible(true);
+				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department, "ADD");
+				addDept.setVisible(true);				
 			}
 		});
 		btnAddDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));
