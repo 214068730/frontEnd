@@ -38,8 +38,9 @@ public class SubjectRestImpl implements RestAPI<Subject, Long> {
 		return subject;
 	}
 	@Override
-	public void put(Subject entity) {
+	public Subject put(Subject entity) {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 	@Override

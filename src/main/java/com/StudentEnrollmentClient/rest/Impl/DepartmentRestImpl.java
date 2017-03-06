@@ -40,9 +40,9 @@ public class DepartmentRestImpl implements RestAPI<Department, Long> {
 	}
 
 	@Override
-	public void put(Department entity) {
+	public Department put(Department entity) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

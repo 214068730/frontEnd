@@ -46,9 +46,9 @@ public class ProgressStatusRestImpl implements RestAPI<ProgressStatus, Long> {
 	}
 
 	@Override
-	public void put(ProgressStatus entity) {
+	public ProgressStatus put(ProgressStatus entity) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

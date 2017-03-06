@@ -14,6 +14,8 @@ import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.utils.AppUtil;
 
+
+
 public class AddressRestImpl implements RestAPI<Address, Long> {
 
 	AppUtil util = new AppUtil();
@@ -37,9 +39,12 @@ public class AddressRestImpl implements RestAPI<Address, Long> {
 	}
 
 	@Override
-	public void put(Address entity) {
-		// TODO Auto-generated method stub
-
+	public Address put(Address entity) {
+		String url = BASE_URL + "/update";
+		HttpEntity<Address> requestEntity = new HttpEntity<Address>(entity,requestHeaders);
+		ResponseEntity<Address> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Address.class);
+		Address address = responseEntity.getBody();
+		return address;
 	}
 
 	@Override

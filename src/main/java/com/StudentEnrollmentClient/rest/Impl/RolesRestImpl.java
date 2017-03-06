@@ -40,9 +40,9 @@ public class RolesRestImpl implements RestAPI<Roles, Long> {
 	}
 
 	@Override
-	public void put(Roles entity) {
+	public Roles put(Roles entity) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

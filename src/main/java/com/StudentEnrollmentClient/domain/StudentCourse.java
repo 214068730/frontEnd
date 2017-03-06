@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class StudentCourse {
 
 	Long id;
@@ -74,4 +75,20 @@ public class StudentCourse {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StudentCourse studentCourse = (StudentCourse) o;
+
+        return id == studentCourse.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }

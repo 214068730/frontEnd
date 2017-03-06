@@ -21,8 +21,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 	}
 
 	@Override
-	public void update(Department entity) {
+	public Department update(Department entity) {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

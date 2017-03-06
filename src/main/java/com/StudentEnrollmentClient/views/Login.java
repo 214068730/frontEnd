@@ -73,6 +73,8 @@ public class Login extends JFrame {
 						if (student != null) {
 							Menu menu = new Menu(student);
 							menu.setVisible(true);
+							dispose();
+							
 						} else
 							JOptionPane.showMessageDialog(null,
 									"STUDENT DETAILS NOT FOUND", "ERROR",

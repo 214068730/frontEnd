@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class Course {
 
 	private Long courseID;
@@ -65,4 +67,19 @@ public class Course {
 		this.dateCreated = dateCreated;
 	}
 
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Course course = (Course) o;
+
+        return courseID == course.courseID;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (courseID ^ (courseID >>> 32));
+    }
 }

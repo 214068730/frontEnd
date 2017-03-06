@@ -40,9 +40,9 @@ public class LecturerRestImpl implements RestAPI<Lecturer, Long> {
 	}
 
 	@Override
-	public void put(Lecturer entity) {
+	public Lecturer put(Lecturer entity) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

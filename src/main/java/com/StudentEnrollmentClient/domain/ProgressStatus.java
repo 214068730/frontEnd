@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class ProgressStatus {
 	private Long id;
 
@@ -78,5 +80,21 @@ public class ProgressStatus {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProgressStatus progressStatus = (ProgressStatus) o;
+
+        return id == progressStatus.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 
 }
