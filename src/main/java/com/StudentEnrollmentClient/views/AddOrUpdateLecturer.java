@@ -150,7 +150,9 @@ public class AddOrUpdateLecturer extends JFrame {
 		JButton btnCancelLecturer = new JButton("Cancel");
 		btnCancelLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				LecturerMenu lecturerMenu = new LecturerMenu();
+				lecturerMenu.setVisible(true);
+				dispose();
 			}
 		});
 		btnCancelLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));

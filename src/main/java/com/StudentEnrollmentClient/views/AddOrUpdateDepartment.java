@@ -70,7 +70,7 @@ public class AddOrUpdateDepartment extends JFrame {
 		setResizable(false);
 		setTitle("Add Or Update Department");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 539, 300);
+		setBounds(100, 100, 507, 266);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -127,22 +127,19 @@ public class AddOrUpdateDepartment extends JFrame {
 			}
 		});
 		btnSaveDept.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnSaveDept.setBounds(59, 149, 120, 40);
+		btnSaveDept.setBounds(68, 149, 164, 40);
 		contentPane.add(btnSaveDept);
-		
-		JButton btnUpdateDept = new JButton("Update");
-		btnUpdateDept.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnUpdateDept.setBounds(215, 149, 120, 40);
-		contentPane.add(btnUpdateDept);
 		
 		JButton btnCancelDept = new JButton("Cancel");
 		btnCancelDept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				DepartmentMenu deptMenu = new DepartmentMenu();
+				deptMenu.setVisible(true);
+				dispose();
 			}
 		});
 		btnCancelDept.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnCancelDept.setBounds(370, 149, 120, 40);
+		btnCancelDept.setBounds(279, 149, 164, 40);
 		contentPane.add(btnCancelDept);
 	}
 

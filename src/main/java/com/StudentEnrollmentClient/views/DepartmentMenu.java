@@ -53,7 +53,7 @@ public class DepartmentMenu extends JFrame {
 	public void intialize() {
 		setTitle("Department Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 590, 386);
+		setBounds(100, 100, 520, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,23 +70,12 @@ public class DepartmentMenu extends JFrame {
 				contentPane.hide();
 				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department, "ADD");
 				addDept.setVisible(true);
+				dispose();
 			}
 		});
 		btnAddDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnAddDepartment.setBounds(142, 80, 236, 63);
+		btnAddDepartment.setBounds(126, 80, 236, 63);
 		contentPane.add(btnAddDepartment);
-		
-		JButton btnUpdateDepartment = new JButton("Update Department");
-		btnUpdateDepartment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				AddOrUpdateDepartment updateDept = new AddOrUpdateDepartment();
-				updateDept.setVisible(true);
-			}
-		});
-		btnUpdateDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnUpdateDepartment.setBounds(146, 169, 236, 63);
-		contentPane.add(btnUpdateDepartment);
 		
 		JButton btnViewDepartment = new JButton("View Department(s)");
 		btnViewDepartment.addActionListener(new ActionListener() {
@@ -97,8 +86,19 @@ public class DepartmentMenu extends JFrame {
 			}
 		});
 		btnViewDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnViewDepartment.setBounds(146, 260, 236, 63);
+		btnViewDepartment.setBounds(126, 170, 236, 63);
 		contentPane.add(btnViewDepartment);
+		
+		JButton button = new JButton("Main Menu");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Menu mainMenu = new Menu();
+				mainMenu.setVisible(true);
+				dispose();
+			}
+		});
+		button.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button.setBounds(126, 263, 236, 63);
+		contentPane.add(button);
 	}
-
 }

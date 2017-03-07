@@ -90,6 +90,7 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				deptMenu = new DepartmentMenu();
 				deptMenu.setVisible(true);
+				dispose();
 			}
 		});
 		btnDeptMenu.setFont(new Font("Tahoma", Font.BOLD, 16));

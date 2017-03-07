@@ -68,9 +68,9 @@ public class LecturerMenu extends JFrame {
 		JButton btnAddLecturer = new JButton("Add Lecturer");
 		btnAddLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
 				AddOrUpdateLecturer addLecturer = new AddOrUpdateLecturer(lecturer, "ADD");
 				addLecturer.setVisible(true);
+				dispose();
 			}
 		});
 		btnAddLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -92,7 +92,6 @@ public class LecturerMenu extends JFrame {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
 				Menu mainMenu = new Menu();
 				mainMenu.setVisible(true);
 				dispose();
