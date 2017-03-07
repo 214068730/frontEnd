@@ -238,11 +238,8 @@ public class AddOrUpdateStudent extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				System.exit(0);
-
-				StudentMenu menu = new StudentMenu();
-				menu.setVisible(false);
+				StudentMenu menu = new StudentMenu(student);
+				menu.setVisible(true);
 				dispose();
 
 			}
