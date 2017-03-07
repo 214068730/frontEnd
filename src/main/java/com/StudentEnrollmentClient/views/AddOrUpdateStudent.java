@@ -239,6 +239,7 @@ public class AddOrUpdateStudent extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				System.exit(0);
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 16));

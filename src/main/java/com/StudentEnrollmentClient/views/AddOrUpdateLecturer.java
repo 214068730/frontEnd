@@ -4,18 +4,30 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.rest.Impl.LecturerRestImpl;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddOrUpdateLecturer extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtLecturerName;
 	private JTextField txtLecturerSurname;
+	Lecturer lecturer;
+	private String message;
+	private LecturerRestImpl lecturerService = new LecturerRestImpl();
 
 	/**
 	 * Launch the application.
@@ -37,9 +49,30 @@ public class AddOrUpdateLecturer extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOrUpdateLecturer() {
+		initialize();
+	}
+	
+	public AddOrUpdateLecturer(Lecturer lecturer, String message) {
+		initialize();
+		this.lecturer = lecturer;
+		this.message = message;
+		
+		switch (message)
+		{
+		case "UPDATE":
+			txtLecturerName.setText(lecturer.getName());
+			txtLecturerSurname.setText(lecturer.getSurname());
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	public void initialize() {
 		setTitle("Add Or Update Lecturer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 612, 310);
+		setBounds(100, 100, 543, 310);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,8 +94,47 @@ public class AddOrUpdateLecturer extends JFrame {
 		contentPane.add(txtLecturerName);
 		
 		JButton btnSaveLecturer = new JButton("Save");
+		btnSaveLecturer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				switch(message)
+				{
+				case "UPDATE":
+					if (!txtLecturerName.getText().equals("") && !txtLecturerSurname.getText().equals(""))
+					{
+						String name = txtLecturerName.getText();
+						String surname = txtLecturerSurname.getText();
+						
+						//update lecturer
+						lecturer.setName(name);
+						lecturer.setSurname(surname);
+						lecturerService.put(lecturer);
+						
+						Lecturer updatedLecturer = lecturerService.get(lecturer.getId());
+						if (!updatedLecturer.equals( lecturer))
+							JOptionPane.showMessageDialog(null,"LECTURER HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+					}
+				case "ADD":
+					if (!txtLecturerName.getText().equals("") && !txtLecturerSurname.getText().equals(""))
+					{
+						String name = txtLecturerName.getText();
+						String surname = txtLecturerSurname.getText();
+						
+						//add lecturer
+						Lecturer lecturer = lecturerService.post(new Lecturer(name, surname));
+						
+						if (lecturer != null) 
+							JOptionPane.showMessageDialog(null,"LECTURER ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+						JOptionPane.showMessageDialog(null,
+								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
+								"INFO", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		btnSaveLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnSaveLecturer.setBounds(22, 207, 169, 39);
+		btnSaveLecturer.setBounds(68, 207, 169, 39);
 		contentPane.add(btnSaveLecturer);
 		
 		JLabel lblLecturerSurname = new JLabel("Lecturer Surname:");
@@ -75,14 +147,14 @@ public class AddOrUpdateLecturer extends JFrame {
 		txtLecturerSurname.setBounds(201, 140, 177, 25);
 		contentPane.add(txtLecturerSurname);
 		
-		JButton btnUpdateLecturer = new JButton("Update");
-		btnUpdateLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnUpdateLecturer.setBounds(218, 207, 169, 39);
-		contentPane.add(btnUpdateLecturer);
-		
 		JButton btnCancelLecturer = new JButton("Cancel");
+		btnCancelLecturer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnCancelLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnCancelLecturer.setBounds(417, 207, 169, 39);
+		btnCancelLecturer.setBounds(306, 207, 169, 39);
 		contentPane.add(btnCancelLecturer);
 	}
 

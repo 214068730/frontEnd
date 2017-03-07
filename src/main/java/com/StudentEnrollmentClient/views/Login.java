@@ -94,6 +94,11 @@ public class Login extends JFrame {
 		contentPane.add(btnLogin);
 
 		JButton btnCancelLogin = new JButton("Cancel");
+		btnCancelLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnCancelLogin.setBounds(254, 184, 86, 35);
 		contentPane.add(btnCancelLogin);
 

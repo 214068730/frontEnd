@@ -108,7 +108,11 @@ public class AddOrUpdateDepartment extends JFrame {
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 						}
-						/*else if (txtDeptName.getText().matches(name)) //check if it exist
+						
+						/*Department updatedLecturer = lecturerService.get(lecturer.getId());
+						if (!updatedDepartment.equals( department))
+							JOptionPane.showMessageDialog(null,"DEPARTMENT HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+						 * else if (txtDeptName.getText().matches(name)) //check if it exist
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ENTER A NEW ONE", JOptionPane.INFORMATION_MESSAGE);
 						}*/
@@ -132,6 +136,11 @@ public class AddOrUpdateDepartment extends JFrame {
 		contentPane.add(btnUpdateDept);
 		
 		JButton btnCancelDept = new JButton("Cancel");
+		btnCancelDept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		btnCancelDept.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelDept.setBounds(370, 149, 120, 40);
 		contentPane.add(btnCancelDept);

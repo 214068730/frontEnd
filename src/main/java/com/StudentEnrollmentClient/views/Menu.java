@@ -12,6 +12,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 
+import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class Menu extends JFrame {
 	private static Student student;
 	private StudentMenu studentMenu;
 	private DepartmentMenu deptMenu;
+	private LecturerMenu lecturerMenu;
 
 	/**
 	 * Launch the application.
@@ -100,6 +102,12 @@ public class Menu extends JFrame {
 		panel.add(button_2);
 		
 		JButton button_3 = new JButton("Lecturer Menu");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lecturerMenu = new LecturerMenu();
+				lecturerMenu.setVisible(true);
+			}
+		});
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_3.setBounds(62, 312, 226, 70);
 		panel.add(button_3);
