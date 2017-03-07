@@ -24,7 +24,7 @@ public class SubjectCourse {
 		this.dateCreated = dateFormat.format(date);
 	}
 
-	public SubjectCourse(Course course, Subject subject, String dateCreated) {
+	public SubjectCourse(Course course, Subject subject) {
 		super();
 		this.course = course;
 		this.subject = subject;
@@ -59,20 +59,6 @@ public class SubjectCourse {
 		return dateCreated;
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SubjectCourse subjectCourse = (SubjectCourse) o;
-
-        return id == subjectCourse.id;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
+	
 
 }

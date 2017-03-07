@@ -22,8 +22,7 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public Address update(Address entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.put(entity);
 		
 	}
 

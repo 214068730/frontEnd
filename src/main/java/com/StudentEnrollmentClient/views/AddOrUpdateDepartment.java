@@ -108,14 +108,10 @@ public class AddOrUpdateDepartment extends JFrame {
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 						}
-						
-						/*Department updatedLecturer = lecturerService.get(lecturer.getId());
-						if (!updatedDepartment.equals( department))
-							JOptionPane.showMessageDialog(null,"DEPARTMENT HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-						 * else if (txtDeptName.getText().matches(name)) //check if it exist
+						else if (txtDeptName.getText().matches(name)) //check if it exist
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ENTER A NEW ONE", JOptionPane.INFORMATION_MESSAGE);
-						}*/
+						}
 					}
 					else
 					{

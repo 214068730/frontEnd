@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.ProgressStatus;
 import com.StudentEnrollmentClient.rest.RestAPI;
@@ -47,8 +48,11 @@ public class ProgressStatusRestImpl implements RestAPI<ProgressStatus, Long> {
 
 	@Override
 	public ProgressStatus put(ProgressStatus entity) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = BASE_URL + "/update";
+		HttpEntity<ProgressStatus> requestEntity = new HttpEntity<ProgressStatus>(entity,requestHeaders);
+		ResponseEntity<ProgressStatus> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, ProgressStatus.class);
+		ProgressStatus progressStatus = responseEntity.getBody();
+		return progressStatus;
 	}
 
 	@Override

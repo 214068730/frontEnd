@@ -22,8 +22,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject update(Subject entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.put(entity);
 		
 	}
 

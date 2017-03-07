@@ -9,7 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.utils.AppUtil;
@@ -28,6 +30,13 @@ public class LecturerRestImpl implements RestAPI<Lecturer, Long> {
 				id.toString());
 		return lecturer;
 	}
+	
+	public Lecturer getByNameAndSurname(String name, String surname) {
+		final String url = BASE_URL +"/findByNameAndSurname/" + name+"/"+surname;
+		Lecturer lecturer = restTemplate.getForObject(url, Lecturer.class,
+				name,surname);
+		return lecturer;
+	}
 
 	@Override
 	public Lecturer post(Lecturer entity) {
@@ -41,8 +50,11 @@ public class LecturerRestImpl implements RestAPI<Lecturer, Long> {
 
 	@Override
 	public Lecturer put(Lecturer entity) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = BASE_URL + "/update";
+		HttpEntity<Lecturer> requestEntity = new HttpEntity<Lecturer>(entity,requestHeaders);
+		ResponseEntity<Lecturer> responseEntity = restTemplate.exchange(url,HttpMethod.PUT, requestEntity, Lecturer.class);
+		Lecturer lecturer = responseEntity.getBody();
+		return lecturer;
 	}
 
 	@Override

@@ -83,10 +83,10 @@ public class StudentMenu extends JFrame {
 		btnAddStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// contentPane.hide();
 				AddOrUpdateStudent addStudent = new AddOrUpdateStudent(student,
 						"ADD");
 				addStudent.setVisible(true);
+				dispose();
 			}
 		});
 		btnAddStudent.setBounds(152, 84, 236, 63);
@@ -98,6 +98,7 @@ public class StudentMenu extends JFrame {
 				AddOrUpdateStudent updateStudent = new AddOrUpdateStudent(
 						student, "UPDATE");
 				updateStudent.setVisible(true);
+				dispose();
 			}
 		});
 		btnUpdateStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -114,6 +115,13 @@ public class StudentMenu extends JFrame {
 		});
 		btnViewStudent.setBounds(152, 259, 236, 64);
 		contentPane.add(btnViewStudent);
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu menu = new Menu(student);
+				menu.setVisible(true);
+				dispose();
+			}
+		});
 
 		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnMainMenu.setBounds(152, 346, 236, 63);

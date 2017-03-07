@@ -79,6 +79,7 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				studentMenu = new StudentMenu(student);
 				studentMenu.setVisible(true);
+				dispose();
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -98,6 +99,13 @@ public class Menu extends JFrame {
 		panel.add(btnDeptMenu);
 		
 		JButton button_2 = new JButton("Subject Menu");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SubjectMenu subjectMenu = new SubjectMenu(student);
+				subjectMenu.setVisible(true);
+				dispose();
+			}
+		});
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_2.setBounds(62, 221, 226, 80);
 		panel.add(button_2);
@@ -117,6 +125,9 @@ public class Menu extends JFrame {
 		JButton button_4 = new JButton("Course Menu");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CourseMenu view = new CourseMenu(student);
+				view.setVisible(true);
+				dispose();
 			}
 		});
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
