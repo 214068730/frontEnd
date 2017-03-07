@@ -8,7 +8,7 @@ import com.StudentEnrollmentClient.rest.Impl.SubjectRestImpl;
 import com.StudentEnrollmentClient.services.SubjectService;
 
 public class SubjectServiceImpl implements SubjectService {
-	private RestAPI<Subject, Long> rest = new SubjectRestImpl();
+	private SubjectRestImpl rest = new SubjectRestImpl();
 
 	@Override
 	public Subject findById(Long id) {
@@ -35,6 +35,11 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public List<Subject> findAll() {
 		return rest.getAll();
+	}
+
+	@Override
+	public Subject getSubjectCode(String subjectCode) {
+		return rest.getSubjectCode(subjectCode);
 	}
 
 }
