@@ -136,8 +136,8 @@ public class AssignSubject extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SubjectMenu subjectMenu = new SubjectMenu();
-				subjectMenu.setVisible(true);
+				CourseMenu coursetMenu = new CourseMenu();
+				coursetMenu.setVisible(true);
 				dispose();
 			}
 		});

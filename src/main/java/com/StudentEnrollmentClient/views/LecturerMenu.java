@@ -80,9 +80,9 @@ public class LecturerMenu extends JFrame {
 		JButton btnViewLecturer = new JButton("View Lecturer");
 		btnViewLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
 				ViewLecturer viewLecturer = new ViewLecturer();
 				viewLecturer.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewLecturer.setFont(new Font("Tahoma", Font.BOLD, 16));

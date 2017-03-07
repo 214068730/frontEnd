@@ -93,7 +93,9 @@ public class CourseMenu extends JFrame {
 		JButton btnViewCourse = new JButton("View Course(s)");
 		btnViewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ViewCourse viewCourse = new ViewCourse();
+				viewCourse.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewCourse.setFont(new Font("Tahoma", Font.BOLD, 16));
