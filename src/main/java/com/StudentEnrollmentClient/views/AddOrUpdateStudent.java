@@ -244,6 +244,10 @@ public class AddOrUpdateStudent extends JFrame {
 
 				StudentMenu menu = new StudentMenu();
 				menu.setVisible(false);
+
+				StudentMenu menu = new StudentMenu(student);
+				menu.setVisible(true);
+
 				dispose();
 
 			}

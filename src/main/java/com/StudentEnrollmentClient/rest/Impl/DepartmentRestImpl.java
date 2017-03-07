@@ -29,6 +29,13 @@ public class DepartmentRestImpl implements RestAPI<Department, Long> {
 				id.toString());
 		return department;
 	}
+	
+	public Department getName(String name) {
+		final String url = BASE_URL + "/name/" + name;
+		Department department = restTemplate.getForObject(url, Department.class,
+				name.toString());
+		return department;
+	}
 
 	@Override
 	public Department post(Department entity) {

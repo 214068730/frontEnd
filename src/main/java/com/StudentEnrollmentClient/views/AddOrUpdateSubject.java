@@ -173,7 +173,7 @@ public class AddOrUpdateSubject extends JFrame {
 			}
 		});
 		btnSaveSubject.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnSaveSubject.setBounds(419, 276, 177, 50);
+		btnSaveSubject.setBounds(456, 281, 153, 45);
 		contentPane.add(btnSaveSubject);
 		
 		JLabel lblNewLabel_1 = new JLabel("Lecturer:");
@@ -194,7 +194,7 @@ public class AddOrUpdateSubject extends JFrame {
 			}
 		});
 		btnCancelSubject.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnCancelSubject.setBounds(606, 276, 177, 50);
+		btnCancelSubject.setBounds(630, 281, 153, 45);
 		contentPane.add(btnCancelSubject);
 		
 		

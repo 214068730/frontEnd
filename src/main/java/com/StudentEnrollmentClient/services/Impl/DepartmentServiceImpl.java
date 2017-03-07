@@ -8,7 +8,7 @@ import com.StudentEnrollmentClient.rest.Impl.DepartmentRestImpl;
 import com.StudentEnrollmentClient.services.DepartmentService;
 
 public class DepartmentServiceImpl implements DepartmentService{
-	private RestAPI<Department, Long> rest = new DepartmentRestImpl();
+	private DepartmentRestImpl rest = new DepartmentRestImpl();
 
 	@Override
 	public Department findById(Long id) {
@@ -35,5 +35,10 @@ public class DepartmentServiceImpl implements DepartmentService{
 	@Override
 	public List<Department> findAll() {
 		return rest.getAll();
+	}
+
+	@Override
+	public Department getByName(String departmentName) {
+		return rest.getName(departmentName);
 	}
 }

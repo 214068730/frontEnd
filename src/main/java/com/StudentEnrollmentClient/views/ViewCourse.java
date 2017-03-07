@@ -60,7 +60,7 @@ public class ViewCourse extends JFrame {
 
 	public void intialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1114, 648);
+		setBounds(100, 100, 1332, 698);
 		getContentPane().setLayout(null);
 		final JTable table = new JTable() {
 			public boolean isCellEditable(int row, int column) {
@@ -77,14 +77,14 @@ public class ViewCourse extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		JScrollPane pane = new JScrollPane(table);
-		pane.setBounds(10, 73, 1078, 433);
+		pane.setBounds(10, 73, 1296, 433);
 		panel.add(pane);
 		setContentPane(panel);
 
 		JLabel lblSubjectSelection = new JLabel("Courses");
 		lblSubjectSelection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
 				26));
-		lblSubjectSelection.setBounds(488, 25, 110, 32);
+		lblSubjectSelection.setBounds(609, 26, 110, 32);
 		panel.add(lblSubjectSelection);
 
 		JButton btnAdd = new JButton("Update");
@@ -92,7 +92,7 @@ public class ViewCourse extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAdd.setBounds(801, 557, 130, 42);
+		btnAdd.setBounds(1019, 607, 130, 42);
 		panel.add(btnAdd);
 
 		JButton btnCancel = new JButton("Menu");
@@ -100,7 +100,7 @@ public class ViewCourse extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel.setBounds(958, 557, 130, 42);
+		btnCancel.setBounds(1176, 607, 130, 42);
 		panel.add(btnCancel);
 	}
 

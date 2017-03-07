@@ -21,10 +21,9 @@ public class Course {
 		this.dateCreated = dateFormat.format(date);
 	}
 
-	public Course(Long id, String courseName, String courseCode,
-			Department department, String dateCreated) {
+	public Course(String courseName, String courseCode,
+			Department department) {
 		super();
-		this.courseID = id;
 		this.courseName = courseName;
 		this.courseCode = courseCode;
 		this.department = department;
@@ -67,19 +66,19 @@ public class Course {
 		this.dateCreated = dateCreated;
 	}
 
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Course course = (Course) o;
-
-        return courseID == course.courseID;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (courseID ^ (courseID >>> 32));
-    }
+//	@Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Course course = (Course) o;
+//
+//        return courseID == course.courseID;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return (int) (courseID ^ (courseID >>> 32));
+//    }
 }

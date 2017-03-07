@@ -67,9 +67,9 @@ public class CourseMenu extends JFrame {
 		JButton btnAddCourse = new JButton("Add Course");
 		btnAddCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				AddOrUpdateCourse addCourse = new AddOrUpdateCourse();
+				AddOrUpdateCourse addCourse = new AddOrUpdateCourse(student);
 				addCourse.setVisible(true);
+				dispose();
 			}
 		});
 		btnAddCourse.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -93,8 +93,13 @@ public class CourseMenu extends JFrame {
 		JButton btnViewCourse = new JButton("View Course(s)");
 		btnViewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				ViewCourse viewCourse = new ViewCourse();
 				viewCourse.setVisible(true);
+
+				ViewCourse view = new ViewCourse(student);
+				view.setVisible(true);
+
 				dispose();
 			}
 		});
@@ -103,6 +108,13 @@ public class CourseMenu extends JFrame {
 		contentPane.add(btnViewCourse);
 		
 		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu view = new Menu(student);
+				view.setVisible(true);
+				dispose();
+			}
+		});
 		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnMainMenu.setBounds(149, 320, 236, 63);
 		contentPane.add(btnMainMenu);
