@@ -76,10 +76,10 @@ public class ViewDepartment extends JFrame {
 		panel.add(pane);
 		setContentPane(panel);
 
-		JLabel lblSubjectSelection = new JLabel("Department");
+		JLabel lblSubjectSelection = new JLabel("Departments");
 		lblSubjectSelection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
 				26));
-		lblSubjectSelection.setBounds(488, 25, 140, 32);
+		lblSubjectSelection.setBounds(488, 25, 217, 32);
 		panel.add(lblSubjectSelection);
 
 		JButton btnAdd = new JButton("Update");

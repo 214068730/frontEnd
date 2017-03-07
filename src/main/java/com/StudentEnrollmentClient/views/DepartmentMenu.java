@@ -83,6 +83,7 @@ public class DepartmentMenu extends JFrame {
 				contentPane.hide();
 				ViewDepartment viewDept = new ViewDepartment();
 				viewDept.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewDepartment.setFont(new Font("Tahoma", Font.BOLD, 16));
