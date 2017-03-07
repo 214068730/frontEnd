@@ -68,11 +68,22 @@ public class SubjectRestImpl implements RestAPI<Subject, Long> {
 		return subjects;
 	}
 	
-	public Subject getStudentNumber(String studentNumber) {
-		final String url = BASE_URL + "/findByStudentNumber/" + studentNumber;
+	public Subject getSubjectCode(String subjectCode) {
+		final String url = BASE_URL + "/code/" + subjectCode;
 			Subject subject = restTemplate.getForObject(url, Subject.class,
-				studentNumber);
+				subjectCode.toString());
 		return subject;
 	}
+	
+	public Subject getSubjectName(String subjectName) {
+		final String url = BASE_URL + "/name/" + subjectName;
+			Subject subject = restTemplate.getForObject(url, Subject.class,
+				subjectName.toString());
+		return subject;
+	}
+	
+	
+	
+	
 	
 }

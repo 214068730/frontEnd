@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.JTable;
@@ -20,9 +21,11 @@ import javax.swing.JButton;
 import com.StudentEnrollmentClient.domain.Course;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.Subject;
+import com.StudentEnrollmentClient.domain.SubjectCourse;
 import com.StudentEnrollmentClient.rest.Impl.CourseRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.SubjectCourseRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.SubjectRestImpl;
+import com.StudentEnrollmentClient.services.Impl.SubjectCourseServiceImpl;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -31,7 +34,7 @@ import java.util.List;
 public class AssignSubject extends JFrame {
 	private Student student;
 	private CourseRestImpl courseService = new CourseRestImpl();
-	private SubjectCourseRestImpl subjectCourseService = new SubjectCourseRestImpl();
+	private SubjectCourseServiceImpl subjectCourseService = new SubjectCourseServiceImpl();
 	private SubjectRestImpl subjectService = new SubjectRestImpl();
 	private JComboBox ddlCourses = new JComboBox();
 
@@ -45,7 +48,7 @@ public class AssignSubject extends JFrame {
 					AssignSubject frame = new AssignSubject();
 					frame.setVisible(true);
 					generateTable();
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,14 +64,14 @@ public class AssignSubject extends JFrame {
 	}
 
 	public AssignSubject(Student student) {
-		
+
 		this.student = student;
 		List<Course> courses = courseService.getAll();
-		for(Course course : courses){
+		for (Course course : courses) {
 			ddlCourses.addItem(course.getCourseName());
 		}
 		intialize();
-		
+
 	}
 
 	private void intialize() {
@@ -84,8 +87,8 @@ public class AssignSubject extends JFrame {
 			};
 		};
 		final DefaultTableModel model = new DefaultTableModel();
-		reloadTable(table,model);
-		
+		reloadTable(table, model);
+
 		table.setModel(model);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -93,49 +96,69 @@ public class AssignSubject extends JFrame {
 		pane.setBounds(10, 116, 806, 313);
 		panel.add(pane);
 		setContentPane(panel);
-		
+
 		JLabel lblSubjectSelection = new JLabel("Subject Selection");
-		lblSubjectSelection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
+		lblSubjectSelection.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC,
+				26));
 		lblSubjectSelection.setBounds(297, 11, 233, 32);
 		panel.add(lblSubjectSelection);
-		
+
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int row = table.getSelectedRow();
+				try{
+				if (row != -1) {
+					String courseName = ddlCourses.getSelectedItem().toString();
+					String subjectCode = table.getValueAt(row, 0).toString();
+					Subject subject = subjectService.getSubjectCode(subjectCode); 
+					Course course = courseService.getByName(courseName);
+					SubjectCourse subjectCourse = subjectCourseService.save(new SubjectCourse(course,subject));
+					if(subjectCourse != null)
+						JOptionPane.showMessageDialog(null,"SUBJECT HAD BEEN ADDED", "INFO",JOptionPane.INFORMATION_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(null,"SUBJECT ALREADY EXIST IN THE COURSE", "INFO",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+					JOptionPane.showMessageDialog(null,"NO SUBJECT SELECTED", "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+				catch(Exception ex){
+					JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+					
+
 			}
 		});
 		btnAdd.setBounds(546, 466, 130, 41);
 		panel.add(btnAdd);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(686, 466, 130, 41);
 		panel.add(btnCancel);
-		
-		
+
 		ddlCourses.setBounds(10, 73, 233, 25);
 		panel.add(ddlCourses);
-		
 	}
-	
+
 	public static void generateTable() {
-		
+
 	}
 
-
-	public  void reloadTable(JTable table, DefaultTableModel model) {
+	public void reloadTable(JTable table, DefaultTableModel model) {
 		Object[] columnsName = new Object[3];
 		Object[] rowData = new Object[3];
 		columnsName[0] = "SUBJECT CODE";
 		columnsName[1] = "SUBJECT NAME";
 		columnsName[2] = "SUBJECT PRICE";
 		model.setColumnIdentifiers(columnsName);
-		
-		List<Subject>subjects = subjectService.getAll();
-		for(Subject sub : subjects){
+
+		List<Subject> subjects = subjectService.getAll();
+		for (Subject sub : subjects) {
 			rowData[0] = sub.getSubjectCode();
 			rowData[1] = sub.getSubjectName();
 			rowData[2] = sub.getPrice();
-			
+
 			model.addRow(rowData);
 		}
 	}

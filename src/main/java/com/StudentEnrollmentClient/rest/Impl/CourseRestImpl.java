@@ -36,6 +36,13 @@ public class CourseRestImpl implements RestAPI<Course, Long> {
 				name.toString());
 		return course;
 	}
+	
+	public Course getByCode(String code) {
+		final String url = BASE_URL + "/code/" + code;
+		Course course = restTemplate.getForObject(url, Course.class,
+				code.toString());
+		return course;
+	}
 
 	@Override
 	public Course post(Course entity) {

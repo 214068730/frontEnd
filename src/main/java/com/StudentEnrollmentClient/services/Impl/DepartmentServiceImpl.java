@@ -22,8 +22,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public Department update(Department entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.put(entity);
 		
 	}
 

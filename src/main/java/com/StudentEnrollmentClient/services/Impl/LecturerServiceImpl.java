@@ -26,8 +26,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 	@Override
 	public Lecturer update(Lecturer entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return rest.put(entity);
 	}
 
 	@Override
