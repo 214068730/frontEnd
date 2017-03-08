@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 
+import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.services.Impl.LecturerServiceImpl;
 
@@ -88,6 +90,37 @@ public class ViewLecturer extends JFrame {
 		JButton btnAdd = new JButton("Update");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					if (table.isEditing()) {
+						table.getCellEditor().stopCellEditing();
+						table.setRowSelectionInterval(row, row);
+
+						Object[] result = new Object[4];// 4 is the number of columns
+						for (int i = 0; i < table.getColumnCount(); i++) {
+							result[i] = table.getValueAt(row, i);
+						}
+						try {
+							Lecturer lecturer = lecturerService
+									.findById(Long.parseLong(result[0]
+											.toString()));
+							if (lecturer != null) {
+								lecturer.setName(result[1].toString());
+								lecturer.setSurname(result[2].toString());
+								lecturerService.update(lecturer); 
+							}
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null,
+									ex.getMessage(), "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				} else
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
+							"INFO", JOptionPane.INFORMATION_MESSAGE);
+
+				model.setRowCount(0);
+				reloadTable(table, model);
 			}
 		});
 		btnAdd.setBounds(801, 557, 130, 42);
@@ -106,11 +139,12 @@ public class ViewLecturer extends JFrame {
 	}
 	
 	public void reloadTable(JTable table, DefaultTableModel model) {
-		Object[] columnsName = new Object[3];
-		Object[] rowData = new Object[3];
+		Object[] columnsName = new Object[4];
+		Object[] rowData = new Object[4];
 		columnsName[0] = "LECTURER ID";
 		columnsName[1] = "LECTURER NAME";
 		columnsName[2] = "LECTURER SURNAME";
+		columnsName[3] = "DATE ADDED";
 		model.setColumnIdentifiers(columnsName);
 		
 		List<Lecturer>lecturers = lecturerService.findAll();
@@ -118,6 +152,7 @@ public class ViewLecturer extends JFrame {
 			rowData[0] = lecturer.getId();
 			rowData[1] = lecturer.getName();
 			rowData[2] = lecturer.getSurname();
+			rowData[3] = lecturer.getDateAdded();
 			model.addRow(rowData);
 		}
 	}

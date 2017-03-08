@@ -28,6 +28,7 @@ public class ViewDepartment extends JFrame {
 	private JPanel contentPane;
 	private Department department;
 	private DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
+
 	/**
 	 * Launch the application.
 	 */
@@ -50,11 +51,12 @@ public class ViewDepartment extends JFrame {
 	public ViewDepartment() {
 		initialize();
 	}
-	
-	public ViewDepartment(Department department){
+
+	public ViewDepartment(Department department) {
 		initialize();
 		this.department = department;
 	}
+
 	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1114, 648);
@@ -93,24 +95,18 @@ public class ViewDepartment extends JFrame {
 						table.getCellEditor().stopCellEditing();
 						table.setRowSelectionInterval(row, row);
 
-						Object[] result = new Object[3];//3 is the number of columns
-						for (int i = 0; i < table.getColumnCount() - 1; i++) {
+						Object[] result = new Object[3];// 3 is the number of columns
+						for (int i = 0; i < table.getColumnCount(); i++) {
 							result[i] = table.getValueAt(row, i);
 						}
 						try {
-							Department department = departmentService.getByName(result[0].toString());
+							Department department = departmentService
+									.findById(Long.parseLong(result[0]
+											.toString()));
 							if (department != null) {
-								department.setDepartmentName(result[0].toString());
-								Department updatedDepartment = departmentService.update(department);										//.update(subject);
-
-//								if (updatedSubject != null)
-//									JOptionPane.showMessageDialog(null,
-//											"RECORD UPDATED", "INFO",
-//											JOptionPane.INFORMATION_MESSAGE);
-//								else
-//									JOptionPane.showMessageDialog(null,
-//											"RECORD UPDATED NOT UPDATED",
-//											"ERROR", JOptionPane.ERROR_MESSAGE);
+								department.setDepartmentName(result[1]
+										.toString());
+								departmentService.update(department); 
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,
@@ -126,7 +122,7 @@ public class ViewDepartment extends JFrame {
 				reloadTable(table, model);
 			}
 		});
-		
+
 		btnAdd.setBounds(801, 557, 130, 42);
 		panel.add(btnAdd);
 
@@ -141,18 +137,20 @@ public class ViewDepartment extends JFrame {
 		btnCancel.setBounds(958, 557, 130, 42);
 		panel.add(btnCancel);
 	}
-	
+
 	public void reloadTable(JTable table, DefaultTableModel model) {
-		Object[] columnsName = new Object[2];
-		Object[] rowData = new Object[2];
+		Object[] columnsName = new Object[3];
+		Object[] rowData = new Object[3];
 		columnsName[0] = "DEPARTMENT ID";
 		columnsName[1] = "DEPARTMENT NAME";
+		columnsName[2] = "DATE ADDED";
 		model.setColumnIdentifiers(columnsName);
-		
-		List<Department>departments = departmentService.findAll();
-		for(Department department : departments){
+
+		List<Department> departments = departmentService.findAll();
+		for (Department department : departments) {
 			rowData[0] = department.getDepartmentID();
 			rowData[1] = department.getDepartmentName();
+			rowData[2] = department.getDateAdded();
 			model.addRow(rowData);
 		}
 	}

@@ -124,14 +124,14 @@ public class ViewSubject extends JFrame {
 								Subject updatedSubject = subjectService
 										.update(subject);
 
-//								if (updatedSubject != null)
-//									JOptionPane.showMessageDialog(null,
-//											"RECORD UPDATED", "INFO",
-//											JOptionPane.INFORMATION_MESSAGE);
-//								else
-//									JOptionPane.showMessageDialog(null,
-//											"RECORD UPDATED NOT UPDATED",
-//											"ERROR", JOptionPane.ERROR_MESSAGE);
+								if (updatedSubject != null)
+									JOptionPane.showMessageDialog(null,
+											"RECORD UPDATED", "INFO",
+											JOptionPane.INFORMATION_MESSAGE);
+								else
+									JOptionPane.showMessageDialog(null,
+											"RECORD UPDATED NOT UPDATED",
+											"ERROR", JOptionPane.ERROR_MESSAGE);
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,
