@@ -93,13 +93,8 @@ public class CourseMenu extends JFrame {
 		JButton btnViewCourse = new JButton("View Course(s)");
 		btnViewCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ViewCourse viewCourse = new ViewCourse();
-				viewCourse.setVisible(true);
-
 				ViewCourse view = new ViewCourse(student);
 				view.setVisible(true);
-
 				dispose();
 			}
 		});

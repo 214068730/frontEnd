@@ -65,7 +65,7 @@ public class ViewSubject extends JFrame {
 		getContentPane().setLayout(null);
 		final JTable table = new JTable() {
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0 || column == 5)
+				if (column == 0 || column == 4)
 					return false;
 				else
 					return true;

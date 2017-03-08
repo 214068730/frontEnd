@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,6 +17,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 import com.StudentEnrollmentClient.domain.Course;
+import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.CourseServiceImpl;
 
@@ -64,7 +66,7 @@ public class ViewCourse extends JFrame {
 		getContentPane().setLayout(null);
 		final JTable table = new JTable() {
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0 || column == 5)
+				if (column == 0 || column == 3)
 					return false;
 				else
 					return true;
@@ -90,6 +92,35 @@ public class ViewCourse extends JFrame {
 		JButton btnAdd = new JButton("Update");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					if (table.isEditing()) {
+						table.getCellEditor().stopCellEditing();
+						table.setRowSelectionInterval(row, row);
+
+						Object[] result = new Object[5];// 4 is the number of columns
+						for (int i = 0; i < table.getColumnCount(); i++) {
+							result[i] = table.getValueAt(row, i);
+						}
+						try {
+							Course course = courseService.findById(Long.parseLong(result[0].toString()));
+							if (course != null) {
+								course.setCourseCode(result[1].toString());
+								course.setCourseName(result[2].toString());
+								courseService.update(course); 
+							}
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null,
+									ex.getMessage(), "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				} else
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
+							"INFO", JOptionPane.INFORMATION_MESSAGE);
+
+				model.setRowCount(0);
+				reloadTable(table, model);
 			}
 		});
 		btnAdd.setBounds(1019, 607, 130, 42);
@@ -98,6 +129,9 @@ public class ViewCourse extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Menu mainMenu = new Menu();
+				mainMenu.setVisible(true);
+				dispose();
 			}
 		});
 		btnCancel.setBounds(1176, 607, 130, 42);
@@ -109,7 +143,7 @@ public class ViewCourse extends JFrame {
 		Object[] rowData = new Object[4];
 		columnsName[0] = "COURSE ID";
 		columnsName[1] = "COURSE CODE";
-		columnsName[2] = "COURSE SUBJECT";
+		columnsName[2] = "COURSE NAME";
 		columnsName[3] = "DEPARTMENT";
 		model.setColumnIdentifiers(columnsName);
 		
