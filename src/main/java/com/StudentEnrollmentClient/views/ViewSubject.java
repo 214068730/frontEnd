@@ -152,6 +152,13 @@ public class ViewSubject extends JFrame {
 		panel.add(btnAdd);
 
 		JButton btnCancel = new JButton("Menu");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu mainMenu = new Menu();
+				mainMenu.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancel.setBounds(1176, 591, 130, 42);
 		panel.add(btnCancel);
 	}

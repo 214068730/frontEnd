@@ -67,8 +67,7 @@ public class DepartmentMenu extends JFrame {
 		JButton btnAddDepartment = new JButton("Add Department");
 		btnAddDepartment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department, "ADD");
+				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department);
 				addDept.setVisible(true);
 				dispose();
 			}
