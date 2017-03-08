@@ -106,7 +106,7 @@ public class ViewSubject extends JFrame {
 						table.getCellEditor().stopCellEditing();
 						table.setRowSelectionInterval(row, row);
 
-						Object[] result = new Object[6];
+						Object[] result = new Object[6];//6 is the number of columns
 						for (int i = 0; i < table.getColumnCount() - 1; i++) {
 							result[i] = table.getValueAt(row, i);
 						}
@@ -114,7 +114,7 @@ public class ViewSubject extends JFrame {
 							Subject subject = subjectService
 									.getSubjectCode(result[0].toString());
 							if (subject != null) {
-								;
+								
 								subject.setSubjectCode(result[0].toString());
 								subject.setSubjectName(result[1].toString());
 								subject.setPrice(Integer.parseInt(result[2]
@@ -124,14 +124,14 @@ public class ViewSubject extends JFrame {
 								Subject updatedSubject = subjectService
 										.update(subject);
 
-								if (updatedSubject != null)
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED", "INFO",
-											JOptionPane.INFORMATION_MESSAGE);
-								else
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED NOT UPDATED",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
+//								if (updatedSubject != null)
+//									JOptionPane.showMessageDialog(null,
+//											"RECORD UPDATED", "INFO",
+//											JOptionPane.INFORMATION_MESSAGE);
+//								else
+//									JOptionPane.showMessageDialog(null,
+//											"RECORD UPDATED NOT UPDATED",
+//											"ERROR", JOptionPane.ERROR_MESSAGE);
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,
