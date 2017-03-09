@@ -5,13 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
+
+
 public class StudentCourse {
 
 	Long id;
 	Course course;
 	Student student;
 	Subject subject;
-	Department department;
 	String dateRegistered;
 
 	public StudentCourse() {
@@ -20,15 +22,13 @@ public class StudentCourse {
 		this.dateRegistered = dateFormat.format(date);
 	}
 
-	public StudentCourse(Course course, Student student, Subject subject,
-			Department department) {
+	public StudentCourse(Course course, Student student, Subject subject) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		this.course = course;
 		this.student = student;
 		this.subject = subject;
-		this.department = department;
 		this.dateRegistered = dateFormat.format(date);
 	}
 
@@ -56,14 +56,6 @@ public class StudentCourse {
 		this.subject = subject;
 	}
 
-	public Department getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-
 	public String getDateRegistered() {
 		return this.dateRegistered;
 	}
@@ -76,19 +68,4 @@ public class StudentCourse {
 		this.course = course;
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StudentCourse studentCourse = (StudentCourse) o;
-
-        return id == studentCourse.id;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
 }

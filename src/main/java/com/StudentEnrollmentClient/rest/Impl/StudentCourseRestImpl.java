@@ -13,13 +13,14 @@ import com.StudentEnrollmentClient.domain.Address;
 import com.StudentEnrollmentClient.domain.StudentCourse;
 import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Student;
+import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.utils.AppUtil;
 
 public class StudentCourseRestImpl implements RestAPI<StudentCourse, Long> {
 
 	AppUtil util = new AppUtil();
-	String BASE_URL = util.getUri() + "enrollment/course";
+	String BASE_URL = util.getUri() + "enrollment/studentCourse";
 	final HttpHeaders requestHeaders = RestMethods.getHeaders();
 	final RestTemplate restTemplate = RestMethods.getRestTemplate();
 
@@ -30,13 +31,23 @@ public class StudentCourseRestImpl implements RestAPI<StudentCourse, Long> {
 				id.toString());
 		return course;
 	}
+	
+	
+	public boolean register(List<Subject> subjects,StudentCourse entity) {
+		String url = BASE_URL + "/register/"+entity.getStudent().getStudentID()+"/"+entity.getCourse().getId()+"create";
+		HttpEntity<StudentCourse> httpEntity = new HttpEntity<>(entity, requestHeaders);
+		StudentCourse course = restTemplate.postForObject(url, httpEntity,StudentCourse.class);
+		if(course == null)
+			return false;
+		else
+			return true;
+	}
 
 	@Override
 	public StudentCourse post(StudentCourse entity) {
 		String url = BASE_URL + "/create";
 		HttpEntity<StudentCourse> httpEntity = new HttpEntity<>(entity, requestHeaders);
-		StudentCourse course = restTemplate.postForObject(url, httpEntity,
-				StudentCourse.class);
+		StudentCourse course = restTemplate.postForObject(url, httpEntity,StudentCourse.class);
 		return course;
 	}
 
@@ -62,8 +73,7 @@ public class StudentCourseRestImpl implements RestAPI<StudentCourse, Long> {
 		String url = BASE_URL + "/findAll";
 		List<StudentCourse> courses = new ArrayList<>();
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
-		ResponseEntity<StudentCourse[]> responseEntity = restTemplate.exchange(url,
-				HttpMethod.GET, requestEntity, StudentCourse[].class);
+		ResponseEntity<StudentCourse[]> responseEntity = restTemplate.exchange(url,HttpMethod.GET, requestEntity, StudentCourse[].class);
 		StudentCourse[] results = responseEntity.getBody();
 
 		for (StudentCourse b : results) {

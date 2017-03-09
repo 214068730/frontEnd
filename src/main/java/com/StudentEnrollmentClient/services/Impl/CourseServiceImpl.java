@@ -36,4 +36,9 @@ public class CourseServiceImpl implements CourseService{
 		return rest.getAll();
 	}
 
+	@Override
+	public Course getByName(String name) {
+		return rest.getByName(name);
+	}
+
 }

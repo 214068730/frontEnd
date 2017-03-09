@@ -30,8 +30,8 @@ public class ProgressStatusRestImpl implements RestAPI<ProgressStatus, Long> {
 		return progressStatus;
 	}
 	
-	public ProgressStatus getByStudentStudentIDAndActive(Long studentID,boolean active) {
-		final String url = BASE_URL + "/progress/grade/"+studentID+"/"+active;
+	public ProgressStatus getByStudentStudentIDAndActive(Long studentID,int active,Long courseID) {
+		final String url = BASE_URL + "/grade/"+"/"+active+"/"+studentID+"/"+courseID;
 		ProgressStatus progressStatus = restTemplate.getForObject(url,ProgressStatus.class,studentID.toString(),active);
 		return progressStatus;
 	}

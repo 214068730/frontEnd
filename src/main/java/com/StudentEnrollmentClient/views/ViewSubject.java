@@ -23,6 +23,8 @@ import java.awt.Font;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ViewSubject extends JFrame {
 
@@ -70,15 +72,6 @@ public class ViewSubject extends JFrame {
 				else
 					return true;
 			};
-
-			public Class getColumnClass(int col) {
-				if (col == 2) // second column accepts only Integer // values
-					return Integer.class;
-				else if (col == 3)
-					return Integer.class;
-				else
-					return String.class; // other columns accept String values
-			};
 		};
 		final DefaultTableModel model = new DefaultTableModel();
 		reloadTable(table, model);
@@ -101,6 +94,7 @@ public class ViewSubject extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
 				if (row != -1) {
 					if (table.isEditing()) {
 						table.getCellEditor().stopCellEditing();
@@ -110,33 +104,26 @@ public class ViewSubject extends JFrame {
 						for (int i = 0; i < table.getColumnCount() - 1; i++) {
 							result[i] = table.getValueAt(row, i);
 						}
-						try {
-							Subject subject = subjectService
-									.getSubjectCode(result[0].toString());
-							if (subject != null) {
-								;
-								subject.setSubjectCode(result[0].toString());
-								subject.setSubjectName(result[1].toString());
-								subject.setPrice(Integer.parseInt(result[2]
-										.toString().trim().replace(".", "")));
-								subject.setYearCode(Integer.parseInt(result[3]
-										.toString()));
-								Subject updatedSubject = subjectService
-										.update(subject);
-
-								if (updatedSubject != null)
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED", "INFO",
-											JOptionPane.INFORMATION_MESSAGE);
-								else
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED NOT UPDATED",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
-							}
-						} catch (Exception ex) {
+						String price = result[2].toString();
+						String level = result[3].toString();
+						boolean isDouble = isNumeric(price);
+						boolean isInt = isNumericForInt(level);
+						if (isDouble == false)
 							JOptionPane.showMessageDialog(null,
-									ex.getMessage(), "ERROR",
+									"PRICE MUST BE DIGITS ONLY", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
+						else if (isInt == false)
+							JOptionPane.showMessageDialog(null,
+									"LEVEL MUST BE DIGITS ONLY", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						else {
+							try {
+								updateStudent(result);
+							} catch (Exception ex) {
+								JOptionPane.showMessageDialog(null,
+										ex.getMessage(), "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
 						}
 					}
 				} else
@@ -145,6 +132,7 @@ public class ViewSubject extends JFrame {
 
 				model.setRowCount(0);
 				reloadTable(table, model);
+				table.changeSelection(row, col, false, false);
 			}
 		});
 
@@ -177,4 +165,32 @@ public class ViewSubject extends JFrame {
 		}
 	}
 
+	private boolean isNumeric(String str) {
+		try {
+			double d = Double.parseDouble(str);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isNumericForInt(String str) {
+		try {
+			int d = Integer.parseInt(str);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
+	}
+
+	private void updateStudent(Object result[]) {
+		Subject subject = subjectService.getSubjectCode(result[0].toString());
+		if (subject != null) {
+			subject.setSubjectCode(result[0].toString());
+			subject.setSubjectName(result[1].toString());
+			subject.setPrice(Double.parseDouble(result[2].toString().trim()));
+			subject.setYearCode(Integer.parseInt(result[3].toString()));
+			subjectService.update(subject);
+		}
+	}
 }

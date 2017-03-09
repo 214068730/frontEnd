@@ -3,6 +3,7 @@ package com.StudentEnrollmentClient.services.Impl;
 import java.util.List;
 
 import com.StudentEnrollmentClient.domain.StudentCourse;
+import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.rest.RestAPI;
 import com.StudentEnrollmentClient.rest.Impl.StudentCourseRestImpl;
 import com.StudentEnrollmentClient.services.StudentCourseService;
@@ -41,6 +42,11 @@ public class StudentCourseServiceImpl implements StudentCourseService{
 	@Override
 	public List<StudentCourse> getByStudentId(Long id) {
 		return rest.getByStudentId(id);
+	}
+
+	@Override
+	public boolean register(List<Subject> subjects, StudentCourse entity) {
+		return rest.register(subjects, entity);
 	}
 
 	

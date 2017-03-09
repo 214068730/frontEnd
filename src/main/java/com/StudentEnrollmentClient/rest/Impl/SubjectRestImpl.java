@@ -83,6 +83,23 @@ public class SubjectRestImpl implements RestAPI<Subject, Long> {
 	}
 	
 	
+	public List<Subject> getAllBySubjectLevel(Long courseID,Long studentID) {
+		String url = BASE_URL + "/findAllByLevel/"+courseID+"/"+studentID;
+		
+		List<Subject> subjects = new ArrayList<>();
+		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+		ResponseEntity<Subject[]> responseEntity = restTemplate.exchange(url,
+				HttpMethod.GET, requestEntity, Subject[].class);
+		Subject[] results = responseEntity.getBody();
+
+		for (Subject b : results) {
+			subjects.add(b);
+		}
+		return subjects;
+	}
+	
+	
+	
 	
 	
 	

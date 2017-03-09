@@ -58,14 +58,14 @@ public class Menu extends JFrame {
 	
 	public void intialize(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 488, 616);
+		setBounds(100, 100, 488, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(64, 11, 328, 566);
+		panel.setBounds(64, 11, 328, 650);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -143,8 +143,21 @@ public class Menu extends JFrame {
 			}
 		});
 		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnLogOut.setBounds(62, 474, 226, 70);
+		btnLogOut.setBounds(62, 569, 226, 70);
 		panel.add(btnLogOut);
+		
+		JButton btnEnrollment = new JButton("Enrollment");
+		btnEnrollment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EnrollementMenu view = new EnrollementMenu(student);
+				view.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnEnrollment.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnEnrollment.setBounds(62, 484, 226, 70);
+		panel.add(btnEnrollment);
 	}
 
 }

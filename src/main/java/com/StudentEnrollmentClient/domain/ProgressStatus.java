@@ -5,33 +5,36 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-
 public class ProgressStatus {
+	
 	private Long id;
-
 	private String currentYear;
 	private String startDate;
 	private String endDate;
-	private boolean active;
+	private int active;
+	private int completed;
 	private Student student;
+	private Course course;
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private Date date = new Date();
 
 	public ProgressStatus() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.startDate = dateFormat.format(date);
 	}
 
-	public ProgressStatus(Long id, String currentYear, String startDate,
-			String endDate, boolean active, Student student) {
+	
+	public ProgressStatus(String currentYear, int active,
+			int completed, Student student, Course course) {
 		super();
-		this.id = id;
 		this.currentYear = currentYear;
-		this.startDate = dateFormat.format(date).toString();
-		this.endDate = endDate;
+		this.startDate = dateFormat.format(date);
 		this.active = active;
+		this.completed = completed;
 		this.student = student;
+		this.course = course;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -73,14 +76,32 @@ public class ProgressStatus {
 		this.student = student;
 	}
 
-	public boolean isActive() {
+	public int isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
+
+	public int isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(int completed) {
+		this.completed = completed;
+	}
 	
+	
+	
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,5 +117,4 @@ public class ProgressStatus {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
-
 }

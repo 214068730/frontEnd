@@ -42,4 +42,9 @@ public class SubjectServiceImpl implements SubjectService {
 		return rest.getSubjectCode(subjectCode);
 	}
 
+	@Override
+	public List<Subject> getAllBySubjectLevel(Long courseID, Long studentID) {
+		return rest.getAllBySubjectLevel(courseID, studentID);
+	}
+
 }

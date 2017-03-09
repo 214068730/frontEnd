@@ -29,6 +29,8 @@ public class SubjectCourseRestImpl implements RestAPI<SubjectCourse, Long> {
 				SubjectCourse.class, id.toString());
 		return subjectCourse;
 	}
+	
+	
 
 	@Override
 	public SubjectCourse post(SubjectCourse entity) {
@@ -60,6 +62,20 @@ public class SubjectCourseRestImpl implements RestAPI<SubjectCourse, Long> {
 	@Override
 	public List<SubjectCourse> getAll() {
 		String url = BASE_URL + "/findAll";
+		List<SubjectCourse> subjectCourses = new ArrayList<>();
+		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+		ResponseEntity<SubjectCourse[]> responseEntity = restTemplate.exchange(url,
+				HttpMethod.GET, requestEntity, SubjectCourse[].class);
+		SubjectCourse[] results = responseEntity.getBody();
+
+		for (SubjectCourse b : results) {
+			subjectCourses.add(b);
+		}
+		return subjectCourses;
+	}
+	
+	public List<SubjectCourse> getByCourseCode(Long id) {
+		String url = BASE_URL + "/courseCode/"+id;
 		List<SubjectCourse> subjectCourses = new ArrayList<>();
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
 		ResponseEntity<SubjectCourse[]> responseEntity = restTemplate.exchange(url,
