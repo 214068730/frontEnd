@@ -100,45 +100,52 @@ public class ViewSubject extends JFrame {
 						table.getCellEditor().stopCellEditing();
 						table.setRowSelectionInterval(row, row);
 
-						Object[] result = new Object[6];//6 is the number of columns
+						Object[] result = new Object[6];// 6 is the number of
+														// columns
 						for (int i = 0; i < table.getColumnCount() - 1; i++) {
 							result[i] = table.getValueAt(row, i);
 						}
-<<<<<<< HEAD
+
 						String price = result[2].toString();
 						String level = result[3].toString();
 						boolean isDouble = isNumeric(price);
 						boolean isInt = isNumericForInt(level);
 						if (isDouble == false)
-=======
-						try {
-							Subject subject = subjectService
-									.getSubjectCode(result[0].toString());
-							if (subject != null) {
-								
-								subject.setSubjectCode(result[0].toString());
-								subject.setSubjectName(result[1].toString());
-								subject.setPrice(Integer.parseInt(result[2]
-										.toString().trim().replace(".", "")));
-								subject.setYearCode(Integer.parseInt(result[3]
-										.toString()));
-								Subject updatedSubject = subjectService
-										.update(subject);
 
-								if (updatedSubject != null)
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED", "INFO",
-											JOptionPane.INFORMATION_MESSAGE);
-								else
-									JOptionPane.showMessageDialog(null,
-											"RECORD UPDATED NOT UPDATED",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
+							try {
+								Subject subject = subjectService
+										.getSubjectCode(result[0].toString());
+								if (subject != null) {
+
+									subject.setSubjectCode(result[0].toString());
+									subject.setSubjectName(result[1].toString());
+									subject.setPrice(Integer
+											.parseInt(result[2].toString()
+													.trim().replace(".", "")));
+									subject.setYearCode(Integer
+											.parseInt(result[3].toString()));
+									Subject updatedSubject = subjectService
+											.update(subject);
+
+									if (updatedSubject != null)
+										JOptionPane
+												.showMessageDialog(
+														null,
+														"RECORD UPDATED",
+														"INFO",
+														JOptionPane.INFORMATION_MESSAGE);
+									else
+										JOptionPane.showMessageDialog(null,
+												"RECORD UPDATED NOT UPDATED",
+												"ERROR",
+												JOptionPane.ERROR_MESSAGE);
+								}
+							} catch (Exception ex) {
+
+								JOptionPane.showMessageDialog(null,
+										"PRICE MUST BE DIGITS ONLY", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
 							}
-						} catch (Exception ex) {
->>>>>>> b74ab90d5bb08e90d1542240d42c80ed04c6bee0
-							JOptionPane.showMessageDialog(null,
-									"PRICE MUST BE DIGITS ONLY", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
 						else if (isInt == false)
 							JOptionPane.showMessageDialog(null,
 									"LEVEL MUST BE DIGITS ONLY", "ERROR",
@@ -227,4 +234,5 @@ public class ViewSubject extends JFrame {
 			subjectService.update(subject);
 		}
 	}
+
 }
