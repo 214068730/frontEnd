@@ -120,7 +120,7 @@ public class Enrol extends JFrame {
 		lblSubjectSelection.setBounds(172, 26, 330, 32);
 		panel.add(lblSubjectSelection);
 
-		JButton btnAdd = new JButton("Cancel");
+		JButton btnAdd = new JButton("Menu");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Menu view = new Menu(student);

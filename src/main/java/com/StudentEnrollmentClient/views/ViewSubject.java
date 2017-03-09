@@ -176,7 +176,7 @@ public class ViewSubject extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu();
+				Menu mainMenu = new Menu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}
