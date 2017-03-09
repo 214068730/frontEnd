@@ -241,7 +241,6 @@ public class AddOrUpdateStudent extends JFrame {
 				StudentMenu menu = new StudentMenu(student);
 				menu.setVisible(true);
 				dispose();
-
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 16));

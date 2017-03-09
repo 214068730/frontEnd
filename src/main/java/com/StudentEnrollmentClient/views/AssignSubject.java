@@ -134,6 +134,13 @@ public class AssignSubject extends JFrame {
 		panel.add(btnAdd);
 
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CourseMenu coursetMenu = new CourseMenu();
+				coursetMenu.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancel.setBounds(686, 466, 130, 41);
 		panel.add(btnCancel);
 

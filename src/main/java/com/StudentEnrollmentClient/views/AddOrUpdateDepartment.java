@@ -49,18 +49,18 @@ public class AddOrUpdateDepartment extends JFrame {
 		initialize();
 	}
 	
-	public AddOrUpdateDepartment(Department department, String message){
+	public AddOrUpdateDepartment(Department department){
 		initialize();
 		this.department = department;
 		this.message = message;	
-		switch(message)
-		{
-		case "UPDATE":
-			txtDeptName.setText(department.getDepartmentName());
-			break;
-		default:
-			break;
-		}
+//		switch(message)
+//		{
+//		case "UPDATE":
+//			txtDeptName.setText(department.getDepartmentName());
+//			break;
+//		default:
+//			break;
+//		}
 	}
 
 	/**
@@ -94,23 +94,19 @@ public class AddOrUpdateDepartment extends JFrame {
 		JButton btnSaveDept = new JButton("Save");
 		btnSaveDept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switch(message)
-				{
-				//case "UPDATE":
-					//break;
-				case "ADD":
+				
 					if (!txtDeptName.getText().equals(""))
 					{
-						String name = txtDeptName.getText();
+						String name = txtDeptName.getText().toUpperCase();
 						Department department = departmentService.post(new Department(name));
 						
 						if (department != null)
 						{
 							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else if (txtDeptName.getText().matches(name)) //check if it exist
+						else 
 						{
-							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ENTER A NEW ONE", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 					else
@@ -119,7 +115,6 @@ public class AddOrUpdateDepartment extends JFrame {
 								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
 								"INFO", JOptionPane.INFORMATION_MESSAGE);
 					}
-				}
 			}
 		});
 		btnSaveDept.setFont(new Font("Tahoma", Font.BOLD, 14));

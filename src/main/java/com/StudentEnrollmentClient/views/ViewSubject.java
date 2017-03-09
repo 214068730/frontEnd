@@ -67,7 +67,7 @@ public class ViewSubject extends JFrame {
 		getContentPane().setLayout(null);
 		final JTable table = new JTable() {
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0 || column == 5)
+				if (column == 0 || column == 4)
 					return false;
 				else
 					return true;
@@ -100,15 +100,42 @@ public class ViewSubject extends JFrame {
 						table.getCellEditor().stopCellEditing();
 						table.setRowSelectionInterval(row, row);
 
-						Object[] result = new Object[6];
+						Object[] result = new Object[6];//6 is the number of columns
 						for (int i = 0; i < table.getColumnCount() - 1; i++) {
 							result[i] = table.getValueAt(row, i);
 						}
+<<<<<<< HEAD
 						String price = result[2].toString();
 						String level = result[3].toString();
 						boolean isDouble = isNumeric(price);
 						boolean isInt = isNumericForInt(level);
 						if (isDouble == false)
+=======
+						try {
+							Subject subject = subjectService
+									.getSubjectCode(result[0].toString());
+							if (subject != null) {
+								
+								subject.setSubjectCode(result[0].toString());
+								subject.setSubjectName(result[1].toString());
+								subject.setPrice(Integer.parseInt(result[2]
+										.toString().trim().replace(".", "")));
+								subject.setYearCode(Integer.parseInt(result[3]
+										.toString()));
+								Subject updatedSubject = subjectService
+										.update(subject);
+
+								if (updatedSubject != null)
+									JOptionPane.showMessageDialog(null,
+											"RECORD UPDATED", "INFO",
+											JOptionPane.INFORMATION_MESSAGE);
+								else
+									JOptionPane.showMessageDialog(null,
+											"RECORD UPDATED NOT UPDATED",
+											"ERROR", JOptionPane.ERROR_MESSAGE);
+							}
+						} catch (Exception ex) {
+>>>>>>> b74ab90d5bb08e90d1542240d42c80ed04c6bee0
 							JOptionPane.showMessageDialog(null,
 									"PRICE MUST BE DIGITS ONLY", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
@@ -140,6 +167,13 @@ public class ViewSubject extends JFrame {
 		panel.add(btnAdd);
 
 		JButton btnCancel = new JButton("Menu");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu mainMenu = new Menu();
+				mainMenu.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancel.setBounds(1176, 591, 130, 42);
 		panel.add(btnCancel);
 	}
