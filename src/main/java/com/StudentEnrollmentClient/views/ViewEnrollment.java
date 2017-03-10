@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.StudentEnrollmentClient.domain.ProgressStatus;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.StudentCourse;
 import com.StudentEnrollmentClient.services.Impl.ProgressStatusServiceImpl;
@@ -31,7 +33,7 @@ public class ViewEnrollment extends JFrame {
 
 	private JPanel contentPane;
 	private ProgressStatusServiceImpl progressStatusService = new ProgressStatusServiceImpl();
-    Student student;
+	Student student;
 	private StudentCourseServiceImpl studentCourseService = new StudentCourseServiceImpl();
 	private JLabel lblFullname = new JLabel("FullName :");
 	private JLabel lblStudentNumber = new JLabel("Student Number: ");
@@ -39,6 +41,7 @@ public class ViewEnrollment extends JFrame {
 	private JLabel lblDate = new JLabel("Date");
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private Date date = new Date();
+	private JLabel lblTotal = new JLabel("TOTAL:");
 
 	/**
 	 * Launch the application.
@@ -66,11 +69,12 @@ public class ViewEnrollment extends JFrame {
 	public ViewEnrollment(Student student) {
 		this.student = student;
 		intialize();
-		lblFullname.setText(student.getStudentName()+" "+student.getStudentSurname());
+		lblFullname.setText(student.getStudentName() + " "
+				+ student.getStudentSurname());
 		lblStudentNumber.setText(student.getStudentNumber());
 		lblIdNumber.setText(student.getStudentIdNumber());
 		lblDate.setText(dateFormat.format(date).toString());
-		
+
 	}
 
 	public void intialize() {
@@ -96,7 +100,18 @@ public class ViewEnrollment extends JFrame {
 		panel.add(pane);
 		setContentPane(panel);
 
-		JButton btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("Cancel Course");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+					status.setActive(0); // Canceling course
+					progressStatusService.update(status);				
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		btnCancel.setBounds(473, 452, 130, 42);
 		panel.add(btnCancel);
 
@@ -126,7 +141,6 @@ public class ViewEnrollment extends JFrame {
 		lblFullname_1.setBounds(10, 11, 61, 14);
 		panel_1.add(lblFullname_1);
 
-		
 		lblFullname.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblFullname.setBounds(120, 11, 140, 14);
 		panel_1.add(lblFullname);
@@ -135,7 +149,6 @@ public class ViewEnrollment extends JFrame {
 		lblStudentNumber_1.setBounds(10, 36, 99, 14);
 		panel_1.add(lblStudentNumber_1);
 
-		
 		lblStudentNumber.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblStudentNumber.setBounds(120, 36, 157, 14);
 		panel_1.add(lblStudentNumber);
@@ -144,12 +157,10 @@ public class ViewEnrollment extends JFrame {
 		lblIdNumber_1.setBounds(10, 61, 99, 14);
 		panel_1.add(lblIdNumber_1);
 
-		
 		lblIdNumber.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblIdNumber.setBounds(120, 61, 157, 14);
 		panel_1.add(lblIdNumber);
 
-		
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDate.setBounds(630, 64, 130, 14);
 		panel.add(lblDate);
@@ -158,7 +169,6 @@ public class ViewEnrollment extends JFrame {
 		lblNewLabel.setBounds(607, 420, 69, 14);
 		panel.add(lblNewLabel);
 
-		JLabel lblTotal = new JLabel("TOTAL:");
 		lblTotal.setBounds(665, 420, 83, 14);
 		panel.add(lblTotal);
 
@@ -166,7 +176,7 @@ public class ViewEnrollment extends JFrame {
 
 	public void reloadTable(JTable table, DefaultTableModel model) {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
-
+		double total = 0;
 		Object[] columnsName = new Object[4];
 		Object[] rowData = new Object[4];
 		columnsName[0] = "SUBJECT CODE";
@@ -174,19 +184,24 @@ public class ViewEnrollment extends JFrame {
 		columnsName[2] = "SUBJECT LEVEL";
 		columnsName[3] = "SUBJECT PRICE";
 		model.setColumnIdentifiers(columnsName);
-		
-		List<StudentCourse> studentCourses = studentCourseService.getByStudentId(student.getStudentID());
+
+		List<StudentCourse> studentCourses = studentCourseService
+				.getByStudentId(student.getStudentID());
 		if (studentCourses != null) {
-			
+
 			for (StudentCourse studentCourse : studentCourses) {
-				if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
+				if (studentCourse.getDateRegistered().substring(0, 4)
+						.equals(year + "")) {
 					rowData[0] = studentCourse.getSubject().getSubjectCode();
 					rowData[1] = studentCourse.getSubject().getSubjectName();
 					rowData[2] = studentCourse.getSubject().getYearCode();
 					rowData[3] = studentCourse.getSubject().getPrice();
+					total = total + Double.parseDouble(rowData[3].toString());
 					model.addRow(rowData);
 				}
 			}
+			lblTotal.setText(total + "");
+
 		}
 	}
 }
