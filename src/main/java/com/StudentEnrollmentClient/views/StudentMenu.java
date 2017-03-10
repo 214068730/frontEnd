@@ -108,9 +108,9 @@ public class StudentMenu extends JFrame {
 		btnViewStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
-				ViewStudent viewStudent = new ViewStudent();
+				ViewStudent viewStudent = new ViewStudent(student);
 				viewStudent.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewStudent.setBounds(152, 259, 236, 64);

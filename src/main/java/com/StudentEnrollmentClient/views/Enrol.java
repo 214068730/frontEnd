@@ -140,7 +140,6 @@ public class Enrol extends JFrame {
 				ProgressStatus status = progressStatusService.findByStudentStudentIDAndActive(student.getStudentID(), 1, resultCourse.getId());
 				if (status == null) {
 					JOptionPane.showMessageDialog(null, "already registred","INFO", JOptionPane.INFORMATION_MESSAGE);
-					List<Subject> subjects = subjectService.getAllBySubjectLevel(resultCourse.getId(),student.getStudentID());
 				} else {
 					JOptionPane.showMessageDialog(null,status.getCurrentYear(), "INFO",JOptionPane.INFORMATION_MESSAGE);
 					List<Subject> subjects = subjectService.getAllBySubjectLevel(resultCourse.getId(),student.getStudentID());
@@ -152,7 +151,7 @@ public class Enrol extends JFrame {
 					if(isRegistered == false)
 						JOptionPane.showMessageDialog(null, "NOT REGISTERED","INFO", JOptionPane.INFORMATION_MESSAGE);
 					else
-						JOptionPane.showMessageDialog(null, "REGISTERED!!!","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "YOU HAVE SUCCESSFULLY REGISTERED!!!","INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
