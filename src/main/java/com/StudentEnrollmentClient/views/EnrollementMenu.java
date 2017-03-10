@@ -47,24 +47,25 @@ public class EnrollementMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public EnrollementMenu() {
-		intialize();
+
 	}
-	
+
 	public EnrollementMenu(Student student) {
 		this.student = student;
 		intialize();
-		try{
-		ProgressStatus status = progressService.getActive(student.getStudentID(), 1);
-		if(status == null)
-			btnView.setEnabled(false);
-		else
-			btnView.setEnabled(true);
-		}catch(Exception ex){
-			JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+		try {
+			ProgressStatus status = progressService.getActive(student.getStudentID(), 1);
+			if (status == null)
+				btnView.setEnabled(false);
+			else
+				btnView.setEnabled(true);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	public void intialize(){
+
+	public void intialize() {
 		setTitle("Enrollment Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 306, 445);
@@ -72,17 +73,17 @@ public class EnrollementMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(20, 11, 250, 371);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblEnrollment = new JLabel("Enrollment");
 		lblEnrollment.setBounds(50, 11, 152, 32);
 		panel.add(lblEnrollment);
 		lblEnrollment.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
-		
+
 		JButton btnEnroll = new JButton("Enroll");
 		btnEnroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,22 +102,10 @@ public class EnrollementMenu extends JFrame {
 				dispose();
 			}
 		});
-		
-		
-
-		JButton btnView = new JButton("View");
-		btnView.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ViewEnrollment viewEnroll = new ViewEnrollment(student);
-				viewEnroll.setVisible(true);
-				dispose();
-			}
-		});
-
 		btnView.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnView.setBounds(10, 163, 226, 70);
 		panel.add(btnView);
-		
+
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

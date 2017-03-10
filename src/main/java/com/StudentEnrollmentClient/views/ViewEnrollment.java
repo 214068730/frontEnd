@@ -38,7 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
 public class ViewEnrollment extends JFrame {
 
 	private JPanel contentPane;
@@ -55,7 +54,6 @@ public class ViewEnrollment extends JFrame {
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private Date date = new Date();
 	private JLabel lblTotal = new JLabel("TOTAL:");
-
 
 	/**
 	 * Launch the application.
@@ -76,16 +74,15 @@ public class ViewEnrollment extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	
+
 	public ViewEnrollment() {
-		intialize();
+		
 	}
 
 	public ViewEnrollment(Student student) {
 		this.student = student;
 		intialize();
-		lblFullname.setText(student.getStudentName() + " "
-				+ student.getStudentSurname());
+		lblFullname.setText(student.getStudentName() + " "+ student.getStudentSurname());
 		lblStudentNumber.setText(student.getStudentNumber());
 		lblIdNumber.setText(student.getStudentIdNumber());
 		lblDate.setText(dateFormat.format(date).toString());
@@ -118,12 +115,14 @@ public class ViewEnrollment extends JFrame {
 		JButton btnCancel = new JButton("Cancel Course");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+			 try {
+				ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+				if (status != null) {
 					status.setActive(0); // Canceling course
-					progressStatusService.update(status);				
+					progressStatusService.update(status);
+				}
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, ex.getMessage(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -133,8 +132,8 @@ public class ViewEnrollment extends JFrame {
 		JButton btnMenua = new JButton("Menu");
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EnrollementMenu view = new EnrollementMenu(student);
-				view.setVisible(true);
+//				EnrollementMenu view = new EnrollementMenu(student);
+//				view.setVisible(true);
 				dispose();
 			}
 		});
@@ -181,7 +180,7 @@ public class ViewEnrollment extends JFrame {
 		panel.add(lblDate);
 
 		JLabel lblNewLabel = new JLabel("TOTAL: R");
-		lblNewLabel.setBounds(607, 420, 69, 14);
+		lblNewLabel.setBounds(607, 420, 69, 4);
 		panel.add(lblNewLabel);
 
 		lblTotal.setBounds(665, 420, 83, 14);

@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
-	private static Student student;
+	private  Student student;
 	private StudentMenu studentMenu;
 	private DepartmentMenu deptMenu;
 	private LecturerMenu lecturerMenu;
@@ -33,7 +33,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu(student);
+					Menu frame = new Menu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
