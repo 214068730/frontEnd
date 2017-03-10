@@ -82,6 +82,13 @@ public class EnrollementMenu extends JFrame {
 		panel.add(btnEnroll);
 		
 		JButton btnView = new JButton("View");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ViewEnrollment viewEnroll = new ViewEnrollment();
+				viewEnroll.setVisible(true);
+				dispose();
+			}
+		});
 		btnView.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnView.setBounds(10, 163, 226, 70);
 		panel.add(btnView);

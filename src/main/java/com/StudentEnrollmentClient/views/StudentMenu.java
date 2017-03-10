@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 public class StudentMenu extends JFrame {
 
 	private JPanel contentPane;
-	private static Student student;
+	private   Student student;
 	JButton btnAddStudent = new JButton("Add Student");
 	JButton btnUpdateStudent = new JButton("Update Student");
 	JButton btnViewStudent = new JButton("View Student");
@@ -33,7 +33,7 @@ public class StudentMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentMenu frame = new StudentMenu(student);
+					StudentMenu frame = new StudentMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,13 +50,14 @@ public class StudentMenu extends JFrame {
 	}
 
 	public StudentMenu(Student student) {
-		intialize();
+		
 		this.student = student;
-		accessRights();
+		accessRights(student);
+		intialize();
 
 	}
 
-	public void accessRights() {
+	public void accessRights(Student student) {
 		// Access Rights
 		String role = student.getRole().getRole();
 		switch (role) {
@@ -108,9 +109,9 @@ public class StudentMenu extends JFrame {
 		btnViewStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
 				ViewStudent viewStudent = new ViewStudent();
 				viewStudent.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewStudent.setBounds(152, 259, 236, 64);

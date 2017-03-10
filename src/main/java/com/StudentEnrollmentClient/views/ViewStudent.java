@@ -145,7 +145,7 @@ public class ViewStudent extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu(student);
+				StudentMenu mainMenu = new StudentMenu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}

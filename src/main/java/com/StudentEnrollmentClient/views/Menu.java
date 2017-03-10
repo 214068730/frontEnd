@@ -51,8 +51,9 @@ public class Menu extends JFrame {
 	}
 	
 	public Menu(Student student) {
-		intialize();
 		this.student = student;
+		intialize();
+		
 	
 	}
 	

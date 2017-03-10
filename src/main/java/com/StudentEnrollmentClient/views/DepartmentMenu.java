@@ -79,7 +79,6 @@ public class DepartmentMenu extends JFrame {
 		JButton btnViewDepartment = new JButton("View Department(s)");
 		btnViewDepartment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.hide();
 				ViewDepartment viewDept = new ViewDepartment();
 				viewDept.setVisible(true);
 				dispose();
