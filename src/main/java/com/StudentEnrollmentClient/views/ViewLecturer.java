@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 
 import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.LecturerServiceImpl;
 
 import java.awt.Font;
@@ -26,6 +27,7 @@ public class ViewLecturer extends JFrame {
 
 	private JPanel contentPane;
 	private Lecturer lecturer;
+	private Student student;
 	private LecturerServiceImpl lecturerService = new LecturerServiceImpl();
 
 	/**
@@ -52,10 +54,10 @@ public class ViewLecturer extends JFrame {
 		initialize();
 	}
 	
-	public ViewLecturer(Lecturer lecturer)
+	public ViewLecturer(Student student)
 	{
 		initialize();
-		this.lecturer = lecturer;
+		this.student = student;
 	}
 	
 	public void initialize() {
@@ -129,8 +131,8 @@ public class ViewLecturer extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu();
-				mainMenu.setVisible(true);
+				LecturerMenu lecturerMenu = new LecturerMenu();
+				lecturerMenu.setVisible(true);
 				dispose();
 			}
 		});

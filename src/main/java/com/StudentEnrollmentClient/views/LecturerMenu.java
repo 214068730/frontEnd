@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.domain.Student;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ public class LecturerMenu extends JFrame {
 
 	private JPanel contentPane;
 	private Lecturer lecturer;
+	private Student student;
 	
 
 	/**
@@ -80,7 +82,7 @@ public class LecturerMenu extends JFrame {
 		JButton btnViewLecturer = new JButton("View Lecturer");
 		btnViewLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewLecturer viewLecturer = new ViewLecturer();
+				ViewLecturer viewLecturer = new ViewLecturer(student);
 				viewLecturer.setVisible(true);
 				dispose();
 			}

@@ -22,6 +22,7 @@ public class DepartmentMenu extends JFrame {
 
 	private JPanel contentPane;
 	private static Department department;
+	private Student student;
 
 	/**
 	 * Launch the application.
@@ -79,7 +80,7 @@ public class DepartmentMenu extends JFrame {
 		JButton btnViewDepartment = new JButton("View Department(s)");
 		btnViewDepartment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewDepartment viewDept = new ViewDepartment();
+				ViewDepartment viewDept = new ViewDepartment(student);
 				viewDept.setVisible(true);
 				dispose();
 			}

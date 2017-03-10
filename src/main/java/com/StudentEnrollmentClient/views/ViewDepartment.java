@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 
 import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.services.Impl.DepartmentServiceImpl;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class ViewDepartment extends JFrame {
 
 	private JPanel contentPane;
-	private Department department;
+	private Student student;
 	private DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
 
 	/**
@@ -52,9 +53,9 @@ public class ViewDepartment extends JFrame {
 		initialize();
 	}
 
-	public ViewDepartment(Department department) {
+	public ViewDepartment(Student student) {
 		initialize();
-		this.department = department;
+		this.student = student;
 	}
 
 	public void initialize() {
@@ -129,8 +130,8 @@ public class ViewDepartment extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu();
-				mainMenu.setVisible(true);
+				DepartmentMenu deptMenu = new DepartmentMenu();
+				deptMenu.setVisible(true);
 				dispose();
 			}
 		});

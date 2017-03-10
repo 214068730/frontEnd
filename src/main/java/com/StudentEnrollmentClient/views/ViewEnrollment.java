@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 public class ViewEnrollment extends JFrame {
 
 	private JPanel contentPane;
+	private Enrol enroll;
 
 	/**
 	 * Launch the application.
@@ -42,7 +43,15 @@ public class ViewEnrollment extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewEnrollment() {
+	public ViewEnrollment(){
+		initialize();
+	}
+	
+	public ViewEnrollment(Enrol enroll){
+		initialize();
+		this.enroll = enroll;
+	}
+	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1104, 616);
 		contentPane = new JPanel();
