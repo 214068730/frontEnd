@@ -2,6 +2,7 @@ package com.StudentEnrollmentClient.services.Impl;
 
 import java.util.List;
 
+import com.StudentEnrollmentClient.domain.ProgressStatus;
 import com.StudentEnrollmentClient.domain.StudentCourse;
 import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.rest.RestAPI;
@@ -48,6 +49,8 @@ public class StudentCourseServiceImpl implements StudentCourseService{
 	public boolean register(List<Subject> subjects, StudentCourse entity) {
 		return rest.register(subjects, entity);
 	}
+
+	
 
 	
 

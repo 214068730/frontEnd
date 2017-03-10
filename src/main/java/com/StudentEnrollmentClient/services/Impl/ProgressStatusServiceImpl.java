@@ -41,4 +41,9 @@ public class ProgressStatusServiceImpl implements ProgressStatusService {
 		return rest.getByStudentStudentIDAndActive(studentID, activated, courseID);
 	}
 
+	@Override
+	public ProgressStatus getActive(Long studentID, int active) {
+		return rest.getActive(studentID, active);
+	}
+
 }

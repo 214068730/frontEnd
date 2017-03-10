@@ -109,7 +109,11 @@ public class StudentMenu extends JFrame {
 		btnViewStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				ViewStudent viewStudent = new ViewStudent();
+=======
+				ViewStudent viewStudent = new ViewStudent(student);
+>>>>>>> 08f8dd7d7b9af473519667ec307236b83376057d
 				viewStudent.setVisible(true);
 				dispose();
 			}
