@@ -223,7 +223,7 @@ public class AddOrUpdateStudent extends JFrame {
 						String streetNumber = txtStreetNumber.getText();
 						Long role = new Long(ddlRights.getSelectedIndex() + 1);
 
-						try {
+						//try {
 							Roles rights = rolesService.get(role); //getting role from db
 							
 							if (rights != null) {
@@ -232,9 +232,9 @@ public class AddOrUpdateStudent extends JFrame {
 								if (student != null) 
 									JOptionPane.showMessageDialog(null,"STUDENT HAS ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 							}
-						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-						}
+//						} catch (Exception ex) {
+//							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+//						}
 					}
 					else
 						JOptionPane.showMessageDialog(null,

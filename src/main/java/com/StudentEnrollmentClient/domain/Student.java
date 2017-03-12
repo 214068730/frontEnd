@@ -2,6 +2,7 @@ package com.StudentEnrollmentClient.domain;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -25,20 +26,16 @@ public class Student {
 
 	public Student() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		DateFormat studentNumberGenerator = new SimpleDateFormat("yyyyHHddss");
 		Date date = new Date();
 		this.dateCreated = dateFormat.format(date).toString();
-		this.studentNumber =  (studentNumberGenerator.format(date).toString()+System.currentTimeMillis()).substring(0, 8);
+		this.studentNumber =  generateStudentNumber();
 	}
 
-	public Student(String studentName,
-			String studentSurname, Address studentAddress,
-			String studentIdNumber, Roles role) {
+	public Student(String studentName,String studentSurname, Address studentAddress,String studentIdNumber, Roles role) {
 		super();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		DateFormat studentNumberGenerator = new SimpleDateFormat("yyyyHHddss");
 		Date date = new Date();
-		this.studentNumber =  (studentNumberGenerator.format(date).toString()+System.currentTimeMillis()).substring(0, 8);
+		this.studentNumber =  generateStudentNumber();
 		this.studentName = studentName;
 		this.studentSurname = studentSurname;
 		this.studentAddress = studentAddress;
@@ -108,20 +105,11 @@ public class Student {
 		this.role = role;
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o;
-
-        return studentID == student.studentID;
-
+	public String generateStudentNumber(){
+    	int year = Calendar.getInstance().get(Calendar.YEAR);
+        String modifiedYear= Integer.toString(year).substring(0,1);
+        DateFormat dateFormat = new SimpleDateFormat("yyHHmmss");
+		Date date = new Date();
+		return modifiedYear+dateFormat.format(date);
     }
-
-    @Override
-    public int hashCode() {
-        return (int) (studentID ^ (studentID >>> 32));
-    }
-
 }

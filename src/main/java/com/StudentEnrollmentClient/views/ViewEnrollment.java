@@ -204,8 +204,7 @@ public class ViewEnrollment extends JFrame {
 		if (studentCourses != null) {
 
 			for (StudentCourse studentCourse : studentCourses) {
-				if (studentCourse.getDateRegistered().substring(0, 4)
-						.equals(year + "")) {
+				if (studentCourse.getDateRegistered().substring(0, 4).equals(year +"")) {
 					rowData[0] = studentCourse.getSubject().getSubjectCode();
 					rowData[1] = studentCourse.getSubject().getSubjectName();
 					rowData[2] = studentCourse.getSubject().getYearCode();
