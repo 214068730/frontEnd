@@ -49,7 +49,7 @@ public class ViewStudent extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewStudent() {
-		intialize();
+		//intialize();
 	}
 
 	public ViewStudent(Student student) {

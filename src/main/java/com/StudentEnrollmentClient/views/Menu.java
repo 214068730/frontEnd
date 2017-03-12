@@ -25,6 +25,12 @@ public class Menu extends JFrame {
 	private StudentMenu studentMenu;
 	private DepartmentMenu deptMenu;
 	private LecturerMenu lecturerMenu;
+	private JButton button = new JButton("Student Menu");
+	private JButton btnDeptMenu = new JButton("Department Menu");
+	private JButton button_2 = new JButton("Subject Menu");
+	private JButton button_3 = new JButton("Lecturer Menu");
+	private JButton button_4 = new JButton("Course Menu");
+	
 
 	/**
 	 * Launch the application.
@@ -47,14 +53,28 @@ public class Menu extends JFrame {
 	 */
 	public Menu() {
 		setResizable(false);
-		intialize();
+		//intialize();
 	}
 	
 	public Menu(Student student) {
 		this.student = student;
 		intialize();
+		accessRights();
 		
 	
+	}
+	
+	public void accessRights() {
+		// Access Rights
+		String role = student.getRole().getRole();
+		switch (role) {
+		case "B":
+			btnDeptMenu.setEnabled(false);
+			button_2.setEnabled(false);
+			button_3.setEnabled(false);
+			button_4.setEnabled(false);
+			
+		}
 	}
 	
 	public void intialize(){
@@ -75,7 +95,7 @@ public class Menu extends JFrame {
 		label.setBounds(97, 11, 154, 32);
 		panel.add(label);
 		
-		JButton button = new JButton("Student Menu");
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				studentMenu = new StudentMenu(student);
@@ -87,10 +107,10 @@ public class Menu extends JFrame {
 		button.setBounds(62, 49, 226, 70);
 		panel.add(button);
 		
-		JButton btnDeptMenu = new JButton("Department Menu");
+		
 		btnDeptMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				deptMenu = new DepartmentMenu();
+				deptMenu = new DepartmentMenu(student);
 				deptMenu.setVisible(true);
 				dispose();
 			}
@@ -99,7 +119,7 @@ public class Menu extends JFrame {
 		btnDeptMenu.setBounds(62, 130, 226, 80);
 		panel.add(btnDeptMenu);
 		
-		JButton button_2 = new JButton("Subject Menu");
+		
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SubjectMenu subjectMenu = new SubjectMenu(student);
@@ -111,10 +131,10 @@ public class Menu extends JFrame {
 		button_2.setBounds(62, 221, 226, 80);
 		panel.add(button_2);
 		
-		JButton button_3 = new JButton("Lecturer Menu");
+		
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lecturerMenu = new LecturerMenu();
+				lecturerMenu = new LecturerMenu(student);
 				lecturerMenu.setVisible(true);
 				dispose();
 			}
@@ -123,7 +143,7 @@ public class Menu extends JFrame {
 		button_3.setBounds(62, 312, 226, 70);
 		panel.add(button_3);
 		
-		JButton button_4 = new JButton("Course Menu");
+		
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CourseMenu view = new CourseMenu(student);

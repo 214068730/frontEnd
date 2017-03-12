@@ -51,7 +51,7 @@ public class ViewCourse extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewCourse() {
-		intialize();
+		//intialize();
 	}
 
 	public ViewCourse(Student student) {
@@ -129,7 +129,7 @@ public class ViewCourse extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu(student);
+				CourseMenu mainMenu = new CourseMenu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}

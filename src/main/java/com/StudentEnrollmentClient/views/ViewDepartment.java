@@ -50,7 +50,7 @@ public class ViewDepartment extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewDepartment() {
-		initialize();
+		//initialize();
 	}
 
 	public ViewDepartment(Student student) {
@@ -130,7 +130,7 @@ public class ViewDepartment extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DepartmentMenu deptMenu = new DepartmentMenu();
+				DepartmentMenu deptMenu = new DepartmentMenu(student);
 				deptMenu.setVisible(true);
 				dispose();
 			}

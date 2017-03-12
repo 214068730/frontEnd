@@ -46,23 +46,24 @@ public class StudentMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentMenu() {
-		intialize();
+		//intialize();
 	}
 
 	public StudentMenu(Student student) {
 		
 		this.student = student;
-		accessRights(student);
+		accessRights();
 		intialize();
 
 	}
 
-	public void accessRights(Student student) {
+	public void accessRights() {
 		// Access Rights
 		String role = student.getRole().getRole();
 		switch (role) {
 		case "B":
 			btnAddStudent.setEnabled(false);
+			btnViewStudent.setEnabled(false);
 
 		}
 	}

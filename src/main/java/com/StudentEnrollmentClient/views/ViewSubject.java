@@ -53,7 +53,7 @@ public class ViewSubject extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewSubject() {
-		intialize();
+		//intialize();
 	}
 
 	public ViewSubject(Student student) {
@@ -176,7 +176,7 @@ public class ViewSubject extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu(student);
+				SubjectMenu mainMenu = new SubjectMenu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}

@@ -123,7 +123,7 @@ public class Enrol extends JFrame {
 		JButton btnAdd = new JButton("Menu");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu view = new Menu(student);
+				EnrollementMenu view = new EnrollementMenu(student);
 				view.setVisible(true);
 				dispose();
 
@@ -200,11 +200,12 @@ public class Enrol extends JFrame {
 	}
 
 	public void reloadTable(JTable table, DefaultTableModel model, Course course) {
-		Object[] columnsName = new Object[3];
-		Object[] rowData = new Object[3];
+		Object[] columnsName = new Object[4];
+		Object[] rowData = new Object[4];
 		columnsName[0] = "SUBJECT CODE";
 		columnsName[1] = "SUBJECT NAME";
 		columnsName[2] = "PRICE";
+		columnsName[3] = "LEVEL";
 		model.setColumnIdentifiers(columnsName);
 
 		List<SubjectCourse> subjects = subjectCourseService
@@ -213,6 +214,7 @@ public class Enrol extends JFrame {
 			rowData[0] = subjectCourse.getSubject().getSubjectCode();
 			rowData[1] = subjectCourse.getSubject().getSubjectName();
 			rowData[2] = subjectCourse.getSubject().getPrice();
+			rowData[3] = subjectCourse.getSubject().getYearCode();
 			model.addRow(rowData);
 		}
 	}

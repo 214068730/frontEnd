@@ -43,7 +43,7 @@ public class SubjectMenu extends JFrame {
 	 */
 	public SubjectMenu() {
 		setResizable(false);
-		intialize();
+		//intialize();
 	}
 	
 	public SubjectMenu(Student student){
@@ -82,7 +82,7 @@ public class SubjectMenu extends JFrame {
 		contentPane.add(btnViewSubjects);
 		btnViewSubjects.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewSubject viewSubject = new ViewSubject();
+				ViewSubject viewSubject = new ViewSubject(student);
 				viewSubject.setVisible(true);
 				dispose();
 			}
@@ -94,7 +94,7 @@ public class SubjectMenu extends JFrame {
 		contentPane.add(btnMainMenu);
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu menu = new Menu();
+				Menu menu = new Menu(student);
 				menu.setVisible(true);
 				dispose();
 			}

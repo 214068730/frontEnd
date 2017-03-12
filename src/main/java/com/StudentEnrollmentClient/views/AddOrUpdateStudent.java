@@ -35,6 +35,8 @@ import com.StudentEnrollmentClient.rest.Impl.StudentRestImpl;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddOrUpdateStudent extends JFrame {
 
@@ -139,6 +141,18 @@ public class AddOrUpdateStudent extends JFrame {
 		lblStudentIdnumber_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 		txtStudentIdNumber = new JTextField();
+		txtStudentIdNumber.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+		          if (!((c >= '0') && (c <= '9') ||
+		             (c == KeyEvent.VK_BACK_SPACE) ||
+		             (c == KeyEvent.VK_DELETE))) {
+		            getToolkit().beep();
+		            e.consume();
+		          }
+			}
+		});
 		txtStudentIdNumber.setBounds(187, 91, 248, 29);
 		panStudInfo.add(txtStudentIdNumber);
 		txtStudentIdNumber.setColumns(10);
@@ -286,6 +300,18 @@ public class AddOrUpdateStudent extends JFrame {
 		panStudAddress.add(lblStreetNo);
 
 		txtStreetNumber = new JTextField();
+		txtStreetNumber.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+		          if (!((c >= '0') && (c <= '9') ||
+		             (c == KeyEvent.VK_BACK_SPACE) ||
+		             (c == KeyEvent.VK_DELETE))) {
+		            getToolkit().beep();
+		            e.consume();
+		          }
+			}
+		});
 		txtStreetNumber.setColumns(10);
 		txtStreetNumber.setBounds(159, 139, 64, 29);
 		panStudAddress.add(txtStreetNumber);

@@ -76,7 +76,7 @@ public class ViewEnrollment extends JFrame {
 	 */
 
 	public ViewEnrollment() {
-		
+		//intialize();
 	}
 
 	public ViewEnrollment(Student student) {
@@ -132,8 +132,8 @@ public class ViewEnrollment extends JFrame {
 		JButton btnMenua = new JButton("Menu");
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				EnrollementMenu view = new EnrollementMenu(student);
-//				view.setVisible(true);
+				EnrollementMenu view = new EnrollementMenu(student);
+				view.setVisible(true);
 				dispose();
 			}
 		});
@@ -180,10 +180,10 @@ public class ViewEnrollment extends JFrame {
 		panel.add(lblDate);
 
 		JLabel lblNewLabel = new JLabel("TOTAL: R");
-		lblNewLabel.setBounds(607, 420, 69, 4);
+		lblNewLabel.setBounds(607, 427, 69, 14);
 		panel.add(lblNewLabel);
 
-		lblTotal.setBounds(665, 420, 83, 14);
+		lblTotal.setBounds(665, 427, 83, 14);
 		panel.add(lblTotal);
 
 	}

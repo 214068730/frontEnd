@@ -45,12 +45,12 @@ public class LecturerMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public LecturerMenu() {
-		initialize();
+		//initialize();
 	}
 
-	public LecturerMenu(Lecturer lecturer) {
+	public LecturerMenu(Student student) {
 		initialize();
-		this.lecturer = lecturer;
+		this.student = student;
 	}
 	
 	public void initialize() {
@@ -70,7 +70,7 @@ public class LecturerMenu extends JFrame {
 		JButton btnAddLecturer = new JButton("Add Lecturer");
 		btnAddLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddOrUpdateLecturer addLecturer = new AddOrUpdateLecturer(lecturer, "ADD");
+				AddOrUpdateLecturer addLecturer = new AddOrUpdateLecturer(student, "ADD");
 				addLecturer.setVisible(true);
 				dispose();
 			}
@@ -94,7 +94,7 @@ public class LecturerMenu extends JFrame {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu mainMenu = new Menu();
+				Menu mainMenu = new Menu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}

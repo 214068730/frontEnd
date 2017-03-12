@@ -58,7 +58,7 @@ public class AddOrUpdateCourse extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOrUpdateCourse() {
-		intialize();
+		//intialize();
 	}
 
 	public AddOrUpdateCourse(Student student) {

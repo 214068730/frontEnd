@@ -66,7 +66,7 @@ public class AddOrUpdateSubject extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOrUpdateSubject() {
-		intialize();
+		//intialize();
 	}
 	
 	public AddOrUpdateSubject(Student student){
@@ -77,8 +77,6 @@ public class AddOrUpdateSubject extends JFrame {
 			ddlLecturer.addItem(lec.getName()+" "+lec.getSurname());
 		}
 		intialize();
-		
-		
 	}
 	
 	private void intialize(){
@@ -131,6 +129,7 @@ public class AddOrUpdateSubject extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 		          if (!((c >= '0') && (c <= '9') ||
+		        	 (c == KeyEvent.VK_PERIOD) ||
 		             (c == KeyEvent.VK_BACK_SPACE) ||
 		             (c == KeyEvent.VK_DELETE))) {
 		            getToolkit().beep();
@@ -188,7 +187,7 @@ public class AddOrUpdateSubject extends JFrame {
 		JButton btnCancelSubject = new JButton("Cancel");
 		btnCancelSubject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SubjectMenu menu = new SubjectMenu();
+				SubjectMenu menu = new SubjectMenu(student);
 				menu.setVisible(true);
 				dispose();
 			}

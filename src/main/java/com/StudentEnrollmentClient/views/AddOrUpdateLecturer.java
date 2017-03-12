@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import com.StudentEnrollmentClient.domain.Lecturer;
+import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.LecturerRestImpl;
 
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class AddOrUpdateLecturer extends JFrame {
 	private JTextField txtLecturerName;
 	private JTextField txtLecturerSurname;
 	Lecturer lecturer;
+	private Student student;
 	private String message;
 	private LecturerRestImpl lecturerService = new LecturerRestImpl();
 
@@ -49,12 +51,12 @@ public class AddOrUpdateLecturer extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOrUpdateLecturer() {
-		initialize();
+		//initialize();
 	}
 	
-	public AddOrUpdateLecturer(Lecturer lecturer, String message) {
+	public AddOrUpdateLecturer(Student student, String message) {
 		initialize();
-		this.lecturer = lecturer;
+		this.student = student;
 		this.message = message;
 		
 		switch (message)
@@ -150,7 +152,7 @@ public class AddOrUpdateLecturer extends JFrame {
 		JButton btnCancelLecturer = new JButton("Cancel");
 		btnCancelLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LecturerMenu lecturerMenu = new LecturerMenu();
+				LecturerMenu lecturerMenu = new LecturerMenu(student);
 				lecturerMenu.setVisible(true);
 				dispose();
 			}

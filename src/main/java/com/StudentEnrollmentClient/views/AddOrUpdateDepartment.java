@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import com.StudentEnrollmentClient.domain.Department;
+import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.DepartmentRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.StudentRestImpl;
 
@@ -26,6 +27,7 @@ public class AddOrUpdateDepartment extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtDeptName;
 	Department department;
+	private Student student;
 	private String message;
 	private DepartmentRestImpl departmentService = new DepartmentRestImpl();
 
@@ -46,12 +48,12 @@ public class AddOrUpdateDepartment extends JFrame {
 	}
 	
 	public AddOrUpdateDepartment(){
-		initialize();
+		//initialize();
 	}
 	
-	public AddOrUpdateDepartment(Department department){
+	public AddOrUpdateDepartment(Student  student){
 		initialize();
-		this.department = department;
+		this.student = student;
 		this.message = message;	
 //		switch(message)
 //		{
@@ -124,7 +126,7 @@ public class AddOrUpdateDepartment extends JFrame {
 		JButton btnCancelDept = new JButton("Cancel");
 		btnCancelDept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DepartmentMenu deptMenu = new DepartmentMenu();
+				DepartmentMenu deptMenu = new DepartmentMenu(student);
 				deptMenu.setVisible(true);
 				dispose();
 			}

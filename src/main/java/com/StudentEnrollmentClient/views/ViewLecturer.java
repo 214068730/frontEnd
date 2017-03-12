@@ -51,7 +51,7 @@ public class ViewLecturer extends JFrame {
 	 */
 	public ViewLecturer()
 	{
-		initialize();
+		//initialize();
 	}
 	
 	public ViewLecturer(Student student)
@@ -131,7 +131,7 @@ public class ViewLecturer extends JFrame {
 		JButton btnCancel = new JButton("Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LecturerMenu lecturerMenu = new LecturerMenu();
+				LecturerMenu lecturerMenu = new LecturerMenu(student);
 				lecturerMenu.setVisible(true);
 				dispose();
 			}

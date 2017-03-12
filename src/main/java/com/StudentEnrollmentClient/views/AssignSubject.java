@@ -60,7 +60,7 @@ public class AssignSubject extends JFrame {
 	 * Create the frame.
 	 */
 	public AssignSubject() {
-		intialize();
+		//intialize();
 	}
 
 	public AssignSubject(Student student) {

@@ -31,7 +31,7 @@ public class DepartmentMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DepartmentMenu frame = new DepartmentMenu(department);
+					DepartmentMenu frame = new DepartmentMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,11 +41,12 @@ public class DepartmentMenu extends JFrame {
 	}
 	
 	public DepartmentMenu() {
-		intialize();
+		//intialize();
 	}
 
-	public DepartmentMenu(Department department) {
+	public DepartmentMenu(Student  student) {
 		intialize();
+		this.student = student;
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class DepartmentMenu extends JFrame {
 		JButton btnAddDepartment = new JButton("Add Department");
 		btnAddDepartment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(department);
+				AddOrUpdateDepartment addDept = new AddOrUpdateDepartment(student);
 				addDept.setVisible(true);
 				dispose();
 			}
@@ -92,7 +93,7 @@ public class DepartmentMenu extends JFrame {
 		JButton button = new JButton("Main Menu");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Menu mainMenu = new Menu();
+				Menu mainMenu = new Menu(student);
 				mainMenu.setVisible(true);
 				dispose();
 			}
