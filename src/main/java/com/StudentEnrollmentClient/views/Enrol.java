@@ -142,7 +142,7 @@ public class Enrol extends JFrame {
 				if (status == null) {
 					JOptionPane.showMessageDialog(null, "already registred","INFO", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null,status.getCurrentYear(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+					//JOptionPane.showMessageDialog(null,status.getCurrentYear(), "INFO",JOptionPane.INFORMATION_MESSAGE);
 					List<Subject> subjects = subjectService.getAllBySubjectLevel(resultCourse.getId(),student.getStudentID());
 					for (Subject subject : subjects) {
 						isRegistered = false;
