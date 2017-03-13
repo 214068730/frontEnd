@@ -54,6 +54,7 @@ public class AddOrUpdateStudent extends JFrame {
 	private AddressRestImpl addressService = new AddressRestImpl();
 	private StudentRestImpl studentService = new StudentRestImpl();
 	private RolesRestImpl rolesService = new RolesRestImpl();
+	private JLabel lblAccessRights = new JLabel("Access Rights:");
 
 	/**
 	 * Launch the application.
@@ -93,12 +94,24 @@ public class AddOrUpdateStudent extends JFrame {
 			String index = student.getRole().getId().toString();
 			ddlRights.setSelectedIndex(Integer.parseInt(index)-1);//minus one because db index start from 1
 			txtStreetNumber.setText(student.getStudentAddress().getStreetNumber());
+			accessRights();
 			
 			break;
 		default:
 			break;
 		}
 	}
+	
+	public void accessRights() {
+		// Access Rights
+		String role = student.getRole().getRole();
+		switch (role) {
+		case "B":
+			lblAccessRights.setVisible(false);
+			ddlRights.setVisible(false);
+		}
+	}
+
 
 	public void intialize() {
 		setResizable(false);
@@ -157,7 +170,7 @@ public class AddOrUpdateStudent extends JFrame {
 		panStudInfo.add(txtStudentIdNumber);
 		txtStudentIdNumber.setColumns(10);
 
-		JLabel lblAccessRights = new JLabel("Access Rights:");
+		
 		lblAccessRights.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAccessRights.setBounds(21, 131, 171, 28);
 		panStudInfo.add(lblAccessRights);
