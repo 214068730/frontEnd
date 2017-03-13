@@ -52,6 +52,8 @@ public class ViewEnrollment extends JFrame {
 	private JLabel lblIdNumber = new JLabel("IdNumber");
 	private JLabel lblDate = new JLabel("Date");
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	private JLabel lblCourse = new JLabel("lblCourse");
+	JLabel lblCurrentYear = new JLabel("Current Year :");
 	private Date date = new Date();
 	private JLabel lblTotal = new JLabel("TOTAL:");
 
@@ -76,7 +78,7 @@ public class ViewEnrollment extends JFrame {
 	 */
 
 	public ViewEnrollment() {
-		//intialize();
+		intialize();
 	}
 
 	public ViewEnrollment(Student student) {
@@ -87,6 +89,14 @@ public class ViewEnrollment extends JFrame {
 		lblStudentNumber.setText(student.getStudentNumber());
 		lblIdNumber.setText(student.getStudentIdNumber());
 		lblDate.setText(dateFormat.format(date).toString());
+		try{
+			ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+			lblCourse.setText(status.getCourse().getCourseName());
+			lblCurrentYear.setText(status.getCurrentYear());
+			
+		}catch(Exception ex){
+			
+		}
 
 	}
 
@@ -110,7 +120,7 @@ public class ViewEnrollment extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		JScrollPane pane = new JScrollPane(table);
-		pane.setBounds(10, 162, 750, 247);
+		pane.setBounds(10, 162, 750, 254);
 		panel.add(pane);
 		setContentPane(panel);
 
@@ -122,6 +132,15 @@ public class ViewEnrollment extends JFrame {
 				if (status != null) {
 					status.setActive(0); // Canceling course
 					progressStatusService.update(status);
+					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), 1);
+					if(updateStatus == null){
+						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
+						EnrollementMenu view = new EnrollementMenu(student);
+						view.setVisible(true);
+						dispose();
+					}
+					else
+						JOptionPane.showMessageDialog(null,"Course has been NOT been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage(),"INFO", JOptionPane.INFORMATION_MESSAGE);
@@ -149,7 +168,7 @@ public class ViewEnrollment extends JFrame {
 		panel.add(lblEnrollementDetails);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 71, 287, 80);
+		panel_1.setBounds(10, 71, 642, 80);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -176,9 +195,31 @@ public class ViewEnrollment extends JFrame {
 		lblIdNumber.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblIdNumber.setBounds(120, 61, 157, 14);
 		panel_1.add(lblIdNumber);
+		
+		JLabel lblCourse2 = new JLabel("Course :");
+		lblCourse2.setBounds(303, 11, 61, 14);
+		panel_1.add(lblCourse2);
+		
+		
+		lblCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCourse.setBounds(393, 11, 239, 13);
+		panel_1.add(lblCourse);
+		
+		
+		lblCurrentYear.setBounds(403, 35, 114, 14);
+		panel_1.add(lblCurrentYear);
+		
+		
+		lblCurrentYear.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCurrentYear.setBounds(393, 35, 140, 14);
+		panel_1.add(lblCurrentYear);
+		
+		JLabel lblCurrentYear_1 = new JLabel("Current Year :");
+		lblCurrentYear_1.setBounds(303, 36, 157, 14);
+		panel_1.add(lblCurrentYear_1);
 
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(630, 64, 130, 14);
+		lblDate.setBounds(630, 47, 130, 14);
 		panel.add(lblDate);
 
 		JLabel lblNewLabel = new JLabel("TOTAL: R");

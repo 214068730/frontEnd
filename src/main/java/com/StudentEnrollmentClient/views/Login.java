@@ -68,8 +68,7 @@ public class Login extends JFrame {
 				String password = txtPassword.getText();
 				if (!username.equals("") && !password.equals("")) {
 					try {
-						Student student = service.getStudentLogin(username,
-								password);
+						Student student = service.getStudentLogin(username,password);
 						if (student != null) {
 							Menu menu = new Menu(student);
 							menu.setVisible(true);
