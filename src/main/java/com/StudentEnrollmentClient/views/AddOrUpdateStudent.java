@@ -179,7 +179,7 @@ public class AddOrUpdateStudent extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch (message) {
 				case "UPDATE":
-					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")) {
+					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("") && txtStudentIdNumber.getText().length() < 13 && txtStudentIdNumber.getText().length() > 13  ) {
 						String name = txtStudentName.getText();
 						String surname = txtStudentSurname.getText();
 						String idNumber = txtStudentIdNumber.getText();
@@ -223,7 +223,7 @@ public class AddOrUpdateStudent extends JFrame {
 						String streetNumber = txtStreetNumber.getText();
 						Long role = new Long(ddlRights.getSelectedIndex() + 1);
 
-						//try {
+						try {
 							Roles rights = rolesService.get(role); //getting role from db
 							
 							if (rights != null) {
@@ -232,14 +232,13 @@ public class AddOrUpdateStudent extends JFrame {
 								if (student != null) 
 									JOptionPane.showMessageDialog(null,"STUDENT HAS ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 							}
-//						} catch (Exception ex) {
-//							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-//						}
+						} catch (Exception ex) {
+							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 					else
 						JOptionPane.showMessageDialog(null,
-								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
-								"INFO", JOptionPane.INFORMATION_MESSAGE);
+								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
