@@ -47,6 +47,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setResizable(false);
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 381, 273);
@@ -106,8 +107,8 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblStudentid = new JLabel("StudentID:");
-		lblStudentid.setBounds(25, 41, 53, 14);
+		JLabel lblStudentid = new JLabel("Student Number:");
+		lblStudentid.setBounds(25, 41, 146, 14);
 		panel.add(lblStudentid);
 
 		txtStudentNumber = new JTextField();
@@ -121,7 +122,7 @@ public class Login extends JFrame {
 		txtPassword.setColumns(10);
 
 		JLabel lblStudentName = new JLabel("Student Name:");
-		lblStudentName.setBounds(25, 77, 92, 14);
+		lblStudentName.setBounds(25, 77, 130, 14);
 		panel.add(lblStudentName);
 	}
 }

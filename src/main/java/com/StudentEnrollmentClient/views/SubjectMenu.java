@@ -52,6 +52,7 @@ public class SubjectMenu extends JFrame {
 	}
 	
 	private void intialize(){
+		setResizable(false);
 		setTitle("Subject Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 353, 430);

@@ -59,6 +59,7 @@ public class ViewDepartment extends JFrame {
 	}
 
 	public void initialize() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1114, 648);
 		getContentPane().setLayout(null);

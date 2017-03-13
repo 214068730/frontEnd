@@ -53,6 +53,7 @@ public class DepartmentMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public void intialize() {
+		setResizable(false);
 		setTitle("Department Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 430);

@@ -80,6 +80,7 @@ public class AddOrUpdateSubject extends JFrame {
 	}
 	
 	private void intialize(){
+		setResizable(false);
 		setTitle("Add Or Update Subject");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 809, 378);

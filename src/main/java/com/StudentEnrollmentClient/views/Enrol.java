@@ -91,6 +91,7 @@ public class Enrol extends JFrame {
 	}
 
 	public void intialize() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 697, 641);
 		getContentPane().setLayout(null);

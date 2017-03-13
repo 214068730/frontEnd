@@ -71,6 +71,7 @@ public class AddOrUpdateCourse extends JFrame {
 	}
 
 	public void intialize() {
+		setResizable(false);
 		setTitle("Add Or Update Course(s)");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 690, 335);

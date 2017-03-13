@@ -72,6 +72,7 @@ public class AddOrUpdateLecturer extends JFrame {
 	
 	
 	public void initialize() {
+		setResizable(false);
 		setTitle("Add Or Update Lecturer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 310);

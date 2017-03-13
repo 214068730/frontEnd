@@ -51,6 +51,7 @@ public class CourseMenu extends JFrame {
 	}
 	
 	public void intialize(){
+		setResizable(false);
 		setTitle("Course Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 603, 445);

@@ -54,6 +54,7 @@ public class LecturerMenu extends JFrame {
 	}
 	
 	public void initialize() {
+		setResizable(false);
 		setTitle("Lecturer Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 582, 417);

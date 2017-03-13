@@ -66,6 +66,7 @@ public class EnrollementMenu extends JFrame {
 	}
 
 	public void intialize() {
+		setResizable(false);
 		setTitle("Enrollment Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 306, 445);

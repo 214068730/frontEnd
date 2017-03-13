@@ -179,7 +179,7 @@ public class AddOrUpdateStudent extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch (message) {
 				case "UPDATE":
-					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("") && txtStudentIdNumber.getText().length() < 13 && txtStudentIdNumber.getText().length() > 13  ) {
+					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("") && txtStudentIdNumber.getText().length() != 13) {
 						String name = txtStudentName.getText();
 						String surname = txtStudentSurname.getText();
 						String idNumber = txtStudentIdNumber.getText();

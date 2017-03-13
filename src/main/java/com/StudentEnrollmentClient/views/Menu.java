@@ -78,6 +78,7 @@ public class Menu extends JFrame {
 	}
 	
 	public void intialize(){
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 488, 700);
 		contentPane = new JPanel();

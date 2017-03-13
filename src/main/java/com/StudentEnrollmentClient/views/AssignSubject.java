@@ -75,6 +75,7 @@ public class AssignSubject extends JFrame {
 	}
 
 	private void intialize() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 842, 556);
 		getContentPane().setLayout(null);
