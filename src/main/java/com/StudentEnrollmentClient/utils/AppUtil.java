@@ -8,6 +8,7 @@ public class AppUtil {
 	private final String recordsAdded = "Records Successfully Added";
 	private final String recordsNotAdded = "Sorry! Records Not Added";
 	private final String recordsFilled = "PLEASE FILL IN ALL FIELDS";
+	private final String noRowSelected = "NO ROW SELECTED";
 	
 	public String getUri() {
 		return URI;
@@ -34,5 +35,9 @@ public class AppUtil {
 	public String getRecordsFilled()
 	{
 		return recordsFilled;
+	}
+	
+	public String getNoRowSelected() {
+		return noRowSelected;
 	}
 }
