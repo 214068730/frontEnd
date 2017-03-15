@@ -182,14 +182,14 @@ public class AddOrUpdateStudent extends JFrame {
 						update();
 					}
 					else
-						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED \nNOTE ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				case "ADD":
 					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")&& txtStudentIdNumber.getText().length() == 13) {
 						add();
 					} 
 					else
-						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED \nNOTE ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
 
 				}
 			}
