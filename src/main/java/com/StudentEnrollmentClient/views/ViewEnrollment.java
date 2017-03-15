@@ -110,9 +110,6 @@ public class ViewEnrollment extends JFrame {
 		}
 	}
 
-
-	
-
 	public void intialize() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
