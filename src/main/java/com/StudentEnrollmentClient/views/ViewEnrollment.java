@@ -267,20 +267,21 @@ public class ViewEnrollment extends JFrame {
 		double total = 0;
 		Object[] columnsName = new Object[4];
 		Object[] rowData = new Object[4];
+		List<Long> numbers = new ArrayList<>();
 		columnsName[0] = "SUBJECT CODE";
 		columnsName[1] = "SUBJECT NAME";
 		columnsName[2] = "SUBJECT LEVEL";
 		columnsName[3] = "SUBJECT PRICE";
 		model.setColumnIdentifiers(columnsName);
 
-		ProgressStatus status = progressStatusService.getActive(
-				student.getStudentID(), 1);
+		ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
 		List<StudentCourse> studentCourses = studentCourseService.registeredSubjects(student.getStudentID(), status.getCourse().getId());
-
+		
+	
 		if (studentCourses != null) {
 			for (StudentCourse studentCourse : studentCourses) {
-						if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
-							if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
+					if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
+						if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
 								rowData[0] = studentCourse.getSubject().getSubjectCode();
 								rowData[1] = studentCourse.getSubject().getSubjectName();
 								rowData[2] = studentCourse.getSubject().getYearCode();
@@ -288,8 +289,8 @@ public class ViewEnrollment extends JFrame {
 								total = total+ Double.parseDouble(rowData[3].toString());
 								model.addRow(rowData);
 								
-							}
 						}
+					}
 			}
 			lblTotal.setText(total + "");
 
