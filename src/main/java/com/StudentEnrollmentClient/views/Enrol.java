@@ -124,10 +124,20 @@ public class Enrol extends JFrame {
 		JButton btnAdd = new JButton("Menu");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EnrollementMenu view = new EnrollementMenu(student);
-				view.setVisible(true);
-				dispose();
-
+				String role = student.getRole().getRole();
+				
+				switch (role)
+				{
+				case "A":
+					EnrollementMenu view = new EnrollementMenu(student);
+					view.setVisible(true);
+					dispose();
+					break;
+				case "B":
+					StudEnrollmentMenu studEnrolMenu = new StudEnrollmentMenu(student);
+					studEnrolMenu.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnAdd.setBounds(541, 537, 130, 42);
