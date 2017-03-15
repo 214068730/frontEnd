@@ -49,8 +49,7 @@ public class CourseRestImpl implements RestAPI<Course, Long> {
 		String url = BASE_URL + "/create";
 		HttpEntity<Course> httpEntity = new HttpEntity<Course>(entity,
 				requestHeaders);
-		Course course = restTemplate.postForObject(url, httpEntity,
-				Course.class);
+		Course course = restTemplate.postForObject(url, httpEntity,Course.class);
 		return course;
 	}
 

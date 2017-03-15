@@ -42,7 +42,7 @@ public class AddOrUpdateStudent extends JFrame {
 
 	private JPanel contentPane;
 	private String message;
-	Student student;
+	private Student student;
 	private JTextField txtStudentName;
 	private JTextField txtStudentSurname;
 	private JTextField txtStudentIdNumber;
@@ -76,7 +76,7 @@ public class AddOrUpdateStudent extends JFrame {
 	 * Create the frame.
 	 */
 	public AddOrUpdateStudent() {
-		intialize();
+		//intialize();
 	}
 
 	public AddOrUpdateStudent(Student student, String message) {
@@ -85,23 +85,14 @@ public class AddOrUpdateStudent extends JFrame {
 		this.message = message;
 		switch (message) {
 		case "UPDATE":
-			txtStudentName.setText(student.getStudentName());
-			txtStudentSurname.setText(student.getStudentSurname());
-			txtStudentIdNumber.setText(student.getStudentIdNumber());
-			txtStreetName.setText(student.getStudentAddress().getStreetName());
-			txtSuburb.setText(student.getStudentAddress().getSurbubName());
-			txtAreaCode.setText(student.getStudentAddress().getAreaCode());
-			String index = student.getRole().getId().toString();
-			ddlRights.setSelectedIndex(Integer.parseInt(index)-1);//minus one because db index start from 1
-			txtStreetNumber.setText(student.getStudentAddress().getStreetNumber());
+			load(student);
 			accessRights();
-			
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 	public void accessRights() {
 		// Access Rights
 		String role = student.getRole().getRole();
@@ -111,7 +102,6 @@ public class AddOrUpdateStudent extends JFrame {
 			ddlRights.setVisible(false);
 		}
 	}
-
 
 	public void intialize() {
 		setResizable(false);
@@ -158,24 +148,20 @@ public class AddOrUpdateStudent extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-		          if (!((c >= '0') && (c <= '9') ||
-		             (c == KeyEvent.VK_BACK_SPACE) ||
-		             (c == KeyEvent.VK_DELETE))) {
-		            getToolkit().beep();
-		            e.consume();
-		          }
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
 			}
 		});
 		txtStudentIdNumber.setBounds(187, 91, 248, 29);
 		panStudInfo.add(txtStudentIdNumber);
 		txtStudentIdNumber.setColumns(10);
 
-		
 		lblAccessRights.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAccessRights.setBounds(21, 131, 171, 28);
 		panStudInfo.add(lblAccessRights);
 
-		
 		ddlRights.setModel(new DefaultComboBoxModel(new String[] { "A", "B" }));
 		ddlRights.setSelectedIndex(0);
 		ddlRights.setBounds(187, 137, 64, 20);
@@ -192,66 +178,19 @@ public class AddOrUpdateStudent extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch (message) {
 				case "UPDATE":
-					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("") && txtStudentIdNumber.getText().length() == 13) {
-						String name = txtStudentName.getText();
-						String surname = txtStudentSurname.getText();
-						String idNumber = txtStudentIdNumber.getText();
-						String streetName = txtStreetName.getText();
-						String suburb = txtSuburb.getText();
-						String areaCode = txtAreaCode.getText();
-						String streetNumber = txtStreetNumber.getText();
-						Long role = new Long(ddlRights.getSelectedIndex() + 1);
-						try{
-							Roles rights = rolesService.get(role); //getting role from db
-							if (rights != null){
-								//update student Address
-								student.getStudentAddress().setAreaCode(areaCode);
-								student.getStudentAddress().setStreetName(streetName);
-								student.getStudentAddress().setStreetNumber(streetNumber);
-								student.getStudentAddress().setSurbubName(suburb);
-								
-								//update student
-								student.setStudentName(name);
-								student.setStudentSurname(surname);
-								student.setRole(rights);
-								
-								studentService.put(student);
-								Student updatedStudent = studentService.get(student.getStudentID());
-								if (!updatedStudent.equals( student))
-									JOptionPane.showMessageDialog(null,"STUDENT HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-							}
-						}catch(Exception ex){
-							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-						}
-					}
-					break;
-				case "ADD":
-					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("") && txtStudentIdNumber.getText().length() == 13) {
-						String name = txtStudentName.getText();
-						String surname = txtStudentName.getText();
-						String idNumber = txtStudentIdNumber.getText();
-						String streetName = txtStreetName.getText();
-						String suburb = txtSuburb.getText();
-						String areaCode = txtAreaCode.getText();
-						String streetNumber = txtStreetNumber.getText();
-						Long role = new Long(ddlRights.getSelectedIndex() + 1);
-
-						try {
-							Roles rights = rolesService.get(role); //getting role from db
-							
-							if (rights != null) {
-								Address result = new Address(streetNumber, streetName,suburb, areaCode); //saving address into db
-								Student student = studentService.post(new Student(name, surname,result, idNumber, rights)); //saving student into db
-								if (student != null) 
-									JOptionPane.showMessageDialog(null,"STUDENT HAS ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-							}
-						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-						}
+					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")&& txtStudentIdNumber.getText().length() == 13) {
+						update();
 					}
 					else
-						JOptionPane.showMessageDialog(null,
-								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
+					break;
+				case "ADD":
+					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")&& txtStudentIdNumber.getText().length() == 13) {
+						add();
+					} 
+					else
+						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED NOT ID FIELD MUST BE 13 DIGITS LONG","INFO", JOptionPane.INFORMATION_MESSAGE);
+
 				}
 			}
 		});
@@ -316,17 +255,91 @@ public class AddOrUpdateStudent extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-		          if (!((c >= '0') && (c <= '9') ||
-		             (c == KeyEvent.VK_BACK_SPACE) ||
-		             (c == KeyEvent.VK_DELETE))) {
-		            getToolkit().beep();
-		            e.consume();
-		          }
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
 			}
 		});
 		txtStreetNumber.setColumns(10);
 		txtStreetNumber.setBounds(159, 139, 64, 29);
 		panStudAddress.add(txtStreetNumber);
-	}
+	}//end 
 
+	public void update() {
+		String name = txtStudentName.getText();
+		String surname = txtStudentSurname.getText();
+		String idNumber = txtStudentIdNumber.getText();
+		String streetName = txtStreetName.getText();
+		String suburb = txtSuburb.getText();
+		String areaCode = txtAreaCode.getText();
+		String streetNumber = txtStreetNumber.getText();
+		Long role = new Long(ddlRights.getSelectedIndex() + 1);
+		try {
+			Roles rights = rolesService.get(role); // getting role from db
+			if (rights != null) {
+				// update student Address
+				student.getStudentAddress().setAreaCode(areaCode);
+				student.getStudentAddress().setStreetName(streetName);
+				student.getStudentAddress().setStreetNumber(streetNumber);
+				student.getStudentAddress().setSurbubName(suburb);
+
+				// update student
+				student.setStudentName(name);
+				student.setStudentSurname(surname);
+				student.setRole(rights);
+				student.setStudentIdNumber(idNumber);
+
+				studentService.put(student);
+				Student updatedStudent = studentService.get(student.getStudentID());
+				Student result = studentService.get(student.getStudentID());
+				load(result);
+				
+			}
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+	}//end if
+
+	public void add() {
+		String name = txtStudentName.getText();
+		String surname = txtStudentName.getText();
+		String idNumber = txtStudentIdNumber.getText();
+		String streetName = txtStreetName.getText();
+		String suburb = txtSuburb.getText();
+		String areaCode = txtAreaCode.getText();
+		String streetNumber = txtStreetNumber.getText();
+		Long role = new Long(ddlRights.getSelectedIndex() + 1);
+
+		try {
+			Roles rights = rolesService.get(role); // getting role from db
+
+			if (rights != null) {
+				Address result = new Address(streetNumber, streetName, suburb,
+						areaCode); // saving address into db
+				Student student = studentService.post(new Student(name,
+						surname, result, idNumber, rights)); // saving student
+																// into db
+				if (student != null)
+					JOptionPane.showMessageDialog(null, "STUDENT HAS ADDED!!",
+							"SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+	}//end if
+	
+	public void load(Student student){
+		txtStudentName.setText(student.getStudentName());
+		txtStudentSurname.setText(student.getStudentSurname());
+		txtStudentIdNumber.setText(student.getStudentIdNumber());
+		txtStreetName.setText(student.getStudentAddress().getStreetName());
+		txtSuburb.setText(student.getStudentAddress().getSurbubName());
+		txtAreaCode.setText(student.getStudentAddress().getAreaCode());
+		String index = student.getRole().getId().toString();
+		ddlRights.setSelectedIndex(Integer.parseInt(index) - 1);
+		txtStreetNumber.setText(student.getStudentAddress().getStreetNumber());
+	}
 }

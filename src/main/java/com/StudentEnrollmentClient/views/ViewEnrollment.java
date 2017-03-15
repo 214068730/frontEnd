@@ -7,12 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JScrollPane;
+
 import java.awt.Component;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,9 +40,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ViewEnrollment extends JFrame {
 
@@ -82,20 +91,22 @@ public class ViewEnrollment extends JFrame {
 	}
 
 	public ViewEnrollment(Student student) {
-		
+
 		this.student = student;
 		intialize();
-		lblFullname.setText(student.getStudentName() + " "+ student.getStudentSurname());
+		lblFullname.setText(student.getStudentName() + " "
+				+ student.getStudentSurname());
 		lblStudentNumber.setText(student.getStudentNumber());
 		lblIdNumber.setText(student.getStudentIdNumber());
 		lblDate.setText(dateFormat.format(date).toString());
-		try{
-			ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+		try {
+			ProgressStatus status = progressStatusService.getActive(
+					student.getStudentID(), 1);
 			lblCourse.setText(status.getCourse().getCourseName());
 			lblCurrentYear.setText(status.getCurrentYear());
-			
-		}catch(Exception ex){
-			
+
+		} catch (Exception ex) {
+
 		}
 
 	}
@@ -127,23 +138,29 @@ public class ViewEnrollment extends JFrame {
 		JButton btnCancel = new JButton("Cancel Course");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			 try {
-				ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
-				if (status != null) {
-					status.setActive(0); // Canceling course
-					progressStatusService.update(status);
-					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), 1);
-					if(updateStatus == null){
-						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
-						EnrollementMenu view = new EnrollementMenu(student);
-						view.setVisible(true);
-						dispose();
+				try {
+					ProgressStatus status = progressStatusService.getActive(
+							student.getStudentID(), 1);
+					if (status != null) {
+						status.setActive(0); // Canceling course
+						progressStatusService.update(status);
+						ProgressStatus updateStatus = progressStatusService
+								.getActive(student.getStudentID(), 1);
+						if (updateStatus == null) {
+							JOptionPane.showMessageDialog(null,
+									"Course has been cancelled", "INFO",
+									JOptionPane.INFORMATION_MESSAGE);
+							EnrollementMenu view = new EnrollementMenu(student);
+							view.setVisible(true);
+							dispose();
+						} else
+							JOptionPane.showMessageDialog(null,
+									"Course has been NOT been cancelled",
+									"INFO", JOptionPane.INFORMATION_MESSAGE);
 					}
-					else
-						JOptionPane.showMessageDialog(null,"Course has been NOT been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
-				}
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage(),"INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, ex.getMessage(),
+							"INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -195,25 +212,22 @@ public class ViewEnrollment extends JFrame {
 		lblIdNumber.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblIdNumber.setBounds(120, 61, 157, 14);
 		panel_1.add(lblIdNumber);
-		
+
 		JLabel lblCourse2 = new JLabel("Course :");
 		lblCourse2.setBounds(303, 11, 61, 14);
 		panel_1.add(lblCourse2);
-		
-		
+
 		lblCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblCourse.setBounds(393, 11, 239, 13);
 		panel_1.add(lblCourse);
-		
-		
+
 		lblCurrentYear.setBounds(403, 35, 114, 14);
 		panel_1.add(lblCurrentYear);
-		
-		
+
 		lblCurrentYear.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblCurrentYear.setBounds(393, 35, 140, 14);
 		panel_1.add(lblCurrentYear);
-		
+
 		JLabel lblCurrentYear_1 = new JLabel("Current Year :");
 		lblCurrentYear_1.setBounds(303, 36, 157, 14);
 		panel_1.add(lblCurrentYear_1);
@@ -242,19 +256,30 @@ public class ViewEnrollment extends JFrame {
 		columnsName[3] = "SUBJECT PRICE";
 		model.setColumnIdentifiers(columnsName);
 
-		List<StudentCourse> studentCourses = studentCourseService
-				.getByStudentId(student.getStudentID());
-		if (studentCourses != null) {
+		ProgressStatus status = progressStatusService.getActive(
+				student.getStudentID(), 1);
+		List<StudentCourse> studentCourses = studentCourseService.registeredSubjects(student.getStudentID(), status.getCourse().getId());
 
+	
+		
+		
+		if (studentCourses != null) {
 			for (StudentCourse studentCourse : studentCourses) {
-				if (studentCourse.getDateRegistered().substring(0, 4).equals(year +"")) {
-					rowData[0] = studentCourse.getSubject().getSubjectCode();
-					rowData[1] = studentCourse.getSubject().getSubjectName();
-					rowData[2] = studentCourse.getSubject().getYearCode();
-					rowData[3] = studentCourse.getSubject().getPrice();
-					total = total + Double.parseDouble(rowData[3].toString());
-					model.addRow(rowData);
-				}
+				//for (StudentCourse studCourse : studCourses) {
+					//if(studentCourse != studCourse){
+						if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
+							if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
+								rowData[0] = studentCourse.getSubject().getSubjectCode();
+								rowData[1] = studentCourse.getSubject().getSubjectName();
+								rowData[2] = studentCourse.getSubject().getYearCode();
+								rowData[3] = studentCourse.getSubject().getPrice();
+								total = total+ Double.parseDouble(rowData[3].toString());
+								model.addRow(rowData);
+								
+							}
+						}
+					//}//end if
+				//} //end for
 			}
 			lblTotal.setText(total + "");
 

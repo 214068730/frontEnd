@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Subject {
 
-	private long subjectID;
+	private Long subjectID;
 
 	private String subjectName;
 
@@ -45,11 +45,11 @@ public class Subject {
 
 
 
-	public long getSubjectID() {
+	public Long getSubjectID() {
 		return subjectID;
 	}
 
-	public void setSubjectID(long subjectID) {
+	public void setSubjectID(Long subjectID) {
 		this.subjectID = subjectID;
 	}
 
@@ -97,20 +97,6 @@ public class Subject {
 		this.yearLevel = yearCode;
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Subject subject = (Subject) o;
-
-        return subjectID == subject.subjectID;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (subjectID ^ (subjectID >>> 32));
-    }
+	
 
 }

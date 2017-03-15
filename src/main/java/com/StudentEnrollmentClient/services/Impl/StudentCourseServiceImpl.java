@@ -46,8 +46,8 @@ public class StudentCourseServiceImpl implements StudentCourseService{
 	}
 
 	@Override
-	public boolean register(List<Subject> subjects, StudentCourse entity) {
-		return rest.register(subjects, entity);
+	public List<StudentCourse> registeredSubjects(Long studentID,Long courseID)  {
+		return rest.registeredSubjects(studentID, courseID);
 	}
 
 	

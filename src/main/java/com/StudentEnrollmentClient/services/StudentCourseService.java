@@ -9,7 +9,7 @@ import com.StudentEnrollmentClient.domain.Subject;
 
 public interface StudentCourseService extends Services<StudentCourse,Long> {
 	public  List<StudentCourse> getByStudentId(Long id);
-	public boolean register(List<Subject> subjects,StudentCourse entity);
+	public List<StudentCourse> registeredSubjects(Long studentID,Long courseID);
 
  
 }
