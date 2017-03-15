@@ -108,8 +108,10 @@ public class ViewEnrollment extends JFrame {
 		} catch (Exception ex) {
 
 		}
-
 	}
+
+
+	
 
 	public void intialize() {
 		setResizable(false);
@@ -138,27 +140,6 @@ public class ViewEnrollment extends JFrame {
 		JButton btnCancel = new JButton("Cancel Course");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				try {
-					ProgressStatus status = progressStatusService.getActive(
-							student.getStudentID(), 1);
-					if (status != null) {
-						status.setActive(0); // Canceling course
-						progressStatusService.update(status);
-						ProgressStatus updateStatus = progressStatusService
-								.getActive(student.getStudentID(), 1);
-						if (updateStatus == null) {
-							JOptionPane.showMessageDialog(null,
-									"Course has been cancelled", "INFO",
-									JOptionPane.INFORMATION_MESSAGE);
-							EnrollementMenu view = new EnrollementMenu(student);
-							view.setVisible(true);
-							dispose();
-						} else
-							JOptionPane.showMessageDialog(null,
-									"Course has been NOT been cancelled",
-									"INFO", JOptionPane.INFORMATION_MESSAGE);
-=======
 			 try {
 				ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
 				String role = student.getRole().getRole();
@@ -169,8 +150,7 @@ public class ViewEnrollment extends JFrame {
 					if(updateStatus == null){
 						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
 						
-						switch (role)
-						{
+						switch (role){
 						case "A":
 							EnrollementMenu view = new EnrollementMenu(student);
 							view.setVisible(true);
@@ -182,14 +162,14 @@ public class ViewEnrollment extends JFrame {
 							dispose();
 							break;
 						}	
-						
->>>>>>> 2409d97c62951a1ad75a79444dda55d72d0efc1f
 					}
-				} catch (Exception ex) {
+				} 
+			 }catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage(),
 							"INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
+				
 		});
 		btnCancel.setBounds(473, 452, 130, 42);
 		panel.add(btnCancel);
@@ -198,9 +178,7 @@ public class ViewEnrollment extends JFrame {
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String role = student.getRole().getRole();
-				
-				switch (role)
-				{
+				switch (role){
 				case "A":
 					EnrollementMenu view = new EnrollementMenu(student);
 					view.setVisible(true);
@@ -283,7 +261,7 @@ public class ViewEnrollment extends JFrame {
 		panel.add(lblTotal);
 
 	}
-
+	
 	public void reloadTable(JTable table, DefaultTableModel model) {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		double total = 0;
@@ -299,13 +277,8 @@ public class ViewEnrollment extends JFrame {
 				student.getStudentID(), 1);
 		List<StudentCourse> studentCourses = studentCourseService.registeredSubjects(student.getStudentID(), status.getCourse().getId());
 
-	
-		
-		
 		if (studentCourses != null) {
 			for (StudentCourse studentCourse : studentCourses) {
-				//for (StudentCourse studCourse : studCourses) {
-					//if(studentCourse != studCourse){
 						if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
 							if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
 								rowData[0] = studentCourse.getSubject().getSubjectCode();
@@ -317,12 +290,15 @@ public class ViewEnrollment extends JFrame {
 								
 							}
 						}
-					//}//end if
-				//} //end for
 			}
 			lblTotal.setText(total + "");
 
 		}
 
 	}
+	
 }
+		
+
+	
+
