@@ -20,11 +20,12 @@ import com.StudentEnrollmentClient.services.Impl.ProgressStatusServiceImpl;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EnrollementMenu extends JFrame {
+public class StudEnrollmentMenu extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnView = new JButton("View");
+	private StudentMainMenu studMainMenu;
 	private Student student;
+	private JButton btnViewStudEnrollment = new JButton("View");
 	private ProgressStatusServiceImpl progressService = new ProgressStatusServiceImpl();
 
 	/**
@@ -34,7 +35,7 @@ public class EnrollementMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EnrollementMenu frame = new EnrollementMenu();
+					StudEnrollmentMenu frame = new StudEnrollmentMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,78 +47,73 @@ public class EnrollementMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EnrollementMenu() {
+	public StudEnrollmentMenu() {
 		getContentPane().setLayout(null);
 
 	}
 
-	public EnrollementMenu(Student student) {
+	public StudEnrollmentMenu(Student student) {
 		this.student = student;
 		intialize();
 		try {
 			ProgressStatus status = progressService.getActive(student.getStudentID(), 1);
 			if (status == null)
-				btnView.setEnabled(false);
+				btnViewStudEnrollment.setEnabled(false);
 			else
-				btnView.setEnabled(true);
+				btnViewStudEnrollment.setEnabled(true);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
+	
 	public void intialize() {
-		setResizable(false);
-		setTitle("Enrollment Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 306, 445);
+		setBounds(100, 100, 451, 393);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(20, 11, 250, 371);
-		contentPane.add(panel);
-		panel.setLayout(null);
-
-		JLabel lblEnrollment = new JLabel("Enrollment");
-		lblEnrollment.setBounds(50, 11, 152, 32);
-		panel.add(lblEnrollment);
-		lblEnrollment.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
-
-		JButton btnEnroll = new JButton("Enroll");
-		btnEnroll.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Enrol view = new Enrol(student);
-				view.setVisible(true);
+		
+		JLabel lblStudentEnrollmentMenu = new JLabel("Student Enrollment Menu");
+		lblStudentEnrollmentMenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
+		lblStudentEnrollmentMenu.setBounds(60, 0, 308, 51);
+		contentPane.add(lblStudentEnrollmentMenu);
+		
+		JButton btnNewButton = new JButton("Enroll");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Enrol enrol = new Enrol(student);
+				enrol.setVisible(true);
 				dispose();
 			}
 		});
-		btnEnroll.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnEnroll.setBounds(10, 64, 226, 70);
-		panel.add(btnEnroll);
-		btnView.addActionListener(new ActionListener() {
+		btnNewButton.setBounds(110, 72, 236, 63);
+		contentPane.add(btnNewButton);
+		
+		JButton btnStudentMainMenu = new JButton("Student Main Menu");
+		btnStudentMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewEnrollment view = new ViewEnrollment(student);
-				view.setVisible(true);
+				studMainMenu = new StudentMainMenu(student);
+				studMainMenu.setVisible(true);
 				dispose();
 			}
 		});
-		btnView.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnView.setBounds(10, 163, 226, 70);
-		panel.add(btnView);
-
-		JButton btnMainMenu = new JButton("Main Menu");
-		btnMainMenu.addActionListener(new ActionListener() {
+		btnStudentMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnStudentMainMenu.setBounds(110, 247, 236, 63);
+		contentPane.add(btnStudentMainMenu);
+		
+		btnViewStudEnrollment.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnViewStudEnrollment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu view = new Menu(student);
-				view.setVisible(true);
+				ViewEnrollment viewEnrollment = new ViewEnrollment(student);
+				viewEnrollment.setVisible(true);
 				dispose();
 			}
 		});
-		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnMainMenu.setBounds(10, 261, 226, 70);
-		panel.add(btnMainMenu);
+		btnViewStudEnrollment.setBounds(108, 159, 238, 63);
+		contentPane.add(btnViewStudEnrollment);
 	}
 }

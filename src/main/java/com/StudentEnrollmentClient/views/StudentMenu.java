@@ -46,7 +46,7 @@ public class StudentMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentMenu() {
-		//intialize();
+		intialize();
 	}
 
 	public StudentMenu(Student student) {

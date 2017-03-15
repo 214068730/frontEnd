@@ -138,6 +138,7 @@ public class ViewEnrollment extends JFrame {
 		JButton btnCancel = new JButton("Cancel Course");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				try {
 					ProgressStatus status = progressStatusService.getActive(
 							student.getStudentID(), 1);
@@ -157,6 +158,32 @@ public class ViewEnrollment extends JFrame {
 							JOptionPane.showMessageDialog(null,
 									"Course has been NOT been cancelled",
 									"INFO", JOptionPane.INFORMATION_MESSAGE);
+=======
+			 try {
+				ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+				String role = student.getRole().getRole();
+				if (status != null) {
+					status.setActive(0); // Canceling course
+					progressStatusService.update(status);
+					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), 1);
+					if(updateStatus == null){
+						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
+						
+						switch (role)
+						{
+						case "A":
+							EnrollementMenu view = new EnrollementMenu(student);
+							view.setVisible(true);
+							dispose();
+							break;
+						case "B":
+							StudEnrollmentMenu studEnrolMenu = new StudEnrollmentMenu(student);
+							studEnrolMenu.setVisible(true);
+							dispose();
+							break;
+						}	
+						
+>>>>>>> 2409d97c62951a1ad75a79444dda55d72d0efc1f
 					}
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage(),
@@ -170,9 +197,21 @@ public class ViewEnrollment extends JFrame {
 		JButton btnMenua = new JButton("Menu");
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EnrollementMenu view = new EnrollementMenu(student);
-				view.setVisible(true);
-				dispose();
+				String role = student.getRole().getRole();
+				
+				switch (role)
+				{
+				case "A":
+					EnrollementMenu view = new EnrollementMenu(student);
+					view.setVisible(true);
+					dispose();
+					break;
+				case "B":
+					StudEnrollmentMenu viewStudEnroll = new StudEnrollmentMenu(student);
+					viewStudEnroll.setVisible(true);
+					dispose();
+					break;
+				}				
 			}
 		});
 		btnMenua.setBounds(630, 452, 130, 42);

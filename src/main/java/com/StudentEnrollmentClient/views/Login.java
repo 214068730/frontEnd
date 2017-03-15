@@ -45,7 +45,7 @@ public class Login extends JFrame {
 	}
 	/**
 	 * Create the frame.
-	 */
+	 */	
 	public Login() {
 		setResizable(false);
 		setTitle("Login");
@@ -66,14 +66,24 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = txtStudentNumber.getText();
 				String password = txtPassword.getText();
+				
 				if (!username.equals("") && !password.equals("")) {
 					try {
 						Student student = service.getStudentLogin(username,password);
+						String role = student.getRole().getRole();
 						if (student != null) {
-							Menu menu = new Menu(student);
-							menu.setVisible(true);
-							dispose();
-							
+							switch(role){
+							case "A":
+								Menu menu = new Menu(student);
+								menu.setVisible(true);
+								dispose();
+								break;
+							case "B":
+								StudentMainMenu studMainMenu = new StudentMainMenu(student);
+								studMainMenu.setVisible(true);
+								dispose();
+								break;
+							}							
 						} else
 							JOptionPane.showMessageDialog(null,
 									"STUDENT DETAILS NOT FOUND", "ERROR",
