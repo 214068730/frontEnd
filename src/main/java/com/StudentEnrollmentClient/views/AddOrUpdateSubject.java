@@ -157,7 +157,7 @@ public class AddOrUpdateSubject extends JFrame {
 				//Separating name and surname
 				name = nameAndSurname[0];
 				surname = nameAndSurname[1];
-				
+				if(!txtSubjectName.getText().equals("")&&!txtSubjectCode.getText().equals("")&&!txtPrice.getText().equals("")){
 			    subjectName = txtSubjectName.getText();
 			    subjectCode = txtSubjectCode.getText();
 			    subjectLevel = Integer.parseInt(ddlSubjectLevel.getSelectedItem().toString());
@@ -167,9 +167,14 @@ public class AddOrUpdateSubject extends JFrame {
 			    if(lecturer != null){
 			    	Subject subject = subjectService.save(new Subject(subjectName,subjectCode,price,subjectLevel,lecturer));
 			    	if(subject != null){
-			    		JOptionPane.showMessageDialog(null,"RECORD INSERTED", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+			    		JOptionPane.showMessageDialog(null,"RECORD INSERTED", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //add
 			    	}
+			    	else
+			    		JOptionPane.showMessageDialog(null,"RECORD NOT ADDED", "ERROR",JOptionPane.ERROR_MESSAGE); //not added
 			    }
+			}
+			 else
+				 JOptionPane.showMessageDialog(null,"FILL IN ALL FIELDS", "ERROR",JOptionPane.ERROR_MESSAGE); //
 			}
 		});
 		btnSaveSubject.setFont(new Font("Tahoma", Font.BOLD, 16));

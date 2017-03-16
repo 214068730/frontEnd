@@ -103,20 +103,12 @@ public class AddOrUpdateDepartment extends JFrame {
 						Department department = departmentService.post(new Department(name));
 						
 						if (department != null)
-						{
-							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-						}
+							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE); // add
 						else 
-						{
-							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-						}
+							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ERROR", JOptionPane.ERROR_MESSAGE); //error
 					}
 					else
-					{
-						JOptionPane.showMessageDialog(null,
-								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
-								"INFO", JOptionPane.INFORMATION_MESSAGE);
-					}
+						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED","INFO", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnSaveDept.setFont(new Font("Tahoma", Font.BOLD, 14));

@@ -92,6 +92,7 @@ public class ViewDepartment extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
 				if (row != -1) {
 					if (table.isEditing()) {
 						table.getCellEditor().stopCellEditing();
@@ -102,26 +103,24 @@ public class ViewDepartment extends JFrame {
 							result[i] = table.getValueAt(row, i);
 						}
 						try {
-							Department department = departmentService
-									.findById(Long.parseLong(result[0]
-											.toString()));
-							if (department != null) {
-								department.setDepartmentName(result[1]
-										.toString());
-								departmentService.update(department); 
+							Long id = Long.parseLong(result[0].toString());
+							Department originalDepartment = departmentService.findById(id);// original object
+							if(!originalDepartment.getDepartmentName().equals(result[1].toString())){
+								boolean update = update(result);
+								if(update == true)
+									JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //update
+								else
+									JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
 							}
 						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null,
-									ex.getMessage(), "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
-							"INFO", JOptionPane.INFORMATION_MESSAGE);
-
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
+				table.changeSelection(row, col, false, false);
 			}
 		});
 
@@ -155,5 +154,22 @@ public class ViewDepartment extends JFrame {
 			rowData[2] = department.getDateAdded();
 			model.addRow(rowData);
 		}
+	}
+	
+	public boolean update(Object[] result){
+		boolean flag = false;
+		Long id = Long.parseLong(result[0].toString());
+		Department department = departmentService.findById(id);// original object
+		if (department != null) {
+			department.setDepartmentName(result[1].toString());
+			Department originalDepartment = departmentService.findById(department.getDepartmentID());// updated object
+			departmentService.update(department); 
+			Department updatedDepartment = departmentService.findById(department.getDepartmentID());// updated object
+			if(updatedDepartment != null){
+				if(!originalDepartment.getDepartmentName().equals(updatedDepartment.getDepartmentName()))
+					flag = true;
+				}
+		}
+		return flag;
 	}
 }

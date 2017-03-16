@@ -10,6 +10,7 @@ public class AppUtil {
 	private final String recordsNotAdded = "SORRY! RECORDS NOT ADDED";
 	private final String recordsFilled = "PLEASE FILL IN ALL FIELDS";
 	private final String noRowSelected = "NO ROW SELECTED";
+
 	
 	public String getUri() {
 		return URI;

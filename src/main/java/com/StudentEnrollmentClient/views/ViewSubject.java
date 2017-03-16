@@ -106,65 +106,31 @@ public class ViewSubject extends JFrame {
 						for (int i = 0; i < table.getColumnCount() - 1; i++) {
 							result[i] = table.getValueAt(row, i);
 						}
-
 						String price = result[2].toString();
 						String level = result[3].toString();
 						boolean isDouble = isNumeric(price);
 						boolean isInt = isNumericForInt(level);
 						if (isDouble == false)
-
-							try {
-								Subject subject = subjectService
-										.getSubjectCode(result[0].toString());
-								if (subject != null) {
-
-									subject.setSubjectCode(result[0].toString());
-									subject.setSubjectName(result[1].toString());
-									subject.setPrice(Integer
-											.parseInt(result[2].toString()
-													.trim().replace(".", "")));
-									subject.setYearCode(Integer
-											.parseInt(result[3].toString()));
-									Subject updatedSubject = subjectService
-											.update(subject);
-
-									if (updatedSubject != null)
-										JOptionPane
-												.showMessageDialog(
-														null,
-														"RECORD UPDATED",
-														"INFO",
-														JOptionPane.INFORMATION_MESSAGE);
-									else
-										JOptionPane.showMessageDialog(null,
-												"RECORD UPDATED NOT UPDATED",
-												"ERROR",
-												JOptionPane.ERROR_MESSAGE);
-								}
-							} catch (Exception ex) {
-
-								JOptionPane.showMessageDialog(null,
-										"PRICE MUST BE DIGITS ONLY", "ERROR",
-										JOptionPane.ERROR_MESSAGE);
-							}
+							JOptionPane.showMessageDialog(null,"PRICE MUST BE DIGITS ONLY", "ERROR",JOptionPane.ERROR_MESSAGE);
 						else if (isInt == false)
-							JOptionPane.showMessageDialog(null,
-									"LEVEL MUST BE DIGITS ONLY", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"LEVEL MUST BE DIGITS ONLY", "ERROR",JOptionPane.ERROR_MESSAGE);
 						else {
 							try {
-								updateStudent(result);
+								Subject originalSubject = subjectService.getSubjectCode(result[0].toString());
+								if(!originalSubject.getSubjectName().equals(result[1].toString())|| originalSubject.getPrice() != Double.parseDouble(result[2].toString()) || originalSubject.getYearCode() != Integer.parseInt(result[3].toString())){
+									boolean updated = updateSubject(result);
+									if(updated == true)
+										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+									else
+										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+								}
 							} catch (Exception ex) {
-								JOptionPane.showMessageDialog(null,
-										ex.getMessage(), "ERROR",
-										JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 							}
 						}
 					}
 				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
-							"INFO", JOptionPane.INFORMATION_MESSAGE);
-
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
 				table.changeSelection(row, col, false, false);
@@ -225,15 +191,22 @@ public class ViewSubject extends JFrame {
 		return true;
 	}
 
-	private void updateStudent(Object result[]) {
+	private boolean updateSubject(Object result[]) {
+		boolean flag = false;
 		Subject subject = subjectService.getSubjectCode(result[0].toString());
 		if (subject != null) {
 			subject.setSubjectCode(result[0].toString());
 			subject.setSubjectName(result[1].toString());
 			subject.setPrice(Double.parseDouble(result[2].toString().trim()));
 			subject.setYearCode(Integer.parseInt(result[3].toString()));
+			Subject originalSubject = subjectService.getSubjectCode(result[0].toString());
 			subjectService.update(subject);
+			Subject updatedSubject = subjectService.getSubjectCode(result[0].toString());
+			if(!originalSubject.getSubjectName().equals(updatedSubject.getSubjectName()) || originalSubject.getPrice() != updatedSubject.getPrice() || originalSubject.getYearCode() != updatedSubject.getYearCode())
+				flag = true;
+			
 		}
+		return flag;
 	}
 
 }
