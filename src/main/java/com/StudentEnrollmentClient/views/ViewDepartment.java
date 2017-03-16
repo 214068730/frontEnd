@@ -165,7 +165,7 @@ public class ViewDepartment extends JFrame {
 		Long id = Long.parseLong(result[0].toString());
 		Department department = departmentService.findById(id);// original object
 		if (department != null) {
-			department.setDepartmentName(result[1].toString());
+			department.setDepartmentName(result[1].toString().toUpperCase());
 			Department originalDepartment = departmentService.findById(department.getDepartmentID());// updated object
 			departmentService.update(department); 
 			Department updatedDepartment = departmentService.findById(department.getDepartmentID());// updated object

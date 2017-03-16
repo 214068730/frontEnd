@@ -47,7 +47,8 @@ public class EnrollementMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public EnrollementMenu() {
-		getContentPane().setLayout(null);
+		//getContentPane().setLayout(null);
+		intialize();
 
 	}
 
@@ -111,13 +112,32 @@ public class EnrollementMenu extends JFrame {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Menu view = new Menu(student);
-				view.setVisible(true);
-				dispose();
+				accessRightsMenu();
 			}
 		});
 		btnMainMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnMainMenu.setBounds(10, 261, 226, 70);
 		panel.add(btnMainMenu);
+	}
+	
+	
+	public void accessRightsMenu(){
+		String role = student.getRole().getRole();
+		try{
+			switch(role){
+			case "A":
+					Menu view = new Menu(student);
+					view.setVisible(true);
+					dispose();
+					break;
+			case "B":
+					StudentMainMenu studView = new StudentMainMenu(student);
+					studView.setVisible(true);
+					dispose();
+					break;
+			}
+		}catch(Exception ex){
+			
+		}
 	}
 }

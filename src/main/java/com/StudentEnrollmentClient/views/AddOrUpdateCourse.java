@@ -120,8 +120,8 @@ public class AddOrUpdateCourse extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!txtCourseName.getText().equals("")&& !txtCourseCode.getText().equals("")){
-					String courseName = txtCourseName.getText();
-					String courseCode = txtCourseCode.getText();
+					String courseName = txtCourseName.getText().toUpperCase();
+					String courseCode = txtCourseCode.getText().toUpperCase();
 					String departmentName = ddlDepartment.getSelectedItem().toString();
 					
 					//Getting department by its unique name
