@@ -316,7 +316,7 @@ public class AddOrUpdateStudent extends JFrame {
 
 	public void add() {
 		String name = txtStudentName.getText();
-		String surname = txtStudentName.getText();
+		String surname = txtStudentSurname.getText();
 		String idNumber = txtStudentIdNumber.getText();
 		String streetName = txtStreetName.getText();
 		String suburb = txtSuburb.getText();
