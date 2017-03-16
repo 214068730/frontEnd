@@ -4,7 +4,12 @@ public class AppUtil {
 
 	private final String URI = "http://localhost:8080/";
 	private final String invalidLoginInput = "Invalid Input";
-	private final String successMessage = "Record Successfully Updated";
+	private final String successMessage = "Records Successfully Updated";
+	private final String recordsAdded = "Records Successfully Added";
+	private final String recordsNotAdded = "Sorry! Records Not Added";
+	private final String recordsFilled = "PLEASE FILL IN ALL FIELDS";
+	private final String noRowSelected = "NO ROW SELECTED";
+
 	
 	public String getUri() {
 		return URI;
@@ -16,5 +21,24 @@ public class AppUtil {
 
 	public String getSuccessMessage() {
 		return successMessage;
+	}
+	
+	public String getRecordsAdded()
+	{
+		return recordsAdded;
+	}
+	
+	public String getRecordsNotAdded()
+	{
+		return recordsNotAdded;
+	}
+	
+	public String getRecordsFilled()
+	{
+		return recordsFilled;
+	}
+	
+	public String getNoRowSelected() {
+		return noRowSelected;
 	}
 }
