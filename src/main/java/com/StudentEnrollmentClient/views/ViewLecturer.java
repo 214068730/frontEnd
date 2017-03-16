@@ -94,6 +94,7 @@ public class ViewLecturer extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
 				if (row != -1) {
 					if (table.isEditing()) {
 						table.getCellEditor().stopCellEditing();
@@ -104,26 +105,27 @@ public class ViewLecturer extends JFrame {
 							result[i] = table.getValueAt(row, i);
 						}
 						try {
-							Lecturer lecturer = lecturerService
-									.findById(Long.parseLong(result[0]
-											.toString()));
+							Lecturer lecturer = lecturerService.findById(Long.parseLong(result[0].toString()));
 							if (lecturer != null) {
-								lecturer.setName(result[1].toString());
-								lecturer.setSurname(result[2].toString());
-								lecturerService.update(lecturer); 
+								if(!lecturer.getName().equals(result[1].toString()) || !lecturer.getSurname().equals(result[2].toString()))
+								{
+									boolean update = update(result);
+									if(update == true)
+										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+									else
+										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null,
-									ex.getMessage(), "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
-							"INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
 
 				model.setRowCount(0);
 				reloadTable(table, model);
+				table.changeSelection(row, col, false, false);
 			}
 		});
 		btnAdd.setBounds(801, 557, 130, 42);
@@ -158,6 +160,21 @@ public class ViewLecturer extends JFrame {
 			rowData[3] = lecturer.getDateAdded();
 			model.addRow(rowData);
 		}
+	}
+	
+	public boolean update(Object[] result){
+		boolean flag = false;
+		Lecturer lecturer = lecturerService.findById(Long.parseLong(result[0].toString()));
+		lecturer.setName(result[1].toString());
+		lecturer.setSurname(result[2].toString());
+		
+		Lecturer originalLecturer = lecturerService.findById(Long.parseLong(result[0].toString())); // get original object
+		lecturerService.update(lecturer); 
+		Lecturer updatedLecturer = lecturerService.findById(Long.parseLong(result[0].toString())); //get updated object
+		if(!originalLecturer.getName().equals(updatedLecturer.getName()) || !originalLecturer.getSurname().equals(updatedLecturer.getSurname()))
+			flag = true;
+		
+		return flag;
 	}
 
 }

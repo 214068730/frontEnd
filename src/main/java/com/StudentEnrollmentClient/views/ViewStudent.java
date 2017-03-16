@@ -104,29 +104,20 @@ public class ViewStudent extends JFrame {
 						id = result[3].toString();
 						boolean isNumber = isNumeric(id);//checking if id is a number
 						if (isNumber == false)
-							JOptionPane.showMessageDialog(null,
-									"ID NUMBER MUST BE DIGITS ONLY", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"ID NUMBER MUST BE DIGITS ONLY", "ERROR",JOptionPane.ERROR_MESSAGE);
 						else if (id.length() != 13)
-							JOptionPane.showMessageDialog(null,
-									"ID NUMBER MUST BE 13 DIGITS LONG",
-									"ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"ID NUMBER MUST BE 13 DIGITS LONG","ERROR", JOptionPane.ERROR_MESSAGE);
 						else {
 							try {
-								Student student = studentService.findById(Long
-										.parseLong(result[0].toString()));
+								Student student = studentService.findById(Long.parseLong(result[0].toString()));
 								if (student != null) {
-									student.getStudentAddress().setAreaCode(
-											result[7].toString());
-									student.getStudentAddress().setStreetName(
-											result[5].toString());
-									student.getStudentAddress().setSurbubName(
-											result[6].toString());
-									student.setStudentIdNumber(id.toString());
-									student.setStudentName(result[1].toString());
-									student.setStudentSurname(result[2].toString());
-									addressService.update(student.getStudentAddress());
-									studentService.update(student);
+									if(!student.getStudentName().equals(result[1].toString()) || !student.getStudentSurname().equals(result[2].toString()) || !student.getStudentIdNumber().equals(result[3].toString()) || !student.getStudentAddress().getStreetName().equals(result[5].toString())|| !student.getStudentAddress().getSurbubName().equals(result[6].toString())|| !student.getStudentAddress().getAreaCode().equals(result[7].toString())){
+										boolean update = update(result,id);
+										if(update == true)
+											JOptionPane.showMessageDialog(null,"updated","SUCCESS", JOptionPane.INFORMATION_MESSAGE); //update
+										else
+											JOptionPane.showMessageDialog(null,"not updated","ERROR", JOptionPane.ERROR_MESSAGE); //not updated
+									}
 								}
 							} catch (Exception ex) {
 								JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -183,6 +174,28 @@ public class ViewStudent extends JFrame {
 			model.addRow(rowData);
 		}
 
+	}
+	
+	public boolean update(Object[] result,String id){
+		boolean flag = false;
+		Student update = studentService.findById(Long.parseLong(result[0].toString())); 
+		update.getStudentAddress().setAreaCode(result[7].toString());
+		update.getStudentAddress().setStreetName(result[5].toString());
+		update.getStudentAddress().setSurbubName(result[6].toString());
+		update.setStudentIdNumber(id.toString());
+		update.setStudentName(result[1].toString());
+		update.setStudentSurname(result[2].toString());
+		
+		Student originalStudent = studentService.findById(Long.parseLong(result[0].toString())); //get the original object
+		addressService.update(update.getStudentAddress());
+		studentService.update(update);
+		Student updateStudent = studentService.findById(Long.parseLong(result[0].toString())); //get the updated object
+		
+		
+		if (!originalStudent.getStudentIdNumber().trim().equals(updateStudent.getStudentIdNumber().trim())|| !originalStudent.getStudentName().trim().equals(updateStudent.getStudentName().trim())|| !originalStudent.getStudentSurname().trim().equals(updateStudent.getStudentSurname().trim())|| !originalStudent.getStudentAddress().getStreetName().trim().equals(updateStudent.getStudentAddress().getStreetName().trim())|| !originalStudent.getStudentAddress().getSurbubName().trim().equals(updateStudent.getStudentAddress().getSurbubName().trim())|| !originalStudent.getStudentAddress().getAreaCode().trim().equals(updateStudent.getStudentAddress().getAreaCode().trim()))
+			flag = true;
+		
+		return flag;
 	}
 
 	private boolean isNumeric(String str) {

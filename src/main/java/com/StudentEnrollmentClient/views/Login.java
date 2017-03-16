@@ -66,12 +66,11 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = txtStudentNumber.getText();
 				String password = txtPassword.getText();
-				
 				if (!username.equals("") && !password.equals("")) {
 					try {
 						Student student = service.getStudentLogin(username,password);
-						String role = student.getRole().getRole();
-						if (student != null) {
+						if(student != null){
+							String role = student.getRole().getRole();
 							switch(role){
 							case "A":
 								Menu menu = new Menu(student);
@@ -83,20 +82,17 @@ public class Login extends JFrame {
 								studMainMenu.setVisible(true);
 								dispose();
 								break;
-							}							
-						} else
-							JOptionPane.showMessageDialog(null,
-									"STUDENT DETAILS NOT FOUND", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							}
+						}
+						else
+							JOptionPane.showMessageDialog(null,"STUDENT DETAILS NOT FOUND","ERROR", JOptionPane.ERROR_MESSAGE);
 
 					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, ex.getMessage(),
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 					}
-				} else
-					JOptionPane.showMessageDialog(null,
-							"Please fill in all fields", "INFO",
-							JOptionPane.INFORMATION_MESSAGE);
+				} 
+				else
+					JOptionPane.showMessageDialog(null,"PLEASE FILL IN ALL THE FIELDS", "INFO",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnLogin.setBounds(161, 184, 86, 35);

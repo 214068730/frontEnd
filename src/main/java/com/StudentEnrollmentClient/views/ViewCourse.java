@@ -94,6 +94,7 @@ public class ViewCourse extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
 				if (row != -1) {
 					if (table.isEditing()) {
 						table.getCellEditor().stopCellEditing();
@@ -106,22 +107,25 @@ public class ViewCourse extends JFrame {
 						try {
 							Course course = courseService.findById(Long.parseLong(result[0].toString()));
 							if (course != null) {
-								course.setCourseCode(result[1].toString());
-								course.setCourseName(result[2].toString());
-								courseService.update(course); 
+								if(!course.getCourseCode().equals(result[1].toString()) || !course.getCourseName().equals(result[2].toString()))
+								{
+									boolean update = update(result);
+									if(update == true)
+										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+									else
+										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);	
+								}
 							}
 						} catch (Exception ex) {
-							JOptionPane.showMessageDialog(null,
-									ex.getMessage(), "ERROR",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}
-				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED",
-							"INFO", JOptionPane.INFORMATION_MESSAGE);
-
+				} 
+				else
+					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
+				table.changeSelection(row, col, false, false);
 			}
 		});
 		btnAdd.setBounds(1019, 607, 130, 42);
@@ -156,6 +160,21 @@ public class ViewCourse extends JFrame {
 			rowData[3] = course.getDepartment().getDepartmentName();
 			model.addRow(rowData);
 		}
+	}
+	
+	public boolean update(Object[] result){
+		boolean flag = false;
+		Course course = courseService.findById(Long.parseLong(result[0].toString()));
+		if (course != null) {
+			course.setCourseCode(result[1].toString());
+			course.setCourseName(result[2].toString());
+			Course originalCourse = courseService.findById(Long.parseLong(result[0].toString()));
+			courseService.update(course); 
+			Course updatedCourse = courseService.findById(Long.parseLong(result[0].toString()));
+			if(!originalCourse.getCourseCode().equals(updatedCourse.getCourseCode()) || !originalCourse.getCourseName().equals(updatedCourse.getCourseName()))
+				flag = true;
+		}
+		return flag;
 	}
 
 }
