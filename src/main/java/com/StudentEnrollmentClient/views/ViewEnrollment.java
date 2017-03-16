@@ -66,9 +66,9 @@ public class ViewEnrollment extends JFrame {
 	private JLabel lblDate = new JLabel("Date");
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private JLabel lblCourse = new JLabel("lblCourse");
-	JLabel lblCurrentYear = new JLabel("Current Year :");
 	private Date date = new Date();
 	private JLabel lblTotal = new JLabel("TOTAL:");
+	private JLabel lblCurrentYear = new JLabel("Current Year :");
 
 	/**
 	 * Launch the application.
@@ -91,7 +91,7 @@ public class ViewEnrollment extends JFrame {
 	 */
 
 	public ViewEnrollment() {
-		intialize();
+		//intialize();
 	}
 
 	public ViewEnrollment(Student student) {
@@ -115,9 +115,8 @@ public class ViewEnrollment extends JFrame {
 	}
 
 	public void intialize() {
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 786, 543);
+		setBounds(100, 100, 1132, 642);
 		getContentPane().setLayout(null);
 		final JTable table = new JTable() {
 			public boolean isCellEditable(int row, int column) {
@@ -134,7 +133,7 @@ public class ViewEnrollment extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		JScrollPane pane = new JScrollPane(table);
-		pane.setBounds(10, 162, 750, 254);
+		pane.setBounds(10, 202, 1096, 293);
 		panel.add(pane);
 		setContentPane(panel);
 
@@ -150,19 +149,9 @@ public class ViewEnrollment extends JFrame {
 					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), 1);
 					if(updateStatus == null){
 						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
-						
-						switch (role){
-						case "A":
 							EnrollementMenu view = new EnrollementMenu(student);
 							view.setVisible(true);
 							dispose();
-							break;
-						case "B":
-							StudEnrollmentMenu studEnrolMenu = new StudEnrollmentMenu(student);
-							studEnrolMenu.setVisible(true);
-							dispose();
-							break;
-						}	
 					}
 				} 
 			 }catch (Exception ex) {
@@ -172,38 +161,30 @@ public class ViewEnrollment extends JFrame {
 			}
 				
 		});
-		btnCancel.setBounds(473, 452, 130, 42);
+		btnCancel.setBounds(819, 551, 130, 42);
 		panel.add(btnCancel);
 
 		JButton btnMenua = new JButton("Menu");
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String role = student.getRole().getRole();
-				switch (role){
-				case "A":
+				
 					EnrollementMenu view = new EnrollementMenu(student);
 					view.setVisible(true);
 					dispose();
-					break;
-				case "B":
-					StudEnrollmentMenu viewStudEnroll = new StudEnrollmentMenu(student);
-					viewStudEnroll.setVisible(true);
-					dispose();
-					break;
-				}				
+							
 			}
 		});
-		btnMenua.setBounds(630, 452, 130, 42);
+		btnMenua.setBounds(976, 551, 130, 42);
 		panel.add(btnMenua);
 
 		JLabel lblEnrollementDetails = new JLabel("ENROLLEMENT DETAILS");
 		lblEnrollementDetails.setFont(new Font("Tahoma", Font.BOLD
 				| Font.ITALIC, 26));
-		lblEnrollementDetails.setBounds(219, 11, 331, 32);
+		lblEnrollementDetails.setBounds(417, 11, 331, 32);
 		panel.add(lblEnrollementDetails);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 71, 642, 80);
+		panel_1.setBounds(10, 111, 1096, 80);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -232,33 +213,36 @@ public class ViewEnrollment extends JFrame {
 		panel_1.add(lblIdNumber);
 
 		JLabel lblCourse2 = new JLabel("Course :");
-		lblCourse2.setBounds(303, 11, 61, 14);
+		lblCourse2.setBounds(757, 11, 61, 14);
 		panel_1.add(lblCourse2);
 
 		lblCourse.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCourse.setBounds(393, 11, 239, 13);
+		lblCourse.setBounds(847, 11, 239, 13);
 		panel_1.add(lblCourse);
 
-		lblCurrentYear.setBounds(403, 35, 114, 14);
+		
+		lblCurrentYear.setBounds(757, 36, 157, 14);
 		panel_1.add(lblCurrentYear);
-
+		
+		
 		lblCurrentYear.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCurrentYear.setBounds(393, 35, 140, 14);
+		lblCurrentYear.setBounds(847, 36, 140, 14);
 		panel_1.add(lblCurrentYear);
-
+		
 		JLabel lblCurrentYear_1 = new JLabel("Current Year :");
-		lblCurrentYear_1.setBounds(303, 36, 157, 14);
+		lblCurrentYear_1.setBounds(757, 36, 120, 14);
 		panel_1.add(lblCurrentYear_1);
 
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(630, 47, 130, 14);
+		lblDate.setBounds(544, 54, 143, 14);
 		panel.add(lblDate);
 
 		JLabel lblNewLabel = new JLabel("TOTAL: R");
-		lblNewLabel.setBounds(607, 427, 69, 14);
+		lblNewLabel.setBounds(965, 506, 69, 14);
 		panel.add(lblNewLabel);
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-		lblTotal.setBounds(665, 427, 83, 14);
+		lblTotal.setBounds(1023, 506, 83, 14);
 		panel.add(lblTotal);
 
 	}
