@@ -111,13 +111,17 @@ public class ViewStudent extends JFrame {
 							try {
 								Student student = studentService.findById(Long.parseLong(result[0].toString()));
 								if (student != null) {
-									if(!student.getStudentName().equals(result[1].toString()) || !student.getStudentSurname().equals(result[2].toString()) || !student.getStudentIdNumber().equals(result[3].toString()) || !student.getStudentAddress().getStreetName().equals(result[5].toString())|| !student.getStudentAddress().getSurbubName().equals(result[6].toString())|| !student.getStudentAddress().getAreaCode().equals(result[7].toString())){
-										boolean update = update(result,id);
-										if(update == true)
-											JOptionPane.showMessageDialog(null,"updated","SUCCESS", JOptionPane.INFORMATION_MESSAGE); //update
-										else
-											JOptionPane.showMessageDialog(null,"not updated","ERROR", JOptionPane.ERROR_MESSAGE); //not updated
+									if(!result[1].toString().equals("") && !result[2].toString().equals("") && !result[3].toString().equals("") && !result[5].toString().equals("") && !result[6].toString().equals("") && !result[7].toString().equals("")){
+										if(!student.getStudentName().equals(result[1].toString()) || !student.getStudentSurname().equals(result[2].toString()) || !student.getStudentIdNumber().equals(result[3].toString()) || !student.getStudentAddress().getStreetName().equals(result[5].toString())|| !student.getStudentAddress().getSurbubName().equals(result[6].toString())|| !student.getStudentAddress().getAreaCode().equals(result[7].toString())){
+											boolean update = update(result,id);
+											if(update == true)
+												JOptionPane.showMessageDialog(null,"updated","SUCCESS", JOptionPane.INFORMATION_MESSAGE); //update
+											else
+												JOptionPane.showMessageDialog(null,"not updated","ERROR", JOptionPane.ERROR_MESSAGE); //not updated
+										}
 									}
+									else
+										JOptionPane.showMessageDialog(null,"blank fields allowed","ERROR", JOptionPane.ERROR_MESSAGE);
 								}
 							} catch (Exception ex) {
 								JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);

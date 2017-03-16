@@ -107,14 +107,19 @@ public class ViewCourse extends JFrame {
 						try {
 							Course course = courseService.findById(Long.parseLong(result[0].toString()));
 							if (course != null) {
-								if(!course.getCourseCode().equals(result[1].toString()) || !course.getCourseName().equals(result[2].toString()))
-								{
-									boolean update = update(result);
-									if(update == true)
-										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-									else
-										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);	
+								if(!result[1].toString().equals("") && !result[2].toString().equals("")){
+									if(!course.getCourseCode().equals(result[1].toString()) || !course.getCourseName().equals(result[2].toString()))
+									{
+										boolean update = update(result);
+										if(update == true)
+											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+										else
+											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);	
+									}
 								}
+								else
+									JOptionPane.showMessageDialog(null,"no blank fields allowed", "ERROR",JOptionPane.ERROR_MESSAGE);
+									
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

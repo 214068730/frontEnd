@@ -125,7 +125,7 @@ public class AddOrUpdateCourse extends JFrame {
 					String departmentName = ddlDepartment.getSelectedItem().toString();
 					
 					//Getting department by its unique name
-//					try{
+				try{
 						Department department = departmentService.getByName(departmentName);
 						if(department != null){
 							//saving course
@@ -136,12 +136,13 @@ public class AddOrUpdateCourse extends JFrame {
 								JOptionPane.showMessageDialog(null,"COURSE ALREADY EXIST", "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 						
-//					}catch(Exception ex){
-//						JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.ERROR_MESSAGE);
-//					}
-					
-					
+					}catch(Exception ex){
+						JOptionPane.showMessageDialog(null,ex.getMessage(), "INFO",JOptionPane.ERROR_MESSAGE);
+					}					
 				}
+				else
+					JOptionPane.showMessageDialog(null,"PLEASE FILL IN ALL FIELDS", "INFO",JOptionPane.INFORMATION_MESSAGE);
+					
 				
 			}
 		});
