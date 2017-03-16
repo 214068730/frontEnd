@@ -107,14 +107,18 @@ public class ViewLecturer extends JFrame {
 						try {
 							Lecturer lecturer = lecturerService.findById(Long.parseLong(result[0].toString()));
 							if (lecturer != null) {
-								if(!lecturer.getName().equals(result[1].toString()) || !lecturer.getSurname().equals(result[2].toString()))
-								{
-									boolean update = update(result);
-									if(update == true)
-										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-									else
-										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+								if(!result[1].toString().equals("") && !result[2].toString().equals("")){
+									if(!lecturer.getName().equals(result[1].toString()) || !lecturer.getSurname().equals(result[2].toString()))
+									{
+										boolean update = update(result);
+										if(update == true)
+											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+										else
+											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+									}
 								}
+								else
+									JOptionPane.showMessageDialog(null,"no blank columns allowed", "ERROR",JOptionPane.ERROR_MESSAGE);
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);

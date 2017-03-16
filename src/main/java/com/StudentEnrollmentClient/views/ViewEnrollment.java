@@ -29,8 +29,11 @@ import javax.swing.table.DefaultTableModel;
 import com.StudentEnrollmentClient.domain.ProgressStatus;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.StudentCourse;
+import com.StudentEnrollmentClient.domain.Subject;
+import com.StudentEnrollmentClient.services.SubjectService;
 import com.StudentEnrollmentClient.services.Impl.ProgressStatusServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.StudentCourseServiceImpl;
+import com.StudentEnrollmentClient.services.Impl.SubjectServiceImpl;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -54,8 +57,9 @@ public class ViewEnrollment extends JFrame {
 	private Enrol enroll;
 
 	private ProgressStatusServiceImpl progressStatusService = new ProgressStatusServiceImpl();
-	Student student;
+	private Student student;
 	private StudentCourseServiceImpl studentCourseService = new StudentCourseServiceImpl();
+	private SubjectServiceImpl subjectService = new SubjectServiceImpl();
 	private JLabel lblFullname = new JLabel("FullName :");
 	private JLabel lblStudentNumber = new JLabel("Student Number: ");
 	private JLabel lblIdNumber = new JLabel("IdNumber");
@@ -273,24 +277,29 @@ public class ViewEnrollment extends JFrame {
 
 		ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
 		List<StudentCourse> studentCourses = studentCourseService.registeredSubjects(student.getStudentID(), status.getCourse().getId());
+		List<String> codes = new ArrayList<>();
 		
 	
 		if (studentCourses != null) {
 			for (StudentCourse studentCourse : studentCourses) {
 					if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
 						if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
-								rowData[0] = studentCourse.getSubject().getSubjectCode();
-								rowData[1] = studentCourse.getSubject().getSubjectName();
-								rowData[2] = studentCourse.getSubject().getYearCode();
-								rowData[3] = studentCourse.getSubject().getPrice();
-								total = total+ Double.parseDouble(rowData[3].toString());
-								model.addRow(rowData);
-								
+							codes.add(studentCourse.getSubject().getSubjectCode());
 						}
 					}
 			}
+			Set<String> sets = new HashSet<String>(codes);
+			
+			for(String set : sets){
+				Subject sub = subjectService.getSubjectCode(set);
+				rowData[0] = sub.getSubjectCode().trim();
+				rowData[1] = sub.getSubjectName().trim();
+				rowData[2] = sub.getYearCode();
+				rowData[3] = sub.getPrice();
+				model.addRow(rowData);
+				total = total + sub.getPrice();
+			}
 			lblTotal.setText(total + "");
-
 		}
 
 	}

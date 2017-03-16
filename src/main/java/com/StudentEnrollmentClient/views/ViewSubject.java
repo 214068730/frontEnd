@@ -117,13 +117,18 @@ public class ViewSubject extends JFrame {
 						else {
 							try {
 								Subject originalSubject = subjectService.getSubjectCode(result[0].toString());
-								if(!originalSubject.getSubjectName().equals(result[1].toString())|| originalSubject.getPrice() != Double.parseDouble(result[2].toString()) || originalSubject.getYearCode() != Integer.parseInt(result[3].toString())){
-									boolean updated = updateSubject(result);
-									if(updated == true)
-										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
-									else
-										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+								if(!result[1].toString().equals("") &&(!result[2].toString().equals("") && (!result[3].toString().equals("")))){
+									if(!originalSubject.getSubjectName().equals(result[1].toString())|| originalSubject.getPrice() != Double.parseDouble(result[2].toString()) || originalSubject.getYearCode() != Integer.parseInt(result[3].toString())){
+										boolean updated = updateSubject(result);
+										if(updated == true)
+											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+										else
+											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+									}
 								}
+								else
+									JOptionPane.showMessageDialog(null,"field cannot be blank", "ERROR",JOptionPane.ERROR_MESSAGE);
+								
 							} catch (Exception ex) {
 								JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 							}

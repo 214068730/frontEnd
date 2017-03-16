@@ -105,13 +105,17 @@ public class ViewDepartment extends JFrame {
 						try {
 							Long id = Long.parseLong(result[0].toString());
 							Department originalDepartment = departmentService.findById(id);// original object
-							if(!originalDepartment.getDepartmentName().equals(result[1].toString())){
-								boolean update = update(result);
-								if(update == true)
-									JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //update
-								else
-									JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+							if(!result[1].toString().equals("")){
+								if(!originalDepartment.getDepartmentName().equals(result[1].toString())){
+									boolean update = update(result);
+									if(update == true)
+										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //update
+									else
+										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+								}
 							}
+							else
+								JOptionPane.showMessageDialog(null,"no column can be blank", "ERROR",JOptionPane.ERROR_MESSAGE);
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
