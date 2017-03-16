@@ -183,12 +183,12 @@ public class ViewStudent extends JFrame {
 	public boolean update(Object[] result,String id){
 		boolean flag = false;
 		Student update = studentService.findById(Long.parseLong(result[0].toString())); 
-		update.getStudentAddress().setAreaCode(result[7].toString());
-		update.getStudentAddress().setStreetName(result[5].toString());
-		update.getStudentAddress().setSurbubName(result[6].toString());
-		update.setStudentIdNumber(id.toString());
-		update.setStudentName(result[1].toString());
-		update.setStudentSurname(result[2].toString());
+		update.getStudentAddress().setAreaCode(result[7].toString().toUpperCase());
+		update.getStudentAddress().setStreetName(result[5].toString().toUpperCase());
+		update.getStudentAddress().setSurbubName(result[6].toString().toUpperCase());
+		update.setStudentIdNumber(id.toString().toUpperCase());
+		update.setStudentName(result[1].toString().toUpperCase());
+		update.setStudentSurname(result[2].toString().toUpperCase());
 		
 		Student originalStudent = studentService.findById(Long.parseLong(result[0].toString())); //get the original object
 		addressService.update(update.getStudentAddress());

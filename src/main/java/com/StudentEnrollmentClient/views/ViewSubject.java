@@ -200,8 +200,8 @@ public class ViewSubject extends JFrame {
 		boolean flag = false;
 		Subject subject = subjectService.getSubjectCode(result[0].toString());
 		if (subject != null) {
-			subject.setSubjectCode(result[0].toString());
-			subject.setSubjectName(result[1].toString());
+			subject.setSubjectCode(result[0].toString().toUpperCase());
+			subject.setSubjectName(result[1].toString().toUpperCase());
 			subject.setPrice(Double.parseDouble(result[2].toString().trim()));
 			subject.setYearCode(Integer.parseInt(result[3].toString()));
 			Subject originalSubject = subjectService.getSubjectCode(result[0].toString());

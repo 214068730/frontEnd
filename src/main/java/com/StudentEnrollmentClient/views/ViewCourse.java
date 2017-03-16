@@ -171,8 +171,8 @@ public class ViewCourse extends JFrame {
 		boolean flag = false;
 		Course course = courseService.findById(Long.parseLong(result[0].toString()));
 		if (course != null) {
-			course.setCourseCode(result[1].toString());
-			course.setCourseName(result[2].toString());
+			course.setCourseCode(result[1].toString().toUpperCase());
+			course.setCourseName(result[2].toString().toUpperCase());
 			Course originalCourse = courseService.findById(Long.parseLong(result[0].toString()));
 			courseService.update(course); 
 			Course updatedCourse = courseService.findById(Long.parseLong(result[0].toString()));

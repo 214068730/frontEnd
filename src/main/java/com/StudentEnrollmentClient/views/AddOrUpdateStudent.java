@@ -294,13 +294,13 @@ public class AddOrUpdateStudent extends JFrame {
 
 	public boolean update() {
 		boolean flag = false;
-		String name = txtStudentName.getText();
-		String surname = txtStudentSurname.getText();
-		String idNumber = txtStudentIdNumber.getText();
-		String streetName = txtStreetName.getText();
-		String suburb = txtSuburb.getText();
-		String areaCode = txtAreaCode.getText();
-		String streetNumber = txtStreetNumber.getText();
+		String name = txtStudentName.getText().toUpperCase();
+		String surname = txtStudentSurname.getText().toUpperCase();
+		String idNumber = txtStudentIdNumber.getText().toUpperCase();
+		String streetName = txtStreetName.getText().toUpperCase();
+		String suburb = txtSuburb.getText().toUpperCase();
+		String areaCode = txtAreaCode.getText().toUpperCase();
+		String streetNumber = txtStreetNumber.getText().toUpperCase();
 		Long role = new Long(ddlRights.getSelectedIndex() + 1);
 		try {
 			Roles rights = rolesService.get(role); // getting role from db
@@ -336,13 +336,13 @@ public class AddOrUpdateStudent extends JFrame {
 
 	public boolean add() {
 		boolean flag = false;
-		String name = txtStudentName.getText();
-		String surname = txtStudentSurname.getText();
-		String idNumber = txtStudentIdNumber.getText();
-		String streetName = txtStreetName.getText();
-		String suburb = txtSuburb.getText();
-		String areaCode = txtAreaCode.getText();
-		String streetNumber = txtStreetNumber.getText();
+		String name = txtStudentName.getText().toUpperCase();
+		String surname = txtStudentSurname.getText().toUpperCase();
+		String idNumber = txtStudentIdNumber.getText().toUpperCase();
+		String streetName = txtStreetName.getText().toUpperCase();
+		String suburb = txtSuburb.getText().toUpperCase();
+		String areaCode = txtAreaCode.getText().toUpperCase();
+		String streetNumber = txtStreetNumber.getText().toUpperCase();
 		Long role = new Long(ddlRights.getSelectedIndex() + 1);
 
 		try {

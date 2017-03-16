@@ -66,9 +66,9 @@ public class StudentSubMenu extends JFrame {
 		panel.setBounds(93, 40, 328, 255);
 		contentPane.add(panel);
 		
-		JLabel lblStudentSubmenu = new JLabel("Student Sub Menu");
+		JLabel lblStudentSubmenu = new JLabel("Student Menu");
 		lblStudentSubmenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
-		lblStudentSubmenu.setBounds(28, 6, 290, 32);
+		lblStudentSubmenu.setBounds(77, 0, 193, 32);
 		panel.add(lblStudentSubmenu);
 		
 		JButton button = new JButton("Update Student");
@@ -84,7 +84,7 @@ public class StudentSubMenu extends JFrame {
 		button.setBounds(52, 70, 236, 63);
 		panel.add(button);
 		
-		JButton btnStudentMainMenu = new JButton("Student Main Menu");
+		JButton btnStudentMainMenu = new JButton("Main Menu");
 		btnStudentMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				studMainMenu = new StudentMainMenu(student);

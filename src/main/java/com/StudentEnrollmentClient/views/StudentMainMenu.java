@@ -66,12 +66,12 @@ public class StudentMainMenu extends JFrame {
 		panel.setBounds(91, 11, 328, 353);
 		contentPane.add(panel);
 		
-		JLabel lblStudentMainMenu = new JLabel("Student Main Menu");
+		JLabel lblStudentMainMenu = new JLabel(" Main Menu");
 		lblStudentMainMenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
-		lblStudentMainMenu.setBounds(28, 6, 290, 32);
+		lblStudentMainMenu.setBounds(84, 0, 169, 32);
 		panel.add(lblStudentMainMenu);
 		
-		JButton btnStudentSubMenu = new JButton("Student Sub Menu");
+		JButton btnStudentSubMenu = new JButton("Student Menu");
 		btnStudentSubMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				studSubMenu = new StudentSubMenu(student);
@@ -86,21 +86,9 @@ public class StudentMainMenu extends JFrame {
 		JButton button_6 = new JButton("Enrollment");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String role = student.getRole().getRole();
-				
-				switch (role)
-				{
-				case "A":
-					EnrollementMenu view = new EnrollementMenu(student);
-					view.setVisible(true);
-					dispose();
-					break;
-				case "B":
-					StudEnrollmentMenu studEnrolView = new StudEnrollmentMenu(student);
-					studEnrolView.setVisible(true);
-					dispose();
-					break;
-				}				
+				EnrollementMenu view = new EnrollementMenu(student);
+				view.setVisible(true);
+				dispose();		
 			}
 		});
 		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));

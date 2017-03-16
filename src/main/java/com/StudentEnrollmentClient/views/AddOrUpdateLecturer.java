@@ -105,8 +105,8 @@ public class AddOrUpdateLecturer extends JFrame {
 				case "UPDATE":
 					if (!txtLecturerName.getText().equals("") && !txtLecturerSurname.getText().equals(""))
 					{
-						String name = txtLecturerName.getText();
-						String surname = txtLecturerSurname.getText();
+						String name = txtLecturerName.getText().toUpperCase();
+						String surname = txtLecturerSurname.getText().toUpperCase();
 						
 						//update lecturer
 						lecturer.setName(name);
@@ -120,8 +120,8 @@ public class AddOrUpdateLecturer extends JFrame {
 				case "ADD":
 					if (!txtLecturerName.getText().equals("") && !txtLecturerSurname.getText().equals(""))
 					{
-						String name = txtLecturerName.getText();
-						String surname = txtLecturerSurname.getText();
+						String name = txtLecturerName.getText().toUpperCase();
+						String surname = txtLecturerSurname.getText().toUpperCase();
 						
 						//add lecturer
 						Lecturer lecturer = lecturerService.post(new Lecturer(name, surname));

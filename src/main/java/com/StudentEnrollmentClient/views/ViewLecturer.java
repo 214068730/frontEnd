@@ -169,8 +169,8 @@ public class ViewLecturer extends JFrame {
 	public boolean update(Object[] result){
 		boolean flag = false;
 		Lecturer lecturer = lecturerService.findById(Long.parseLong(result[0].toString()));
-		lecturer.setName(result[1].toString());
-		lecturer.setSurname(result[2].toString());
+		lecturer.setName(result[1].toString().toUpperCase());
+		lecturer.setSurname(result[2].toString().toUpperCase());
 		
 		Lecturer originalLecturer = lecturerService.findById(Long.parseLong(result[0].toString())); // get original object
 		lecturerService.update(lecturer); 

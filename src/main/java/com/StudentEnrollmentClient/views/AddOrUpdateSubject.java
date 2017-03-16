@@ -158,8 +158,8 @@ public class AddOrUpdateSubject extends JFrame {
 				name = nameAndSurname[0];
 				surname = nameAndSurname[1];
 				if(!txtSubjectName.getText().equals("")&&!txtSubjectCode.getText().equals("")&&!txtPrice.getText().equals("")){
-			    subjectName = txtSubjectName.getText();
-			    subjectCode = txtSubjectCode.getText();
+			    subjectName = txtSubjectName.getText().toUpperCase();
+			    subjectCode = txtSubjectCode.getText().toUpperCase();
 			    subjectLevel = Integer.parseInt(ddlSubjectLevel.getSelectedItem().toString());
 			    price = Double.parseDouble(txtPrice.getText());
 			    

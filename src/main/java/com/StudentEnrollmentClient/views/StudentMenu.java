@@ -80,7 +80,7 @@ public class StudentMenu extends JFrame {
 
 		JLabel lblStudentMenu = new JLabel("Student Menu");
 		lblStudentMenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
-		lblStudentMenu.setBounds(176, 22, 178, 40);
+		lblStudentMenu.setBounds(188, 22, 161, 40);
 		contentPane.add(lblStudentMenu);
 
 		btnAddStudent.setFont(new Font("Tahoma", Font.BOLD, 16));
