@@ -18,6 +18,7 @@ import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.services.Impl.AddressServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.StudentServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.SubjectServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.Font;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ViewSubject extends JFrame {
 	private Student student;
 	private SubjectServiceImpl subjectService = new SubjectServiceImpl();
 	private AddressServiceImpl addressService = new AddressServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -121,21 +123,22 @@ public class ViewSubject extends JFrame {
 									if(!originalSubject.getSubjectName().equals(result[1].toString())|| originalSubject.getPrice() != Double.parseDouble(result[2].toString()) || originalSubject.getYearCode() != Integer.parseInt(result[3].toString())){
 										boolean updated = updateSubject(result);
 										if(updated == true)
-											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+											JOptionPane.showMessageDialog(null,util.getRecordsUpdated(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 										else
-											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+											JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated()+"\nsubject code already exist", "ERROR",JOptionPane.ERROR_MESSAGE);
 									}
 								}
 								else
-									JOptionPane.showMessageDialog(null,"field cannot be blank", "ERROR",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,util.getNoBlankFields(), "ERROR",JOptionPane.ERROR_MESSAGE);
 								
 							} catch (Exception ex) {
 								JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 							}
 						}
 					}
-				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
+				} 
+				else
+					JOptionPane.showMessageDialog(null,util.getNoRowSelected(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
 				table.changeSelection(row, col, false, false);

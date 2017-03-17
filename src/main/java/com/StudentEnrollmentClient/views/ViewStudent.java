@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.AddressServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.StudentServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.Font;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ViewStudent extends JFrame {
 	private Student student;
 	private StudentServiceImpl studentService = new StudentServiceImpl();
 	private AddressServiceImpl addressService = new AddressServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -107,7 +109,7 @@ public class ViewStudent extends JFrame {
 							JOptionPane.showMessageDialog(null,"ID NUMBER MUST BE DIGITS ONLY", "ERROR",JOptionPane.ERROR_MESSAGE);
 						else if (id.length() != 13)
 							JOptionPane.showMessageDialog(null,"ID NUMBER MUST BE 13 DIGITS LONG","ERROR", JOptionPane.ERROR_MESSAGE);
-						else {
+						else if(isNumber == true && id.length() == 13){
 							try {
 								Student student = studentService.findById(Long.parseLong(result[0].toString()));
 								if (student != null) {
@@ -115,23 +117,25 @@ public class ViewStudent extends JFrame {
 										if(!student.getStudentName().equals(result[1].toString()) || !student.getStudentSurname().equals(result[2].toString()) || !student.getStudentIdNumber().equals(result[3].toString()) || !student.getStudentAddress().getStreetName().equals(result[5].toString())|| !student.getStudentAddress().getSurbubName().equals(result[6].toString())|| !student.getStudentAddress().getAreaCode().equals(result[7].toString())){
 											boolean update = update(result,id);
 											if(update == true)
-												JOptionPane.showMessageDialog(null,"updated","SUCCESS", JOptionPane.INFORMATION_MESSAGE); //update
+												JOptionPane.showMessageDialog(null,util.getRecordsUpdated(),"SUCCESS", JOptionPane.INFORMATION_MESSAGE); //update
 											else
-												JOptionPane.showMessageDialog(null,"not updated","ERROR", JOptionPane.ERROR_MESSAGE); //not updated
+												JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated()+"\nid number already exist","ERROR", JOptionPane.ERROR_MESSAGE); //not updated
 										}
 									}
 									else
-										JOptionPane.showMessageDialog(null,"blank fields allowed","ERROR", JOptionPane.ERROR_MESSAGE);
+										JOptionPane.showMessageDialog(null,util.getNoBlankFields(),"ERROR", JOptionPane.ERROR_MESSAGE);
 								}
 							} catch (Exception ex) {
 								JOptionPane.showMessageDialog(null,ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 							}
 						}
-						model.setRowCount(0);
-						reloadTable(table, model);
-						table.changeSelection(row, col, false, false);
 					}
 				}
+				else
+					JOptionPane.showMessageDialog(null,util.getNoRowSelected(),"INFO", JOptionPane.INFORMATION_MESSAGE);
+				model.setRowCount(0);
+				reloadTable(table, model);
+				table.changeSelection(row, col, false, false);
 
 			}
 		});

@@ -17,6 +17,7 @@ import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.LecturerServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class ViewLecturer extends JFrame {
 	private Lecturer lecturer;
 	private Student student;
 	private LecturerServiceImpl lecturerService = new LecturerServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -112,20 +114,20 @@ public class ViewLecturer extends JFrame {
 									{
 										boolean update = update(result);
 										if(update == true)
-											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+											JOptionPane.showMessageDialog(null,util.getRecordsUpdated(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 										else
-											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+											JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated(), "ERROR",JOptionPane.ERROR_MESSAGE);
 									}
 								}
 								else
-									JOptionPane.showMessageDialog(null,"no blank columns allowed", "ERROR",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,util.getNoBlankFields(), "ERROR",JOptionPane.ERROR_MESSAGE);
 							}
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,util.getNoRowSelected(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 
 				model.setRowCount(0);
 				reloadTable(table, model);

@@ -32,9 +32,11 @@ import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.AddressRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.RolesRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.StudentRestImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -54,6 +56,7 @@ public class AddOrUpdateStudent extends JFrame {
 	private AddressRestImpl addressService = new AddressRestImpl();
 	private StudentRestImpl studentService = new StudentRestImpl();
 	private RolesRestImpl rolesService = new RolesRestImpl();
+	private AppUtil util = new AppUtil();
 	private JLabel lblAccessRights = new JLabel("Access Rights:");
 
 	/**
@@ -182,30 +185,30 @@ public class AddOrUpdateStudent extends JFrame {
 						if (txtStudentIdNumber.getText().length() == 13) {
 							if (!student.getStudentIdNumber().trim().equals(txtStudentIdNumber.getText().trim())|| !student.getStudentName().trim().equals(txtStudentName.getText().trim())|| !student.getStudentSurname().trim().equals(txtStudentSurname.getText().trim())|| !student.getStudentAddress().getStreetName().trim().equals(txtStreetName.getText().trim())|| !student.getStudentAddress().getSurbubName().trim().equals(txtSuburb.getText().trim())|| !student.getStudentAddress().getAreaCode().trim().equals(txtAreaCode.getText().trim())|| !student.getStudentAddress().getStreetNumber().trim().equals( txtStreetNumber.getText().trim())){
 								if (update() == true)
-									JOptionPane.showMessageDialog(null, "updated","INFO",JOptionPane.INFORMATION_MESSAGE);// update
+									JOptionPane.showMessageDialog(null, util.getRecordsUpdated(),"UPDATED",JOptionPane.INFORMATION_MESSAGE);// update
 								else
-									JOptionPane.showMessageDialog(null, "not updated","ERROR",JOptionPane.ERROR_MESSAGE);// update
+									JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated()+"\nID number already exist","ERROR",JOptionPane.ERROR_MESSAGE);// update
 						}
 					}
 					else
 						JOptionPane.showMessageDialog(null,"ID FIELD MUST BE 13 DIGITS LONG", "INFO",JOptionPane.INFORMATION_MESSAGE);
 					} 
 					else
-						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED IN","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,util.getRecordsFilled(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				case "ADD":
 					if (!txtStudentName.getText().equals("")&& !txtStudentSurname.getText().equals("")&& !txtStudentIdNumber.getText().equals("")&& !txtStreetName.getText().equals("")&& !txtSuburb.getText().equals("")&& !txtAreaCode.getText().equals("")) {
 						if (txtStudentIdNumber.getText().length() == 13){
 							if(add() == true)
-								JOptionPane.showMessageDialog(null, "add","SUCCESS",JOptionPane.INFORMATION_MESSAGE);// add
+								JOptionPane.showMessageDialog(null,util.getRecordsAdded(),"SUCCESS",JOptionPane.INFORMATION_MESSAGE);// add
 							else
-								JOptionPane.showMessageDialog(null, "not add","ERROR",JOptionPane.ERROR_MESSAGE);// not add
+								JOptionPane.showMessageDialog(null,util.getRecordsNotAdded()+"\nID  number already exist","ERROR",JOptionPane.ERROR_MESSAGE);// not add
 						}
 						else
 							JOptionPane.showMessageDialog(null,"ID FIELD MUST BE 13 DIGITS LONG", "INFO",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
-						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED IN","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,util.getRecordsFilled(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -302,7 +305,7 @@ public class AddOrUpdateStudent extends JFrame {
 		String areaCode = txtAreaCode.getText().toUpperCase();
 		String streetNumber = txtStreetNumber.getText().toUpperCase();
 		Long role = new Long(ddlRights.getSelectedIndex() + 1);
-		try {
+//		try {
 			Roles rights = rolesService.get(role); // getting role from db
 			if (rights != null) {
 				
@@ -328,9 +331,9 @@ public class AddOrUpdateStudent extends JFrame {
 					flag = false;
 				load(updatedResult);
 			} 
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-		}
+//		} catch (Exception ex) {
+//			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+//		}
 		return flag;
 	}
 
@@ -345,7 +348,7 @@ public class AddOrUpdateStudent extends JFrame {
 		String streetNumber = txtStreetNumber.getText().toUpperCase();
 		Long role = new Long(ddlRights.getSelectedIndex() + 1);
 
-		try {
+//		try {
 			Roles rights = rolesService.get(role); // getting role from db
 
 			if (rights != null) {
@@ -354,9 +357,9 @@ public class AddOrUpdateStudent extends JFrame {
 				if (student != null)
 					flag = true;
 			}
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
-		}
+//		} catch (Exception ex) {
+//			JOptionPane.showMessageDialog(null, ex.getMessage(), "INFO",JOptionPane.INFORMATION_MESSAGE);
+//		}
 		return flag;
 	}
 

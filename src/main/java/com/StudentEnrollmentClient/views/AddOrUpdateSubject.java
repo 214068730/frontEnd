@@ -25,6 +25,7 @@ import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.services.LecturerService;
 import com.StudentEnrollmentClient.services.Impl.LecturerServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.SubjectServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -45,6 +46,7 @@ public class AddOrUpdateSubject extends JFrame {
 	private JComboBox ddlSubjectLevel = new JComboBox();
 	private LecturerServiceImpl lecturerService = new LecturerServiceImpl();
 	private SubjectServiceImpl  subjectService = new SubjectServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -167,14 +169,14 @@ public class AddOrUpdateSubject extends JFrame {
 			    if(lecturer != null){
 			    	Subject subject = subjectService.save(new Subject(subjectName,subjectCode,price,subjectLevel,lecturer));
 			    	if(subject != null){
-			    		JOptionPane.showMessageDialog(null,"RECORD INSERTED", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //add
+			    		JOptionPane.showMessageDialog(null,util.getRecordsAdded(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //add
 			    	}
 			    	else
-			    		JOptionPane.showMessageDialog(null,"RECORD NOT ADDED", "ERROR",JOptionPane.ERROR_MESSAGE); //not added
+			    		JOptionPane.showMessageDialog(null,util.getRecordsNotAdded()+"\nsubject code already exist", "ERROR",JOptionPane.ERROR_MESSAGE); //not added
 			    }
 			}
 			 else
-				 JOptionPane.showMessageDialog(null,"FILL IN ALL FIELDS", "ERROR",JOptionPane.ERROR_MESSAGE); //
+				 JOptionPane.showMessageDialog(null,util.getRecordsFilled(), "INFO",JOptionPane.INFORMATION_MESSAGE); //
 			}
 		});
 		btnSaveSubject.setFont(new Font("Tahoma", Font.BOLD, 16));

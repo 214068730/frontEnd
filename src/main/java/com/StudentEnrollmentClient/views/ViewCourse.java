@@ -20,6 +20,7 @@ import com.StudentEnrollmentClient.domain.Course;
 import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.CourseServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ public class ViewCourse extends JFrame {
 	private JPanel contentPane;
 	private Student student;
 	private CourseServiceImpl courseService = new CourseServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -112,13 +114,13 @@ public class ViewCourse extends JFrame {
 									{
 										boolean update = update(result);
 										if(update == true)
-											JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+											JOptionPane.showMessageDialog(null,util.getRecordsUpdated(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 										else
-											JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);	
+											JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated()+"/ncourse code or name already exist", "ERROR",JOptionPane.ERROR_MESSAGE);	
 									}
 								}
 								else
-									JOptionPane.showMessageDialog(null,"no blank fields allowed", "ERROR",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(null,util.getNoBlankFields(), "ERROR",JOptionPane.ERROR_MESSAGE);
 									
 							}
 						} catch (Exception ex) {
@@ -127,7 +129,7 @@ public class ViewCourse extends JFrame {
 					}
 				} 
 				else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,util.getNoRowSelected(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
 				table.changeSelection(row, col, false, false);

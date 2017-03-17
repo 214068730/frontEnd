@@ -16,6 +16,7 @@ import javax.swing.JButton;
 
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.StudentRestImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ public class Login extends JFrame {
 	private JTextField txtPassword;
 	private Student student;
 	private final StudentRestImpl service = new StudentRestImpl();
+	private  AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -92,7 +94,7 @@ public class Login extends JFrame {
 					}
 				} 
 				else
-					JOptionPane.showMessageDialog(null,"PLEASE FILL IN ALL THE FIELDS", "INFO",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,util.getRecordsFilled(), "INFO",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnLogin.setBounds(161, 184, 86, 35);

@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.LecturerRestImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class AddOrUpdateLecturer extends JFrame {
 	private Student student;
 	private String message;
 	private LecturerRestImpl lecturerService = new LecturerRestImpl();
+	private  AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -115,7 +117,7 @@ public class AddOrUpdateLecturer extends JFrame {
 						
 						Lecturer updatedLecturer = lecturerService.get(lecturer.getId());
 						if (!updatedLecturer.equals( lecturer))
-							JOptionPane.showMessageDialog(null,"LECTURER HAS BEEN UPDATED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,util.getRecordsUpdated(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 					}
 				case "ADD":
 					if (!txtLecturerName.getText().equals("") && !txtLecturerSurname.getText().equals(""))
@@ -127,12 +129,10 @@ public class AddOrUpdateLecturer extends JFrame {
 						Lecturer lecturer = lecturerService.post(new Lecturer(name, surname));
 						
 						if (lecturer != null) 
-							JOptionPane.showMessageDialog(null,"LECTURER ADDED!!", "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,util.getRecordsAdded(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
-						JOptionPane.showMessageDialog(null,
-								"PLEASE ENSURE THAT ALL FIELDS ARE FILLED",
-								"INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,util.getRecordsFilled(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

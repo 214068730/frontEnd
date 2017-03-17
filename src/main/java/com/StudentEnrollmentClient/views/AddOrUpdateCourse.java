@@ -13,6 +13,7 @@ import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.services.Impl.CourseServiceImpl;
 import com.StudentEnrollmentClient.services.Impl.DepartmentServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.Font;
 
@@ -35,6 +36,7 @@ public class AddOrUpdateCourse extends JFrame {
 	private JComboBox ddlDepartment = new JComboBox();
 	private CourseServiceImpl courseService = new CourseServiceImpl();
 	private DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
+	private AppUtil util = new AppUtil();
 	
 	
 
@@ -131,9 +133,9 @@ public class AddOrUpdateCourse extends JFrame {
 							//saving course
 							Course course =  courseService.save(new Course(courseName,courseCode,department));
 							if(course != null)
-								JOptionPane.showMessageDialog(null,"RECORD ADDED", "INFO",JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(null,util.getRecordsAdded(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE);
 							else
-								JOptionPane.showMessageDialog(null,"COURSE ALREADY EXIST", "ERROR",JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null,util.getRecordsNotAdded()+"\ncourse code or name already exist","ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}catch(Exception ex){
@@ -141,7 +143,7 @@ public class AddOrUpdateCourse extends JFrame {
 					}					
 				}
 				else
-					JOptionPane.showMessageDialog(null,"PLEASE FILL IN ALL FIELDS", "INFO",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,util.getRecordsFilled(), "INFO",JOptionPane.INFORMATION_MESSAGE);
 					
 				
 			}

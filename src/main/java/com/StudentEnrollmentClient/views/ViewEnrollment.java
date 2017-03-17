@@ -167,11 +167,9 @@ public class ViewEnrollment extends JFrame {
 		JButton btnMenua = new JButton("Menu");
 		btnMenua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 					EnrollementMenu view = new EnrollementMenu(student);
 					view.setVisible(true);
-					dispose();
-							
+					dispose();		
 			}
 		});
 		btnMenua.setBounds(976, 551, 130, 42);

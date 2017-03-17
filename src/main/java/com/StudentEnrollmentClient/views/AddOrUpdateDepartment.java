@@ -18,6 +18,7 @@ import com.StudentEnrollmentClient.domain.Department;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.rest.Impl.DepartmentRestImpl;
 import com.StudentEnrollmentClient.rest.Impl.StudentRestImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class AddOrUpdateDepartment extends JFrame {
 	private Student student;
 	private String message;
 	private DepartmentRestImpl departmentService = new DepartmentRestImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -103,12 +105,12 @@ public class AddOrUpdateDepartment extends JFrame {
 						Department department = departmentService.post(new Department(name));
 						
 						if (department != null)
-							JOptionPane.showMessageDialog(null, "DEPARTMENT ADDED!!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE); // add
+							JOptionPane.showMessageDialog(null,util.getRecordsAdded(), "SUCCESS", JOptionPane.INFORMATION_MESSAGE); // add
 						else 
-							JOptionPane.showMessageDialog(null, "DEPARTMENT ALREADY EXIST!!", "ERROR", JOptionPane.ERROR_MESSAGE); //error
+							JOptionPane.showMessageDialog(null,util.getRecordsNotAdded()+"\ndepartment name already exist", "ERROR", JOptionPane.ERROR_MESSAGE); //error
 					}
 					else
-						JOptionPane.showMessageDialog(null,"PLEASE ENSURE THAT ALL FIELDS ARE FILLED","INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,util.getRecordsFilled(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnSaveDept.setFont(new Font("Tahoma", Font.BOLD, 14));

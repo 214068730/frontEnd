@@ -18,6 +18,7 @@ import com.StudentEnrollmentClient.domain.Lecturer;
 import com.StudentEnrollmentClient.domain.Student;
 import com.StudentEnrollmentClient.domain.Subject;
 import com.StudentEnrollmentClient.services.Impl.DepartmentServiceImpl;
+import com.StudentEnrollmentClient.utils.AppUtil;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class ViewDepartment extends JFrame {
 	private JPanel contentPane;
 	private Student student;
 	private DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
+	private AppUtil util = new AppUtil();
 
 	/**
 	 * Launch the application.
@@ -109,19 +111,19 @@ public class ViewDepartment extends JFrame {
 								if(!originalDepartment.getDepartmentName().equals(result[1].toString())){
 									boolean update = update(result);
 									if(update == true)
-										JOptionPane.showMessageDialog(null,"updated", "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //update
+										JOptionPane.showMessageDialog(null,util.getRecordsUpdated(), "SUCCESS",JOptionPane.INFORMATION_MESSAGE); //update
 									else
-										JOptionPane.showMessageDialog(null,"not updated", "ERROR",JOptionPane.ERROR_MESSAGE);
+										JOptionPane.showMessageDialog(null,util.getRecordsNotUpdated()+"\ndepartment name already exist", "ERROR",JOptionPane.ERROR_MESSAGE);
 								}
 							}
 							else
-								JOptionPane.showMessageDialog(null,"no column can be blank", "ERROR",JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null,util.getNoBlankFields(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						} catch (Exception ex) {
 							JOptionPane.showMessageDialog(null,ex.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				} else
-					JOptionPane.showMessageDialog(null, "NO ROW WAS SELECTED","INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,util.getNoRowSelected(),"INFO", JOptionPane.INFORMATION_MESSAGE);
 				model.setRowCount(0);
 				reloadTable(table, model);
 				table.changeSelection(row, col, false, false);
