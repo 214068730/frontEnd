@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
@@ -25,7 +26,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtStudentNumber;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private Student student;
 	private final StudentRestImpl service = new StudentRestImpl();
 	private  AppUtil util = new AppUtil();
@@ -123,7 +124,7 @@ public class Login extends JFrame {
 		panel.add(txtStudentNumber);
 		txtStudentNumber.setColumns(10);
 
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		txtPassword.setBounds(124, 65, 164, 26);
 		panel.add(txtPassword);
 		txtPassword.setColumns(10);
