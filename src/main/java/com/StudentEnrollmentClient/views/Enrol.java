@@ -52,6 +52,7 @@ public class Enrol extends JFrame {
 	private StudentCourseServiceImpl studentCourseService = new StudentCourseServiceImpl();
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private Date date = new Date();
+	private JLabel lblQualify = new JLabel("YOU HAVE BEEN PROMOTOED TO THE NEXT GRADE");
 
 	/**
 	 * Launch the application.
@@ -82,11 +83,19 @@ public class Enrol extends JFrame {
 		for (Course course : courses) {
 			ddlCourses.addItem(course.getCourseName());
 		}
-		lblFullName.setText(student.getStudentName() + " "
-				+ student.getStudentSurname());
+		lblFullName.setText(student.getStudentName() + " "+ student.getStudentSurname());
 		lblIDNumber.setText(student.getStudentIdNumber());
 		lblStudentNumber.setText(student.getStudentNumber());
 		lblDate.setText(dateFormat.format(date).toString());
+		ProgressStatus status = progressStatusService.getActive(student.getStudentID(), "1");
+		if(status != null){
+			if(status.getCompleted().equals("1"))
+				lblQualify.setVisible(true);
+			else
+				lblQualify.setVisible(false);
+		}
+		else
+			lblQualify.setVisible(false);
 		intialize();
 	}
 
@@ -126,6 +135,7 @@ public class Enrol extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 					EnrollementMenu view = new EnrollementMenu(student);
 					view.setVisible(true);
+					lblQualify.setVisible(false);
 					dispose();
 			}
 		});
@@ -137,7 +147,7 @@ public class Enrol extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Course resultCourse = courseService.getByName(ddlCourses.getSelectedItem().toString());
 				boolean isRegistered = false;
-				ProgressStatus status = progressStatusService.findByStudentStudentIDAndActive(student.getStudentID(), 1, resultCourse.getId());
+				ProgressStatus status = progressStatusService.findByStudentStudentIDAndActive(student.getStudentID(), "1", resultCourse.getId());
 				if (status == null) {
 					JOptionPane.showMessageDialog(null, "ALREADY REGISTERED","INFO", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -145,15 +155,19 @@ public class Enrol extends JFrame {
 					List<Subject> subjects = subjectService.getAllBySubjectLevel(resultCourse.getId(),student.getStudentID());
 					for (Subject subject : subjects) {
 						if(status.getCourse().getCourseCode().equals(resultCourse.getCourseCode())){
-							isRegistered = false;
-							StudentCourse studentCourse = studentCourseService.save(new StudentCourse(resultCourse, student,subject));
-							isRegistered = true;
+							if(status.getCurrentYear().equals(Integer.toString(subject.getYearCode()))){
+								isRegistered = false;
+								StudentCourse studentCourse = studentCourseService.save(new StudentCourse(resultCourse, student,subject));
+								isRegistered = true;
+							}
 						}
 					}
 					if(isRegistered == false)
 						JOptionPane.showMessageDialog(null, "NOT REGISTERED","INFO", JOptionPane.INFORMATION_MESSAGE);
-					else
+					else{
 						JOptionPane.showMessageDialog(null, "YOU HAVE SUCCESSFULLY REGISTERED!!!","INFO", JOptionPane.INFORMATION_MESSAGE);
+						lblQualify.setVisible(false);
+					}
 				}
 			}
 		});
@@ -199,6 +213,11 @@ public class Enrol extends JFrame {
 
 		lblDate.setBounds(577, 41, 65, 14);
 		panel.add(lblDate);
+		
+		
+		lblQualify.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblQualify.setBounds(337, 497, 322, 14);
+		panel.add(lblQualify);
 	}
 
 	public void reloadTable(JTable table, DefaultTableModel model, Course course) {

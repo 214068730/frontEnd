@@ -56,7 +56,7 @@ public class EnrollementMenu extends JFrame {
 		this.student = student;
 		intialize();
 		try {
-			ProgressStatus status = progressService.getActive(student.getStudentID(), 1);
+			ProgressStatus status = progressService.getActive(student.getStudentID(), "1");
 			if (status == null)
 				btnView.setEnabled(false);
 			else

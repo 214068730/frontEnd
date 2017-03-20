@@ -37,12 +37,12 @@ public class ProgressStatusServiceImpl implements ProgressStatusService {
 	}
 
 	@Override
-	public ProgressStatus findByStudentStudentIDAndActive(Long studentID,int activated,Long courseID) {
+	public ProgressStatus findByStudentStudentIDAndActive(Long studentID,String activated,Long courseID) {
 		return rest.getByStudentStudentIDAndActive(studentID, activated, courseID);
 	}
 
 	@Override
-	public ProgressStatus getActive(Long studentID, int active) {
+	public ProgressStatus getActive(Long studentID, String active) {
 		return rest.getActive(studentID, active);
 	}
 

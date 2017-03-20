@@ -11,8 +11,8 @@ public class ProgressStatus {
 	private String currentYear;
 	private String startDate;
 	private String endDate;
-	private int active;
-	private int completed;
+	private String active;
+	private String completed;
 	private Student student;
 	private Course course;
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -24,8 +24,8 @@ public class ProgressStatus {
 	}
 
 	
-	public ProgressStatus(String currentYear, int active,
-			int completed, Student student, Course course) {
+	public ProgressStatus(String currentYear, String active,
+			String completed, Student student, Course course) {
 		super();
 		this.currentYear = currentYear;
 		this.startDate = dateFormat.format(date);
@@ -76,19 +76,19 @@ public class ProgressStatus {
 		this.student = student;
 	}
 
-	public int isActive() {
+	public String getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
 
-	public int isCompleted() {
+	public String getCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(int completed) {
+	public void setCompleted(String completed) {
 		this.completed = completed;
 	}
 	

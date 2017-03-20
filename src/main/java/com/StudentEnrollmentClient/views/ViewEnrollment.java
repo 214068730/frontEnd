@@ -49,6 +49,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.SwingConstants;
 
 public class ViewEnrollment extends JFrame {
 
@@ -69,6 +70,8 @@ public class ViewEnrollment extends JFrame {
 	private Date date = new Date();
 	private JLabel lblTotal = new JLabel("TOTAL:");
 	private JLabel lblCurrentYear = new JLabel("Current Year :");
+	private ProgressStatus status;
+	private JButton btnCancel = new JButton("Cancel Course");
 
 	/**
 	 * Launch the application.
@@ -91,7 +94,7 @@ public class ViewEnrollment extends JFrame {
 	 */
 
 	public ViewEnrollment() {
-		//intialize();
+		intialize();
 	}
 
 	public ViewEnrollment(Student student) {
@@ -104,10 +107,13 @@ public class ViewEnrollment extends JFrame {
 		lblIdNumber.setText(student.getStudentIdNumber());
 		lblDate.setText(dateFormat.format(date).toString());
 		try {
-			ProgressStatus status = progressStatusService.getActive(
-					student.getStudentID(), 1);
+			 status = progressStatusService.getActive(student.getStudentID(),"1");
 			lblCourse.setText(status.getCourse().getCourseName());
 			lblCurrentYear.setText(status.getCurrentYear());
+			if(status.getCompleted().equals("1"))
+				btnCancel.setVisible(false);
+				
+				
 
 		} catch (Exception ex) {
 
@@ -137,16 +143,16 @@ public class ViewEnrollment extends JFrame {
 		panel.add(pane);
 		setContentPane(panel);
 
-		JButton btnCancel = new JButton("Cancel Course");
+		
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			 try {
-				ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+				
 				String role = student.getRole().getRole();
 				if (status != null) {
-					status.setActive(0); // Canceling course
+					status.setActive("0"); // Canceling course
 					progressStatusService.update(status);
-					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), 1);
+					ProgressStatus updateStatus = progressStatusService.getActive(student.getStudentID(), "1");
 					if(updateStatus == null){
 						JOptionPane.showMessageDialog(null,"Course has been cancelled","INFO", JOptionPane.INFORMATION_MESSAGE);
 							EnrollementMenu view = new EnrollementMenu(student);
@@ -191,7 +197,7 @@ public class ViewEnrollment extends JFrame {
 		panel_1.add(lblFullname_1);
 
 		lblFullname.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblFullname.setBounds(120, 11, 140, 14);
+		lblFullname.setBounds(120, 11, 326, 14);
 		panel_1.add(lblFullname);
 
 		JLabel lblStudentNumber_1 = new JLabel("Student Number: ");
@@ -207,7 +213,7 @@ public class ViewEnrollment extends JFrame {
 		panel_1.add(lblIdNumber_1);
 
 		lblIdNumber.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblIdNumber.setBounds(120, 61, 157, 14);
+		lblIdNumber.setBounds(120, 61, 269, 14);
 		panel_1.add(lblIdNumber);
 
 		JLabel lblCourse2 = new JLabel("Course :");
@@ -257,7 +263,7 @@ public class ViewEnrollment extends JFrame {
 		columnsName[3] = "SUBJECT PRICE";
 		model.setColumnIdentifiers(columnsName);
 
-		ProgressStatus status = progressStatusService.getActive(student.getStudentID(), 1);
+		ProgressStatus status = progressStatusService.getActive(student.getStudentID(), "1");
 		List<StudentCourse> studentCourses = studentCourseService.registeredSubjects(student.getStudentID(), status.getCourse().getId());
 		List<String> codes = new ArrayList<>();
 		
@@ -266,7 +272,8 @@ public class ViewEnrollment extends JFrame {
 			for (StudentCourse studentCourse : studentCourses) {
 					if (studentCourse.getDateRegistered().substring(0, 4).equals(year + "")) {
 						if (status.getCourse().getCourseName().equals(studentCourse.getCourse().getCourseName())) {
-							codes.add(studentCourse.getSubject().getSubjectCode());
+							if(status.getCurrentYear().equals(Integer.toString(studentCourse.getSubject().getYearCode())))
+								codes.add(studentCourse.getSubject().getSubjectCode());
 						}
 					}
 			}
